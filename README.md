@@ -55,6 +55,10 @@ curl -X POST http://127.0.0.1:1880/transform -H 'Content-Type: application/json'
 
 The Semantic Extractor is the component tasked with (a) extracting annotations from Flows and Functions and (b) transforming the JSON representation of Application components from Node-Red into a JSON-LD representation compliant with the PHYSICS Ontology. Its development is to proceed along with the integration of the different parts of the ontology, so as to gradually support the representation of different Application structures, requirements and annotations, as well as the integration with the Inference Engine.
 
+The role of the semantic extractor, and its relationship with the ontology, can be summarised in the image below:
+
+![extractor domain](./figures/extractor-domain.png)
+
 The workflow of the semantic extractor can be summed up in the following steps:
 1.	The Design and Control UI triggers the Semantic Extractor to begin its workflow, using the representation of flows from the Node-RED of the developer, and the corresponding deployable artifact locations. The semantic extractor sends an acknowledgement that the extraction trigger has been received.
 2.	The included semantic annotations are extracted from each Flow as well as the Functions included.
