@@ -1,0 +1,257 @@
+[
+    {
+        "@context": {
+            "@version": 1.1,
+            "@vocab": "http://www.physics-h2020.eu/physics/1.0.0/",
+            "flow": "http://example_composer.physics.eu/flow/",
+            "function": "http://example_composer.physics.eu/function/",
+            "param": "http://example_parameters_repository.physics.eu/",
+            "app": "http://example_composer.physics.eu/app/",
+            "owner": "http://example_owners_repository.physics.eu/",
+            "proglang": "http://languages.programming.physics.eu/",
+            "js_lib": "http://languages.programming.physics.eu/javascript/lib/"
+        },
+        "@id": "app:[object Object]",
+        "@type": "Application",
+        "hasFlow": {
+            "@id": "flow:39ef55a8.55f96a",
+            "@type": "Flow",
+            "definesInterface": [
+                {
+                    "@id": "flow:39ef55a8.55f96a/interface/f70d642d7d615561",
+                    "@type": "REST",
+                    "allowsUpload": false,
+                    "hasHttpMethod": "POST",
+                    "interfaceToInterface": "flow:39ef55a8.55f96a/interface/a8ea37eb3bb8cf23",
+                    "interfaceURI": "/init"
+                },
+                {
+                    "@id": "flow:39ef55a8.55f96a/interface/ee0278d90f6393a9",
+                    "@type": "REST",
+                    "allowsUpload": false,
+                    "hasHttpMethod": "POST",
+                    "interfaceURI": "/run",
+                    "isNodeInputOf": "function:f52b7bec399e315a"
+                },
+                {
+                    "@id": "flow:39ef55a8.55f96a/interface/a8ea37eb3bb8cf23",
+                    "@type": "RESTOutput"
+                },
+                {
+                    "@id": "flow:39ef55a8.55f96a/interface/ab91c6c51decfbab",
+                    "@type": "RESTOutput"
+                }
+            ],
+            "executorMode": "NoderedFunction",
+            "exposesREST": [
+                "flow:39ef55a8.55f96a/interface/f70d642d7d615561",
+                "flow:39ef55a8.55f96a/interface/ee0278d90f6393a9"
+            ],
+            "goal": "performance",
+            "hasFunction": {
+                "@id": "function:f52b7bec399e315a",
+                "@type": "Function",
+                "funcCode": "//console.log(msg);\nmsg.payload={'response':'hello '+msg.payload.value.name};\nreturn msg;",
+                "hasNodeOutput": "flow:39ef55a8.55f96a/interface/ab91c6c51decfbab",
+                "label": "hello world"
+            },
+            "hasJSONDescription": {
+                "artifact": "registry.apps.ocphub.physics-faas.eu/custom/george:79",
+                "artifactType": "image",
+                "id": "39ef55a8.55f96a",
+                "label": "HelloFunctionV2",
+                "nodes": [
+                    {
+                        "disabled": false,
+                        "id": "39ef55a8.55f96a",
+                        "label": "HelloFunctionV2",
+                        "type": "tab"
+                    },
+                    {
+                        "id": "f70d642d7d615561",
+                        "method": "post",
+                        "type": "http in",
+                        "upload": false,
+                        "url": "/init",
+                        "wires": "a8ea37eb3bb8cf23",
+                        "x": 340,
+                        "y": 180,
+                        "z": "39ef55a8.55f96a"
+                    },
+                    {
+                        "id": "ee0278d90f6393a9",
+                        "method": "post",
+                        "type": "http in",
+                        "upload": false,
+                        "url": "/run",
+                        "wires": "f52b7bec399e315a",
+                        "x": 340,
+                        "y": 280,
+                        "z": "39ef55a8.55f96a"
+                    },
+                    {
+                        "id": "a8ea37eb3bb8cf23",
+                        "type": "http response",
+                        "x": 730,
+                        "y": 180,
+                        "z": "39ef55a8.55f96a"
+                    },
+                    {
+                        "id": "ab91c6c51decfbab",
+                        "type": "http response",
+                        "x": 870,
+                        "y": 380,
+                        "z": "39ef55a8.55f96a"
+                    },
+                    {
+                        "func": "//console.log(msg);\nmsg.payload={'response':'hello '+msg.payload.value.name};\nreturn msg;",
+                        "id": "f52b7bec399e315a",
+                        "name": "hello world",
+                        "noerr": 0,
+                        "outputs": 1,
+                        "type": "function",
+                        "wires": "ab91c6c51decfbab",
+                        "x": 630,
+                        "y": 280,
+                        "z": "39ef55a8.55f96a"
+                    },
+                    {
+                        "id": "47d1123d17b41031",
+                        "name": "OW SKELETON with hello world function",
+                        "type": "comment",
+                        "x": 440,
+                        "y": 360,
+                        "z": "39ef55a8.55f96a"
+                    },
+                    {
+                        "env": {
+                            "name": "Executor Mode",
+                            "type": "str",
+                            "value": "NoderedFunction"
+                        },
+                        "id": "129fabd43047059b",
+                        "subflow": "694cb784968dc0b9",
+                        "type": "subflow:694cb784968dc0b9",
+                        "x": 240,
+                        "y": 460,
+                        "z": "39ef55a8.55f96a"
+                    },
+                    {
+                        "env": [
+                            {
+                                "name": "memory",
+                                "type": "num",
+                                "value": "512"
+                            },
+                            {
+                                "name": "timeout",
+                                "type": "num",
+                                "value": "120000"
+                            }
+                        ],
+                        "id": "bba4b91d07643081",
+                        "subflow": "dd8835083692860a",
+                        "type": "subflow:dd8835083692860a",
+                        "x": 240,
+                        "y": 520,
+                        "z": "39ef55a8.55f96a"
+                    },
+                    {
+                        "env": {
+                            "name": "goal",
+                            "type": "str",
+                            "value": "performance"
+                        },
+                        "id": "46230eca45760f58",
+                        "subflow": "f0b9b88b6dcb2ece",
+                        "type": "subflow:f0b9b88b6dcb2ece",
+                        "x": 290,
+                        "y": 580,
+                        "z": "39ef55a8.55f96a"
+                    },
+                    {
+                        "env": {
+                            "name": "importance",
+                            "type": "str",
+                            "value": "high"
+                        },
+                        "id": "be87371dd5bad13a",
+                        "subflow": "94dffc86e4af9a58",
+                        "type": "subflow:94dffc86e4af9a58",
+                        "x": 260,
+                        "y": 640,
+                        "z": "39ef55a8.55f96a"
+                    },
+                    {
+                        "env": {
+                            "name": "locality",
+                            "type": "str",
+                            "value": "aws"
+                        },
+                        "id": "7ec29cdc3b1457ea",
+                        "subflow": "05f045b87080a61e",
+                        "type": "subflow:05f045b87080a61e",
+                        "x": 250,
+                        "y": 700,
+                        "z": "39ef55a8.55f96a"
+                    },
+                    {
+                        "id": "eeb5210da7efebd3",
+                        "info": "The Executor Mode Annotator is a mean to describe to the PHYSICS Environment the execution mode of a given flow. There are three options\n1) Service mode: the selected flow will be deployed as a Node-RED service, thus always running\n2) Node-RED Function mode: the selected flow will be wrapped around a Node-RED runtime and registered to a target Openwhisk platform, where it will be executed as a Node-RED runtime function\n3) Native Sequence: the included functions will be packaged and registered individually at the Openwhisk platform, while their links (workflow) will be translated to the native Openwhisk sequence format and registered to the Openwhisk platform. This mode at the moment is limited to pure function nodes of Node-RED, while the workflow description is limited by the sequence abilities of Openwhisk. ",
+                        "name": "Instructions",
+                        "type": "comment",
+                        "x": 560,
+                        "y": 280,
+                        "z": "694cb784968dc0b9"
+                    },
+                    {
+                        "id": "827476cff63f679c",
+                        "info": "The node is used to indicate memory and timing preferences for the final OW action.",
+                        "name": "README",
+                        "type": "comment",
+                        "x": 440,
+                        "y": 180,
+                        "z": "dd8835083692860a"
+                    },
+                    {
+                        "id": "a0dfe746ee0c085b",
+                        "info": "The node is used to set the desired optimization goal: performance/energy",
+                        "name": "README",
+                        "type": "comment",
+                        "x": 340,
+                        "y": 160,
+                        "z": "f0b9b88b6dcb2ece"
+                    },
+                    {
+                        "id": "1896904e3b2cf282",
+                        "info": "The node is used to indicate at the flow level what is the importance of the flow (to be taken under consideration in the scheduling aspects of PHYSICS)",
+                        "name": "README",
+                        "type": "comment",
+                        "x": 400,
+                        "y": 160,
+                        "z": "94dffc86e4af9a58"
+                    },
+                    {
+                        "id": "30ee5c09f384361d",
+                        "info": "The node is used to indicate at the flow level the locality of this flow with relation to a set of standard locations by name ",
+                        "name": "README",
+                        "type": "comment",
+                        "x": 400,
+                        "y": 220,
+                        "z": "05f045b87080a61e"
+                    }
+                ]
+            },
+            "hasSoftwareArtifact": {
+                "@id": "registry.apps.ocphub.physics-faas.eu/custom/george:79",
+                "@type": "SoftwareImage"
+            },
+            "importance": "high",
+            "label": "HelloFunctionV2",
+            "locality": "aws",
+            "memory": "512",
+            "timeout": "120000"
+        },
+        "isTopLevelComposite": true
+    }
+]
