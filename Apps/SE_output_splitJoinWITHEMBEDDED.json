@@ -1,0 +1,548 @@
+[
+    {
+        "@context": {
+            "@version": 1.1,
+            "@vocab": "http://www.physics-h2020.eu/physics/1.0.0/",
+            "flow": "http://example_composer.physics.eu/flow/",
+            "function": "http://example_composer.physics.eu/function/",
+            "param": "http://example_parameters_repository.physics.eu/",
+            "app": "http://example_composer.physics.eu/app/",
+            "owner": "http://example_owners_repository.physics.eu/",
+            "proglang": "http://languages.programming.physics.eu/",
+            "js_lib": "http://languages.programming.physics.eu/javascript/lib/"
+        },
+        "@id": "app:[object Object]",
+        "@type": "Application",
+        "hasFlow": [
+            {
+                "@id": "flow:39ef55a8.55f96a",
+                "@type": "Flow",
+                "definesInterface": [
+                    {
+                        "@id": "flow:39ef55a8.55f96a/interface/f70d642d7d615561",
+                        "@type": "REST",
+                        "allowsUpload": false,
+                        "hasHttpMethod": "POST",
+                        "interfaceToInterface": "flow:39ef55a8.55f96a/interface/a8ea37eb3bb8cf23",
+                        "interfaceURI": "/init"
+                    },
+                    {
+                        "@id": "flow:39ef55a8.55f96a/interface/ee0278d90f6393a9",
+                        "@type": "REST",
+                        "allowsUpload": false,
+                        "hasHttpMethod": "POST",
+                        "interfaceURI": "/run",
+                        "isNodeInputOf": "function:f52b7bec399e315a"
+                    },
+                    {
+                        "@id": "flow:39ef55a8.55f96a/interface/a8ea37eb3bb8cf23",
+                        "@type": "RESTOutput"
+                    },
+                    {
+                        "@id": "flow:39ef55a8.55f96a/interface/ab91c6c51decfbab",
+                        "@type": "RESTOutput"
+                    }
+                ],
+                "executorMode": "NoderedFunction",
+                "exposesREST": [
+                    "flow:39ef55a8.55f96a/interface/f70d642d7d615561",
+                    "flow:39ef55a8.55f96a/interface/ee0278d90f6393a9"
+                ],
+                "goal": "performance",
+                "hasFunction": {
+                    "@id": "function:f52b7bec399e315a",
+                    "@type": "Function",
+                    "funcCode": "//console.log(msg);\nmsg.payload={'response':'hello '+msg.payload.value.name};\nreturn msg;",
+                    "hasNodeOutput": "flow:39ef55a8.55f96a/interface/ab91c6c51decfbab",
+                    "label": "hello world"
+                },
+                "hasJSONDescription": {
+                    "artifact": "registry.apps.ocphub.physics-faas.eu/custom/george:79",
+                    "artifactType": "image",
+                    "id": "39ef55a8.55f96a",
+                    "label": "HelloFunctionV2",
+                    "nodes": [
+                        {
+                            "disabled": false,
+                            "id": "39ef55a8.55f96a",
+                            "label": "HelloFunctionV2",
+                            "type": "tab"
+                        },
+                        {
+                            "id": "f70d642d7d615561",
+                            "method": "post",
+                            "type": "http in",
+                            "upload": false,
+                            "url": "/init",
+                            "wires": "a8ea37eb3bb8cf23",
+                            "x": 340,
+                            "y": 180,
+                            "z": "39ef55a8.55f96a"
+                        },
+                        {
+                            "id": "ee0278d90f6393a9",
+                            "method": "post",
+                            "type": "http in",
+                            "upload": false,
+                            "url": "/run",
+                            "wires": "f52b7bec399e315a",
+                            "x": 340,
+                            "y": 280,
+                            "z": "39ef55a8.55f96a"
+                        },
+                        {
+                            "id": "a8ea37eb3bb8cf23",
+                            "type": "http response",
+                            "x": 730,
+                            "y": 180,
+                            "z": "39ef55a8.55f96a"
+                        },
+                        {
+                            "id": "ab91c6c51decfbab",
+                            "type": "http response",
+                            "x": 870,
+                            "y": 380,
+                            "z": "39ef55a8.55f96a"
+                        },
+                        {
+                            "func": "//console.log(msg);\nmsg.payload={'response':'hello '+msg.payload.value.name};\nreturn msg;",
+                            "id": "f52b7bec399e315a",
+                            "name": "hello world",
+                            "noerr": 0,
+                            "outputs": 1,
+                            "type": "function",
+                            "wires": "ab91c6c51decfbab",
+                            "x": 630,
+                            "y": 280,
+                            "z": "39ef55a8.55f96a"
+                        },
+                        {
+                            "id": "47d1123d17b41031",
+                            "name": "OW SKELETON with hello world function",
+                            "type": "comment",
+                            "x": 440,
+                            "y": 360,
+                            "z": "39ef55a8.55f96a"
+                        },
+                        {
+                            "env": {
+                                "name": "Executor Mode",
+                                "type": "str",
+                                "value": "NoderedFunction"
+                            },
+                            "id": "129fabd43047059b",
+                            "subflow": "694cb784968dc0b9",
+                            "type": "subflow:694cb784968dc0b9",
+                            "x": 240,
+                            "y": 460,
+                            "z": "39ef55a8.55f96a"
+                        },
+                        {
+                            "env": [
+                                {
+                                    "name": "memory",
+                                    "type": "num",
+                                    "value": "512"
+                                },
+                                {
+                                    "name": "timeout",
+                                    "type": "num",
+                                    "value": "120000"
+                                }
+                            ],
+                            "id": "bba4b91d07643081",
+                            "subflow": "dd8835083692860a",
+                            "type": "subflow:dd8835083692860a",
+                            "x": 240,
+                            "y": 520,
+                            "z": "39ef55a8.55f96a"
+                        },
+                        {
+                            "env": {
+                                "name": "goal",
+                                "type": "str",
+                                "value": "performance"
+                            },
+                            "id": "46230eca45760f58",
+                            "subflow": "f0b9b88b6dcb2ece",
+                            "type": "subflow:f0b9b88b6dcb2ece",
+                            "x": 290,
+                            "y": 580,
+                            "z": "39ef55a8.55f96a"
+                        },
+                        {
+                            "env": {
+                                "name": "importance",
+                                "type": "str",
+                                "value": "high"
+                            },
+                            "id": "be87371dd5bad13a",
+                            "subflow": "94dffc86e4af9a58",
+                            "type": "subflow:94dffc86e4af9a58",
+                            "x": 260,
+                            "y": 640,
+                            "z": "39ef55a8.55f96a"
+                        },
+                        {
+                            "env": {
+                                "name": "locality",
+                                "type": "str",
+                                "value": "aws"
+                            },
+                            "id": "7ec29cdc3b1457ea",
+                            "subflow": "05f045b87080a61e",
+                            "type": "subflow:05f045b87080a61e",
+                            "x": 250,
+                            "y": 700,
+                            "z": "39ef55a8.55f96a"
+                        },
+                        {
+                            "id": "eeb5210da7efebd3",
+                            "info": "The Executor Mode Annotator is a mean to describe to the PHYSICS Environment the execution mode of a given flow. There are three options\n1) Service mode: the selected flow will be deployed as a Node-RED service, thus always running\n2) Node-RED Function mode: the selected flow will be wrapped around a Node-RED runtime and registered to a target Openwhisk platform, where it will be executed as a Node-RED runtime function\n3) Native Sequence: the included functions will be packaged and registered individually at the Openwhisk platform, while their links (workflow) will be translated to the native Openwhisk sequence format and registered to the Openwhisk platform. This mode at the moment is limited to pure function nodes of Node-RED, while the workflow description is limited by the sequence abilities of Openwhisk. ",
+                            "name": "Instructions",
+                            "type": "comment",
+                            "x": 560,
+                            "y": 280,
+                            "z": "694cb784968dc0b9"
+                        },
+                        {
+                            "id": "827476cff63f679c",
+                            "info": "The node is used to indicate memory and timing preferences for the final OW action.",
+                            "name": "README",
+                            "type": "comment",
+                            "x": 440,
+                            "y": 180,
+                            "z": "dd8835083692860a"
+                        },
+                        {
+                            "id": "a0dfe746ee0c085b",
+                            "info": "The node is used to set the desired optimization goal: performance/energy",
+                            "name": "README",
+                            "type": "comment",
+                            "x": 340,
+                            "y": 160,
+                            "z": "f0b9b88b6dcb2ece"
+                        },
+                        {
+                            "id": "1896904e3b2cf282",
+                            "info": "The node is used to indicate at the flow level what is the importance of the flow (to be taken under consideration in the scheduling aspects of PHYSICS)",
+                            "name": "README",
+                            "type": "comment",
+                            "x": 400,
+                            "y": 160,
+                            "z": "94dffc86e4af9a58"
+                        },
+                        {
+                            "id": "30ee5c09f384361d",
+                            "info": "The node is used to indicate at the flow level the locality of this flow with relation to a set of standard locations by name ",
+                            "name": "README",
+                            "type": "comment",
+                            "x": 400,
+                            "y": 220,
+                            "z": "05f045b87080a61e"
+                        }
+                    ]
+                },
+                "hasSoftwareArtifact": {
+                    "@id": "registry.apps.ocphub.physics-faas.eu/custom/george:79",
+                    "@type": "SoftwareImage"
+                },
+                "importance": "high",
+                "label": "HelloFunctionV2",
+                "locality": "aws",
+                "memory": "512",
+                "timeout": "120000"
+            },
+            {
+                "@id": "flow:e98bf48d7a877d25",
+                "@type": "Flow",
+                "affinity": "affinity",
+                "affinityAppID": "this",
+                "affinityArtefactID": "registry.apps.ocphub.physics-faas.eu/custom/george:74",
+                "consumesREST": {
+                    "@id": "flow:5813b63f70690303/interface/4b0793e93fa7e4c7",
+                    "@type": "REST",
+                    "hasHttpMethod": "POST"
+                },
+                "definesInterface": [
+                    {
+                        "@id": "flow:e98bf48d7a877d25/interface/ce0ad53cb5c6ef33.out0",
+                        "@type": "MessageWire",
+                        "isNodeOutputOf": "function:ce0ad53cb5c6ef33"
+                    },
+                    {
+                        "@id": "flow:e98bf48d7a877d25/interface/6c475d976512ab6c",
+                        "@type": "REST",
+                        "allowsUpload": false,
+                        "hasHttpMethod": "POST",
+                        "interfaceURI": "/run",
+                        "isNodeInputOf": "flow:e98bf48d7a877d25/node/da1cd4a2ba26b2ce"
+                    },
+                    {
+                        "@id": "flow:e98bf48d7a877d25/interface/d8ea5c991b7256b2",
+                        "@type": "REST",
+                        "allowsUpload": false,
+                        "hasHttpMethod": "POST",
+                        "interfaceToInterface": "flow:e98bf48d7a877d25/interface/0bf6e36501ea140c",
+                        "interfaceURI": "/init"
+                    },
+                    {
+                        "@id": "flow:e98bf48d7a877d25/interface/0bf6e36501ea140c",
+                        "@type": "RESTOutput"
+                    },
+                    {
+                        "@id": "flow:e98bf48d7a877d25/interface/729306c6b37c0ec0",
+                        "@type": "RESTOutput"
+                    }
+                ],
+                "executorMode": "NoderedFunction",
+                "exposesREST": [
+                    "flow:e98bf48d7a877d25/interface/6c475d976512ab6c",
+                    "flow:e98bf48d7a877d25/interface/d8ea5c991b7256b2"
+                ],
+                "hasFunction": [
+                    {
+                        "@id": "function:ce0ad53cb5c6ef33",
+                        "@type": "Function",
+                        "funcCode": "//msg.action=msg.payload.value.action;\n\nmsg.url=msg.payload.value.url;\nmsg.creds=msg.payload.value.creds;\n\nmsg.oldpayload=msg.payload;\nmsg.payload={};\nmsg.payload=msg.oldpayload.value.values;\n\nmsg.headers={};\nvar auth = 'Basic ' + new Buffer(msg.creds).toString('base64');\nmsg.headers = {\n    \"Authorization\": auth\n}\nreturn msg;"
+                    },
+                    {
+                        "@id": "function:933bd2f642873790",
+                        "@type": "Function",
+                        "funcCode": "msg.newpayload=msg.payload;\nmsg.payload=[];\nmsg.payload=msg.oldpayload;\nmsg.payload.value=msg.newpayload;\n\nmsg.payload.value.myvar=env.get('setsplit');\nreturn msg;"
+                    }
+                ],
+                "hasJSONDescription": {
+                    "artifact": "registry.apps.ocphub.physics-faas.eu/custom/george:81",
+                    "artifactType": "image",
+                    "id": "e98bf48d7a877d25",
+                    "label": "splitjoinFunction",
+                    "nodes": [
+                        {
+                            "disabled": false,
+                            "id": "e98bf48d7a877d25",
+                            "label": "splitjoinFunction",
+                            "type": "tab"
+                        },
+                        {
+                            "id": "6c475d976512ab6c",
+                            "method": "post",
+                            "type": "http in",
+                            "upload": false,
+                            "url": "/run",
+                            "wires": "da1cd4a2ba26b2ce",
+                            "x": 500,
+                            "y": 500,
+                            "z": "e98bf48d7a877d25"
+                        },
+                        {
+                            "id": "d8ea5c991b7256b2",
+                            "method": "post",
+                            "type": "http in",
+                            "upload": false,
+                            "url": "/init",
+                            "wires": "0bf6e36501ea140c",
+                            "x": 540,
+                            "y": 380,
+                            "z": "e98bf48d7a877d25"
+                        },
+                        {
+                            "id": "0bf6e36501ea140c",
+                            "type": "http response",
+                            "x": 830,
+                            "y": 380,
+                            "z": "e98bf48d7a877d25"
+                        },
+                        {
+                            "id": "729306c6b37c0ec0",
+                            "type": "http response",
+                            "x": 1090,
+                            "y": 500,
+                            "z": "e98bf48d7a877d25"
+                        },
+                        {
+                            "env": {
+                                "name": "Executor Mode",
+                                "type": "str",
+                                "value": "NoderedFunction"
+                            },
+                            "id": "e385b549bc1cae8d",
+                            "subflow": "694cb784968dc0b9",
+                            "type": "subflow:694cb784968dc0b9",
+                            "x": 500,
+                            "y": 600,
+                            "z": "e98bf48d7a877d25"
+                        },
+                        {
+                            "id": "da1cd4a2ba26b2ce",
+                            "subflow": "5813b63f70690303",
+                            "type": "subflow:5813b63f70690303",
+                            "wires": "729306c6b37c0ec0",
+                            "x": 780,
+                            "y": 500,
+                            "z": "e98bf48d7a877d25"
+                        },
+                        {
+                            "env": [
+                                {
+                                    "name": "affinityArtefactID",
+                                    "type": "str",
+                                    "value": "registry.apps.ocphub.physics-faas.eu/custom/george:74"
+                                },
+                                {
+                                    "name": "affinityAppID",
+                                    "type": "str",
+                                    "value": "this"
+                                },
+                                {
+                                    "name": "affinity",
+                                    "type": "str",
+                                    "value": "affinity"
+                                }
+                            ],
+                            "id": "84e7befdcccb2e4e",
+                            "subflow": "edfbba7dd979ecf1",
+                            "type": "subflow:edfbba7dd979ecf1",
+                            "x": 490,
+                            "y": 680,
+                            "z": "e98bf48d7a877d25"
+                        },
+                        {
+                            "id": "eeb5210da7efebd3",
+                            "info": "The Executor Mode Annotator is a mean to describe to the PHYSICS Environment the execution mode of a given flow. There are three options\n1) Service mode: the selected flow will be deployed as a Node-RED service, thus always running\n2) Node-RED Function mode: the selected flow will be wrapped around a Node-RED runtime and registered to a target Openwhisk platform, where it will be executed as a Node-RED runtime function\n3) Native Sequence: the included functions will be packaged and registered individually at the Openwhisk platform, while their links (workflow) will be translated to the native Openwhisk sequence format and registered to the Openwhisk platform. This mode at the moment is limited to pure function nodes of Node-RED, while the workflow description is limited by the sequence abilities of Openwhisk. ",
+                            "name": "Instructions",
+                            "type": "comment",
+                            "x": 560,
+                            "y": 280,
+                            "z": "694cb784968dc0b9"
+                        },
+                        {
+                            "api": "https://openwhisk.apps.ocphub.physics-faas.eu/api/v1",
+                            "id": "64f1be8afce20915",
+                            "name": "aws",
+                            "type": "openwhisk-service",
+                            "z": "5813b63f70690303"
+                        },
+                        {
+                            "id": "1f13a2c0346f82c6",
+                            "type": "tls-config",
+                            "verifyservercert": false,
+                            "z": "5813b63f70690303"
+                        },
+                        {
+                            "arraySplt": "1",
+                            "arraySpltType": "len",
+                            "id": "770ef202c7ccecb6",
+                            "splt": "\\n",
+                            "spltType": "str",
+                            "stream": false,
+                            "type": "split",
+                            "wires": [
+                                "cb539c8dcce538f8",
+                                "4b0793e93fa7e4c7"
+                            ],
+                            "x": 330,
+                            "y": 100,
+                            "z": "5813b63f70690303"
+                        },
+                        {
+                            "accumulate": "false",
+                            "build": "string",
+                            "id": "fef7008cea92f52d",
+                            "joiner": "\\n",
+                            "joinerType": "str",
+                            "key": "topic",
+                            "mode": "auto",
+                            "property": "payload",
+                            "propertyType": "msg",
+                            "reduceRight": false,
+                            "type": "join",
+                            "wires": "933bd2f642873790",
+                            "x": 650,
+                            "y": 100,
+                            "z": "5813b63f70690303"
+                        },
+                        {
+                            "id": "8ca660db8c891c1f",
+                            "name": "NEEDS CONFIGURATION WITH OW ENDPOINT",
+                            "type": "comment",
+                            "x": 470,
+                            "y": 160,
+                            "z": "5813b63f70690303"
+                        },
+                        {
+                            "func": "//msg.action=msg.payload.value.action;\n\nmsg.url=msg.payload.value.url;\nmsg.creds=msg.payload.value.creds;\n\nmsg.oldpayload=msg.payload;\nmsg.payload={};\nmsg.payload=msg.oldpayload.value.values;\n\nmsg.headers={};\nvar auth = 'Basic ' + new Buffer(msg.creds).toString('base64');\nmsg.headers = {\n    \"Authorization\": auth\n}\nreturn msg;",
+                            "id": "ce0ad53cb5c6ef33",
+                            "noerr": 0,
+                            "outputs": 1,
+                            "type": "function",
+                            "wires": "770ef202c7ccecb6",
+                            "x": 160,
+                            "y": 100,
+                            "z": "5813b63f70690303"
+                        },
+                        {
+                            "func": "msg.newpayload=msg.payload;\nmsg.payload=[];\nmsg.payload=msg.oldpayload;\nmsg.payload.value=msg.newpayload;\n\nmsg.payload.value.myvar=env.get('setsplit');\nreturn msg;",
+                            "id": "933bd2f642873790",
+                            "noerr": 0,
+                            "outputs": 1,
+                            "type": "function",
+                            "x": 800,
+                            "y": 100,
+                            "z": "5813b63f70690303"
+                        },
+                        {
+                            "active": true,
+                            "complete": "false",
+                            "console": false,
+                            "id": "cb539c8dcce538f8",
+                            "statusType": "auto",
+                            "tosidebar": true,
+                            "tostatus": false,
+                            "type": "debug",
+                            "x": 420,
+                            "y": 240,
+                            "z": "5813b63f70690303"
+                        },
+                        {
+                            "authType": "basic",
+                            "id": "4b0793e93fa7e4c7",
+                            "method": "POST",
+                            "paytoqs": "ignore",
+                            "persist": false,
+                            "ret": "obj",
+                            "senderr": false,
+                            "tls": "1f13a2c0346f82c6",
+                            "type": "http request",
+                            "wires": "fef7008cea92f52d",
+                            "x": 510,
+                            "y": 100,
+                            "z": "5813b63f70690303"
+                        },
+                        {
+                            "id": "1dc64fe5f2cdee5b",
+                            "info": "Affinity annotator node",
+                            "name": "README",
+                            "type": "comment",
+                            "x": 500,
+                            "y": 200,
+                            "z": "edfbba7dd979ecf1"
+                        }
+                    ]
+                },
+                "hasNode": {
+                    "@id": "flow:e98bf48d7a877d25/node/da1cd4a2ba26b2ce",
+                    "@type": "SubFlow",
+                    "hasNodeOutput": "flow:e98bf48d7a877d25/interface/729306c6b37c0ec0",
+                    "hasTemplate": "flow:5813b63f70690303"
+                },
+                "hasSoftwareArtifact": {
+                    "@id": "registry.apps.ocphub.physics-faas.eu/custom/george:81",
+                    "@type": "SoftwareImage"
+                },
+                "label": "splitjoinFunction"
+            }
+        ],
+        "isTopLevelComposite": true
+    }
+]

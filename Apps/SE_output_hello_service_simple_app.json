@@ -1,0 +1,211 @@
+[
+    {
+        "@context": {
+            "@version": 1.1,
+            "@vocab": "http://www.physics-h2020.eu/physics/1.0.0/",
+            "flow": "http://example_composer.physics.eu/flow/",
+            "function": "http://example_composer.physics.eu/function/",
+            "param": "http://example_parameters_repository.physics.eu/",
+            "app": "http://example_composer.physics.eu/app/",
+            "owner": "http://example_owners_repository.physics.eu/",
+            "proglang": "http://languages.programming.physics.eu/",
+            "js_lib": "http://languages.programming.physics.eu/javascript/lib/"
+        },
+        "@id": "app:[object Object]",
+        "@type": "Application",
+        "hasFlow": {
+            "@id": "flow:7cf35d6fe22c0878",
+            "@type": "Flow",
+            "definesInterface": [
+                {
+                    "@id": "flow:7cf35d6fe22c0878/interface/fa5197c3886bef7b",
+                    "@type": "REST",
+                    "allowsUpload": false,
+                    "hasHttpMethod": "POST",
+                    "interfaceToInterface": "flow:7cf35d6fe22c0878/interface/d2284b7bbae5fdb0",
+                    "interfaceURI": "/init"
+                },
+                {
+                    "@id": "flow:7cf35d6fe22c0878/interface/f872647252f87d03",
+                    "@type": "REST",
+                    "allowsUpload": false,
+                    "hasHttpMethod": "POST",
+                    "interfaceURI": "/run",
+                    "isNodeInputOf": "function:e934516dd5157a50"
+                },
+                {
+                    "@id": "flow:7cf35d6fe22c0878/interface/d2284b7bbae5fdb0",
+                    "@type": "RESTOutput"
+                },
+                {
+                    "@id": "flow:7cf35d6fe22c0878/interface/f3c09b21d781d801",
+                    "@type": "RESTOutput"
+                }
+            ],
+            "executorMode": "Service",
+            "exposesREST": [
+                "flow:7cf35d6fe22c0878/interface/fa5197c3886bef7b",
+                "flow:7cf35d6fe22c0878/interface/f872647252f87d03"
+            ],
+            "hasFunction": {
+                "@id": "function:e934516dd5157a50",
+                "@type": "Function",
+                "funcCode": "\nconsole.log(msg);\nmsg.payload={'response':'hello '+msg.payload.value.name};\nreturn msg;",
+                "hasNodeOutput": "flow:7cf35d6fe22c0878/interface/f3c09b21d781d801",
+                "label": "hello world"
+            },
+            "hasJSONDescription": {
+                "artifact": "https://registry.apps.ocphub.physics-faas.eu/custom/george:80",
+                "artifactType": "image",
+                "id": "7cf35d6fe22c0878",
+                "label": "Hello_Service_v2",
+                "nodes": [
+                    {
+                        "disabled": false,
+                        "id": "7cf35d6fe22c0878",
+                        "label": "Hello_Service_v2",
+                        "type": "tab"
+                    },
+                    {
+                        "id": "fa5197c3886bef7b",
+                        "method": "post",
+                        "type": "http in",
+                        "upload": false,
+                        "url": "/init",
+                        "wires": "d2284b7bbae5fdb0",
+                        "x": 440,
+                        "y": 140,
+                        "z": "7cf35d6fe22c0878"
+                    },
+                    {
+                        "id": "f872647252f87d03",
+                        "method": "post",
+                        "type": "http in",
+                        "upload": false,
+                        "url": "/run",
+                        "wires": "e934516dd5157a50",
+                        "x": 440,
+                        "y": 240,
+                        "z": "7cf35d6fe22c0878"
+                    },
+                    {
+                        "id": "d2284b7bbae5fdb0",
+                        "type": "http response",
+                        "x": 740,
+                        "y": 140,
+                        "z": "7cf35d6fe22c0878"
+                    },
+                    {
+                        "id": "f3c09b21d781d801",
+                        "type": "http response",
+                        "x": 870,
+                        "y": 320,
+                        "z": "7cf35d6fe22c0878"
+                    },
+                    {
+                        "func": "\nconsole.log(msg);\nmsg.payload={'response':'hello '+msg.payload.value.name};\nreturn msg;",
+                        "id": "e934516dd5157a50",
+                        "name": "hello world",
+                        "noerr": 0,
+                        "outputs": 1,
+                        "type": "function",
+                        "wires": "f3c09b21d781d801",
+                        "x": 730,
+                        "y": 240,
+                        "z": "7cf35d6fe22c0878"
+                    },
+                    {
+                        "id": "62b1682131ee1314",
+                        "name": "OW SKELETON with hello world function",
+                        "type": "comment",
+                        "x": 540,
+                        "y": 320,
+                        "z": "7cf35d6fe22c0878"
+                    },
+                    {
+                        "env": {
+                            "name": "Executor Mode",
+                            "type": "str",
+                            "value": "Service"
+                        },
+                        "id": "b9b6dfc14dce6137",
+                        "subflow": "694cb784968dc0b9",
+                        "type": "subflow:694cb784968dc0b9",
+                        "x": 460,
+                        "y": 400,
+                        "z": "7cf35d6fe22c0878"
+                    },
+                    {
+                        "env": {
+                            "name": "locality",
+                            "type": "str",
+                            "value": "edgeA"
+                        },
+                        "id": "bbc491867a86cec9",
+                        "subflow": "05f045b87080a61e",
+                        "type": "subflow:05f045b87080a61e",
+                        "x": 470,
+                        "y": 540,
+                        "z": "7cf35d6fe22c0878"
+                    },
+                    {
+                        "env": [
+                            {
+                                "name": "Service name",
+                                "type": "str",
+                                "value": "serviceA"
+                            },
+                            {
+                                "name": "Url of compose file",
+                                "type": "str",
+                                "value": "https://gogs.apps.ocphub.physics-faas.eu/WP3/Patterns/raw/master/compose/docker-compose.yml"
+                            }
+                        ],
+                        "id": "a21a81edc16d0669",
+                        "subflow": "d7579a1472067fcf",
+                        "type": "subflow:d7579a1472067fcf",
+                        "x": 470,
+                        "y": 480,
+                        "z": "7cf35d6fe22c0878"
+                    },
+                    {
+                        "id": "eeb5210da7efebd3",
+                        "info": "The Executor Mode Annotator is a mean to describe to the PHYSICS Environment the execution mode of a given flow. There are three options\n1) Service mode: the selected flow will be deployed as a Node-RED service, thus always running\n2) Node-RED Function mode: the selected flow will be wrapped around a Node-RED runtime and registered to a target Openwhisk platform, where it will be executed as a Node-RED runtime function\n3) Native Sequence: the included functions will be packaged and registered individually at the Openwhisk platform, while their links (workflow) will be translated to the native Openwhisk sequence format and registered to the Openwhisk platform. This mode at the moment is limited to pure function nodes of Node-RED, while the workflow description is limited by the sequence abilities of Openwhisk. ",
+                        "name": "Instructions",
+                        "type": "comment",
+                        "x": 560,
+                        "y": 280,
+                        "z": "694cb784968dc0b9"
+                    },
+                    {
+                        "id": "30ee5c09f384361d",
+                        "info": "The node is used to indicate at the flow level the locality of this flow with relation to a set of standard locations by name ",
+                        "name": "README",
+                        "type": "comment",
+                        "x": 400,
+                        "y": 220,
+                        "z": "05f045b87080a61e"
+                    },
+                    {
+                        "id": "c12a4bacaa7304c8",
+                        "info": "This node is intended to provide info on the location of  a compose file that can be used to deploy this flow as a service.",
+                        "name": "README",
+                        "type": "comment",
+                        "x": 560,
+                        "y": 180,
+                        "z": "d7579a1472067fcf"
+                    }
+                ]
+            },
+            "hasSoftwareArtifact": {
+                "@id": "https://registry.apps.ocphub.physics-faas.eu/custom/george:80",
+                "@type": "SoftwareImage"
+            },
+            "label": "Hello_Service_v2",
+            "locality": "edgeA",
+            "serviceName": "serviceA",
+            "urlOfComposeFile": "https://gogs.apps.ocphub.physics-faas.eu/WP3/Patterns/raw/master/compose/docker-compose.yml"
+        },
+        "isTopLevelComposite": true
+    }
+]

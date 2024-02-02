@@ -1,14 +1,21 @@
 # Semantic Extractor
-The Semantic Extractor component in [H2020-PHYSICS][physics].
+This repository contains the files that have to do with the semantic extractor. 
 
-The project is **based on [Node-RED][node-red]**.
+The project is **based on Node-RED**.
+
+## Prerequisite steps
+
+1. Copy **[settings.example.js][settings-example]** and paste locally to create the **`settings.js`** file.
 
 ## Node-RED admin environment credentials
+The **default** credentials, given the default [settings.js][settings-example] are:
+- user: **admin**
+- password: **physics**
 
-To **enable** authentication and use credentials credentials follow these **[instructions][node-red-admin-auth]**, and make the changes in the **`settings.js`** file.
+To **replace** with custom credentials follow these **[instructions][node-red-admin-auth]**, and make the changes in the **`settings.js`** file you just created.
 
 
-## Run Semantic Extractor
+## Execute Semantic Extractor
 There are **two options**:
 * Build a container locally and run it. *(REQUIRES DOCKER)*
 * Run node-red locally using a local node.js and node-red installation. *(REQUIRES local Node.js and Node-RED)*
@@ -37,19 +44,9 @@ To create a container for the semantic extractor, **Docker (or a Docker-compatib
     ```
 2. Run a new container called `extractor-example` based on the `semantic-extractor` image:
     ```bash
-    docker run -d -p 1880:1880 --name extractor-example semantic-extractor
+    docker run -d -p 8080:8080 --name extractor-example semantic-extractor
     ```
 3. Stop, start or remove the extractor-example container as usual.
-
-## Example usage for transformation into JSON-LD
-
-The semantic extractor can be used to generate the JSON-LD representation of the input, following the [PHYSICS Application Ontology][physics-ontology].
-
-Using the [**example input**][example-input], the [**example output**][example-output] can be *returned from a locally-deployed instance* (as seen in the steps above) of the semantic extractor, using cURL, as follows:
-
-```bash
-curl -X POST http://127.0.0.1:1880/transform -H 'Content-Type: application/json' --data-binary "@examples/helloFunctionV2DEoutput.json"
-```
 
 ## Description - Usage within PHYSICS
 

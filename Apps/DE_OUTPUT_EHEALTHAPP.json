@@ -1,0 +1,927 @@
+{
+    "flows": [
+        {
+            "flowID": "f4a0fb9518d4df8d",
+            "flowName": "Inference",
+            "flow": [
+                {
+                    "id": "f4a0fb9518d4df8d",
+                    "type": "tab",
+                    "label": "Inference",
+                    "disabled": false,
+                    "info": "",
+                    "env": []
+                },
+                {
+                    "id": "48676e3bbd5ccbdd",
+                    "type": "exec",
+                    "z": "f4a0fb9518d4df8d",
+                    "command": "python3 /data/scripts/inference.py",
+                    "addpay": "cla",
+                    "append": "",
+                    "useSpawn": "false",
+                    "timer": "",
+                    "winHide": false,
+                    "oldrc": false,
+                    "name": "Infer with Python",
+                    "x": 410,
+                    "y": 360,
+                    "wires": [
+                        [
+                            "bfc262ed8d69643a"
+                        ],
+                        [
+                            "3ec2ee2e0cd2bb1b"
+                        ],
+                        []
+                    ]
+                },
+                {
+                    "id": "41dd301dce34ce6e",
+                    "type": "inject",
+                    "z": "f4a0fb9518d4df8d",
+                    "name": "",
+                    "props": [
+                        {
+                            "p": "payload"
+                        },
+                        {
+                            "p": "topic",
+                            "vt": "str"
+                        }
+                    ],
+                    "repeat": "",
+                    "crontab": "",
+                    "once": false,
+                    "onceDelay": 0.1,
+                    "topic": "",
+                    "payload": "",
+                    "payloadType": "date",
+                    "x": 120,
+                    "y": 680,
+                    "wires": [
+                        [
+                            "a3107530757941c9"
+                        ]
+                    ]
+                },
+                {
+                    "id": "d0eb89f611e377fd",
+                    "type": "http request",
+                    "z": "f4a0fb9518d4df8d",
+                    "name": "Send request",
+                    "method": "POST",
+                    "ret": "obj",
+                    "paytoqs": "ignore",
+                    "url": "localhost:1880/run",
+                    "tls": "",
+                    "persist": false,
+                    "proxy": "",
+                    "authType": "basic",
+                    "senderr": false,
+                    "x": 490,
+                    "y": 680,
+                    "wires": [
+                        [
+                            "4078b21395814fb2"
+                        ]
+                    ]
+                },
+                {
+                    "id": "4078b21395814fb2",
+                    "type": "debug",
+                    "z": "f4a0fb9518d4df8d",
+                    "name": "Inference",
+                    "active": true,
+                    "tosidebar": true,
+                    "console": false,
+                    "tostatus": false,
+                    "complete": "true",
+                    "targetType": "full",
+                    "statusVal": "",
+                    "statusType": "auto",
+                    "x": 660,
+                    "y": 680,
+                    "wires": []
+                },
+                {
+                    "id": "5f46f2f372d50ec2",
+                    "type": "http response",
+                    "z": "f4a0fb9518d4df8d",
+                    "name": "",
+                    "statusCode": "",
+                    "headers": {},
+                    "x": 870,
+                    "y": 460,
+                    "wires": []
+                },
+                {
+                    "id": "89bbfca9894f9583",
+                    "type": "join",
+                    "z": "f4a0fb9518d4df8d",
+                    "name": "",
+                    "mode": "auto",
+                    "build": "array",
+                    "property": "payload",
+                    "propertyType": "msg",
+                    "key": "topic",
+                    "joiner": "\\n",
+                    "joinerType": "str",
+                    "accumulate": false,
+                    "timeout": "",
+                    "count": "2",
+                    "reduceRight": false,
+                    "reduceExp": "",
+                    "reduceInit": "",
+                    "reduceInitType": "",
+                    "reduceFixup": "",
+                    "x": 770,
+                    "y": 340,
+                    "wires": [
+                        [
+                            "8fe0a12ef00c83e0"
+                        ]
+                    ]
+                },
+                {
+                    "id": "8fe0a12ef00c83e0",
+                    "type": "function",
+                    "z": "f4a0fb9518d4df8d",
+                    "name": "Prepare response",
+                    "func": "var input = msg.payload;\nmsg.payload = {};\nerrors = input[1];\nif (input[0] == \"\") {\n    msg.payload.errors = JSON.stringify(errors);\n    msg.statusCode = 500;\n} else {\n    msg.payload.out = input[0];\n    msg.payload.errors = JSON.stringify(errors);\n}\nmsg.filename = '/data/scripts/out_' + msg._msgid;\nmsg.result = msg.payload;\nreturn msg;\n",
+                    "outputs": 1,
+                    "noerr": 0,
+                    "initialize": "",
+                    "finalize": "",
+                    "libs": [],
+                    "x": 210,
+                    "y": 460,
+                    "wires": [
+                        [
+                            "91e8d9a937614015"
+                        ]
+                    ]
+                },
+                {
+                    "id": "3ec2ee2e0cd2bb1b",
+                    "type": "subflow:61834c2663a6ece6",
+                    "z": "f4a0fb9518d4df8d",
+                    "name": "",
+                    "env": [
+                        {
+                            "name": "totalcount",
+                            "value": "2",
+                            "type": "num"
+                        },
+                        {
+                            "name": "position",
+                            "value": "2",
+                            "type": "num"
+                        }
+                    ],
+                    "x": 610,
+                    "y": 360,
+                    "wires": [
+                        [
+                            "89bbfca9894f9583"
+                        ]
+                    ]
+                },
+                {
+                    "id": "bfc262ed8d69643a",
+                    "type": "subflow:61834c2663a6ece6",
+                    "z": "f4a0fb9518d4df8d",
+                    "name": "",
+                    "env": [
+                        {
+                            "name": "totalcount",
+                            "value": "2",
+                            "type": "num"
+                        },
+                        {
+                            "name": "position",
+                            "value": "1",
+                            "type": "num"
+                        }
+                    ],
+                    "x": 610,
+                    "y": 320,
+                    "wires": [
+                        [
+                            "89bbfca9894f9583"
+                        ]
+                    ]
+                },
+                {
+                    "id": "a3bf1605553dc582",
+                    "type": "http in",
+                    "z": "f4a0fb9518d4df8d",
+                    "name": "",
+                    "url": "/run",
+                    "method": "post",
+                    "upload": false,
+                    "swaggerDoc": "",
+                    "x": 80,
+                    "y": 360,
+                    "wires": [
+                        [
+                            "9e2f3aa450c84658"
+                        ]
+                    ]
+                },
+                {
+                    "id": "a3107530757941c9",
+                    "type": "function",
+                    "z": "f4a0fb9518d4df8d",
+                    "name": "Prepare input",
+                    "func": "msg.payload = {};\nmsg.payload.value = {};\nmsg.payload.value.input = \"[{\\\"patient\\\":\\\"4140D\\\",\\\"date\\\":\\\"10-06-2022\\\",\\\"vector\\\":[-0.17563081,0.37319498,0.22020688,0.80695292,-0.14483578,0.82998543,-0.37742864,1.66220971,-0.65614964,-0.14292737,-0.37938052,0.79727469,0.11874357,-1.01171128,0.36931477]},{\\\"patient\\\":\\\"4140D\\\",\\\"date\\\":\\\"10-06-2022\\\",\\\"vector\\\":[-0.17563081,0.38092934,0.77517288,0.60602839,-0.74486557,0.55876642,-0.97958379,0.6130755,-1.33591593,0.23242436,0.20101902,0.57318741,-0.32033507,-0.32264458,0.70643433]},{\\\"patient\\\":\\\"4140D\\\",\\\"date\\\":\\\"10-06-2022\\\",\\\"vector\\\":[-0.17563081,0.40445467,1.08207716,0.75746139,-0.0749294,0.90057979,0.08020928,0.44294563,-0.95483483,0.79288105,0.84270299,1.23749778,0.99690085,-0.08768413,0.79027754]},{\\\"patient\\\":\\\"4140D\\\",\\\"date\\\":\\\"10-06-2022\\\",\\\"vector\\\":[-0.17563081,0.40896638,0.95170053,0.42175769,-1.12061238,0.47985993,-0.97055147,1.12346512,-0.0361204,0.53064902,0.24427862,1.03798781,0.48402748,0.4104772,1.2217207]},{\\\"patient\\\":\\\"4140D\\\",\\\"date\\\":\\\"10-06-2022\\\",\\\"vector\\\":[-0.17563081,0.39253087,-0.00477934,0.53616301,-0.60796557,0.86801974,0.23074807,1.18017507,0.04627552,0.75174661,0.44976169,1.17316305,0.82348324,0.90750891,1.51517193]},{\\\"patient\\\":\\\"4140D\\\",\\\"date\\\":\\\"10-06-2022\\\",\\\"vector\\\":[-0.17563081,0.41380036,0.89401176,0.55280539,-0.40407195,0.74137306,-0.1215127,0.66978546,-0.5119568,1.0756803,0.8210732,0.43006069,-1.13576682,0.33027435,0.62084439]},{\\\"patient\\\":\\\"4140D\\\",\\\"date\\\":\\\"10-06-2022\\\",\\\"vector\\\":[-0.17563081,0.43055813,1.23437552,0.2466346,-1.42354004,0.21542495,-1.64195446,0.69814044,-0.38424313,1.27621067,1.05179103,0.44379507,-1.03614394,-0.47288371,-0.61933637]},{\\\"patient\\\":\\\"4140D\\\",\\\"date\\\":\\\"10-06-2022\\\",\\\"vector\\\":[-0.17563081,0.43378078,1.12476685,0.14893176,-1.64491026,0.27156963,-1.32582301,0.17357333,-1.05988962,1.50245007,1.09865559,0.19585333,-1.66708887,0.46808769,0.83045241]},{\\\"patient\\\":\\\"4140D\\\",\\\"date\\\":\\\"10-06-2022\\\",\\\"vector\\\":[-0.17563081,0.4179898,0.41634871,0.19798855,-1.27207621,0.28847097,-1.13614413,0.42876814,-0.53667557,0.68490315,0.17578426,0.23705648,-1.35346127,0.54038322,0.83743934]},{\\\"patient\\\":\\\"4140D\\\",\\\"date\\\":\\\"10-06-2022\\\",\\\"vector\\\":[-0.17563081,0.37738442,-1.15970858,0.17140037,-1.32159323,0.21450978,-1.34689844,0.18775082,-0.80858208,-0.22005444,-0.85523605,0.39680903,-0.86272633,0.34382976,0.45315798]}]\";\nmsg.payload.value.model = \"benchmark_tristate_NN_no_valid\";\n\nreturn msg;",
+                    "outputs": 1,
+                    "noerr": 0,
+                    "initialize": "",
+                    "finalize": "",
+                    "libs": [],
+                    "x": 300,
+                    "y": 680,
+                    "wires": [
+                        [
+                            "d0eb89f611e377fd",
+                            "2c2d1ebff6a7cc1b"
+                        ]
+                    ]
+                },
+                {
+                    "id": "9e2f3aa450c84658",
+                    "type": "function",
+                    "z": "f4a0fb9518d4df8d",
+                    "name": "Prepare CLA",
+                    "func": "msg.cla = \"'\" + msg.payload.value.input + \"' \" + msg.payload.value.model + \" \" + 'out_' + msg._msgid;\nreturn msg;",
+                    "outputs": 1,
+                    "noerr": 0,
+                    "initialize": "",
+                    "finalize": "",
+                    "libs": [],
+                    "x": 230,
+                    "y": 360,
+                    "wires": [
+                        [
+                            "48676e3bbd5ccbdd"
+                        ]
+                    ]
+                },
+                {
+                    "id": "c2a8ddbb8642a71c",
+                    "type": "comment",
+                    "z": "f4a0fb9518d4df8d",
+                    "name": "Manual invocation section",
+                    "info": "",
+                    "x": 130,
+                    "y": 580,
+                    "wires": []
+                },
+                {
+                    "id": "91e8d9a937614015",
+                    "type": "file in",
+                    "z": "f4a0fb9518d4df8d",
+                    "name": "",
+                    "filename": "",
+                    "format": "utf8",
+                    "chunk": false,
+                    "sendError": false,
+                    "encoding": "none",
+                    "allProps": false,
+                    "x": 380,
+                    "y": 460,
+                    "wires": [
+                        [
+                            "25518d73172e8ecf"
+                        ]
+                    ]
+                },
+                {
+                    "id": "25518d73172e8ecf",
+                    "type": "json",
+                    "z": "f4a0fb9518d4df8d",
+                    "name": "",
+                    "property": "payload",
+                    "action": "",
+                    "pretty": false,
+                    "x": 510,
+                    "y": 460,
+                    "wires": [
+                        [
+                            "a929760723e0c2c5"
+                        ]
+                    ]
+                },
+                {
+                    "id": "a929760723e0c2c5",
+                    "type": "function",
+                    "z": "f4a0fb9518d4df8d",
+                    "name": "final",
+                    "func": "msg.result.predictions = msg.payload;\nmsg.payload = {};\nmsg.payload = msg.result;\nreturn msg;\n",
+                    "outputs": 1,
+                    "noerr": 0,
+                    "initialize": "",
+                    "finalize": "",
+                    "libs": [],
+                    "x": 630,
+                    "y": 460,
+                    "wires": [
+                        [
+                            "a49f32e21f2ceea2"
+                        ]
+                    ]
+                },
+                {
+                    "id": "a49f32e21f2ceea2",
+                    "type": "file",
+                    "z": "f4a0fb9518d4df8d",
+                    "name": "",
+                    "filename": "",
+                    "appendNewline": true,
+                    "createDir": false,
+                    "overwriteFile": "delete",
+                    "encoding": "none",
+                    "x": 750,
+                    "y": 460,
+                    "wires": [
+                        [
+                            "5f46f2f372d50ec2"
+                        ]
+                    ]
+                },
+                {
+                    "id": "7cd54384e3001590",
+                    "type": "subflow:694cb784968dc0b9",
+                    "z": "f4a0fb9518d4df8d",
+                    "name": "",
+                    "env": [
+                        {
+                            "name": "Executor Mode",
+                            "value": "NoderedFunction",
+                            "type": "str"
+                        }
+                    ],
+                    "x": 300,
+                    "y": 100,
+                    "wires": []
+                },
+                {
+                    "id": "e0a44f9c057781b6",
+                    "type": "comment",
+                    "z": "f4a0fb9518d4df8d",
+                    "name": "Annotations section",
+                    "info": "",
+                    "x": 110,
+                    "y": 40,
+                    "wires": []
+                },
+                {
+                    "id": "738be79c50ce5ea0",
+                    "type": "subflow:dd8835083692860a",
+                    "z": "f4a0fb9518d4df8d",
+                    "name": "",
+                    "env": [
+                        {
+                            "name": "memory",
+                            "value": "512",
+                            "type": "num"
+                        },
+                        {
+                            "name": "timeout",
+                            "value": "300000",
+                            "type": "num"
+                        }
+                    ],
+                    "x": 100,
+                    "y": 100,
+                    "wires": [
+                        []
+                    ]
+                },
+                {
+                    "id": "b286543636b19b47",
+                    "type": "comment",
+                    "z": "f4a0fb9518d4df8d",
+                    "name": "Endpoints' definition section",
+                    "info": "",
+                    "x": 140,
+                    "y": 220,
+                    "wires": []
+                },
+                {
+                    "id": "b4e22c25249c9de1",
+                    "type": "http in",
+                    "z": "f4a0fb9518d4df8d",
+                    "name": "",
+                    "url": "/init",
+                    "method": "post",
+                    "upload": false,
+                    "swaggerDoc": "",
+                    "x": 80,
+                    "y": 280,
+                    "wires": [
+                        [
+                            "13d4f7c0acaa0a39"
+                        ]
+                    ]
+                },
+                {
+                    "id": "13d4f7c0acaa0a39",
+                    "type": "http response",
+                    "z": "f4a0fb9518d4df8d",
+                    "name": "",
+                    "x": 380,
+                    "y": 280,
+                    "wires": []
+                },
+                {
+                    "id": "2c2d1ebff6a7cc1b",
+                    "type": "json",
+                    "z": "f4a0fb9518d4df8d",
+                    "name": "",
+                    "property": "payload.value.input",
+                    "action": "",
+                    "pretty": false,
+                    "x": 490,
+                    "y": 620,
+                    "wires": [
+                        [
+                            "99c7424da4aad1d3"
+                        ]
+                    ]
+                },
+                {
+                    "id": "99c7424da4aad1d3",
+                    "type": "debug",
+                    "z": "f4a0fb9518d4df8d",
+                    "name": "Input data",
+                    "active": true,
+                    "tosidebar": true,
+                    "console": false,
+                    "tostatus": false,
+                    "complete": "payload",
+                    "targetType": "msg",
+                    "statusVal": "",
+                    "statusType": "auto",
+                    "x": 660,
+                    "y": 620,
+                    "wires": []
+                },
+                {
+                    "id": "2d64e8357aafa568",
+                    "type": "subflow:40ce9e05d2b123a0",
+                    "z": "f4a0fb9518d4df8d",
+                    "name": "",
+                    "env": [
+                        {
+                            "name": "gpu_enabled",
+                            "value": "true",
+                            "type": "str"
+                        },
+                        {
+                            "name": "architecture",
+                            "value": "x86_64",
+                            "type": "str"
+                        }
+                    ],
+                    "x": 490,
+                    "y": 100,
+                    "wires": []
+                },
+                {
+                    "id": "ec218f71071744ae",
+                    "type": "subflow:05f045b87080a61e",
+                    "z": "f4a0fb9518d4df8d",
+                    "name": "",
+                    "env": [
+                        {
+                            "name": "locality",
+                            "value": "Cloud",
+                            "type": "str"
+                        }
+                    ],
+                    "x": 690,
+                    "y": 100,
+                    "wires": []
+                },
+                {
+                    "id": "6cf5b4224f0daa69",
+                    "type": "function",
+                    "z": "61834c2663a6ece6",
+                    "name": "create artificial msg.parts",
+                    "func": "\n//need to push the new parts down a LIFO structure?\nif (msg.hasOwnProperty(\"parts\")){\n    var parts={};\n    parts=msg.parts;\n    delete msg.parts;\n    msg.parts={};\n    msg.parts.parts=parts;\n    msg.parts.id=msg._msgid;\n} else {\n    msg.parts={};\n    msg.parts.id=msg._msgid;\n}\n\nmsg.parts.count=env.get('totalcount');\nmsg.parts.len=1;\nmsg.parts.index=env.get('position')-1;\nmsg.parts.type=\"array\";\n\n//msg.topic='topic2';\n\n\nreturn msg;",
+                    "outputs": 1,
+                    "noerr": 0,
+                    "initialize": "",
+                    "finalize": "",
+                    "libs": [],
+                    "x": 330,
+                    "y": 120,
+                    "wires": [
+                        []
+                    ]
+                },
+                {
+                    "id": "61834c2663a6ece6",
+                    "type": "subflow",
+                    "name": "BranchJoin",
+                    "info": "\nTotal count is the total number of branches expected to join.\n\nPosition in sequence should be from 1 to total count.\n\nBoth variables are set via the node UI.",
+                    "category": "PHYSICS",
+                    "in": [
+                        {
+                            "x": 140,
+                            "y": 120,
+                            "wires": [
+                                {
+                                    "id": "6cf5b4224f0daa69"
+                                }
+                            ]
+                        }
+                    ],
+                    "out": [
+                        {
+                            "x": 520,
+                            "y": 120,
+                            "wires": [
+                                {
+                                    "id": "6cf5b4224f0daa69",
+                                    "port": 0
+                                }
+                            ]
+                        }
+                    ],
+                    "env": [
+                        {
+                            "name": "totalcount",
+                            "type": "num",
+                            "value": "",
+                            "ui": {
+                                "label": {
+                                    "en-US": "Total Count"
+                                }
+                            }
+                        },
+                        {
+                            "name": "position",
+                            "type": "num",
+                            "value": "",
+                            "ui": {
+                                "label": {
+                                    "en-US": "Position in sequence"
+                                }
+                            }
+                        }
+                    ],
+                    "meta": {},
+                    "color": "#FFF0F0"
+                },
+                {
+                    "id": "6cf5b4224f0daa69",
+                    "type": "function",
+                    "z": "61834c2663a6ece6",
+                    "name": "create artificial msg.parts",
+                    "func": "\n//need to push the new parts down a LIFO structure?\nif (msg.hasOwnProperty(\"parts\")){\n    var parts={};\n    parts=msg.parts;\n    delete msg.parts;\n    msg.parts={};\n    msg.parts.parts=parts;\n    msg.parts.id=msg._msgid;\n} else {\n    msg.parts={};\n    msg.parts.id=msg._msgid;\n}\n\nmsg.parts.count=env.get('totalcount');\nmsg.parts.len=1;\nmsg.parts.index=env.get('position')-1;\nmsg.parts.type=\"array\";\n\n//msg.topic='topic2';\n\n\nreturn msg;",
+                    "outputs": 1,
+                    "noerr": 0,
+                    "initialize": "",
+                    "finalize": "",
+                    "libs": [],
+                    "x": 330,
+                    "y": 120,
+                    "wires": [
+                        []
+                    ]
+                },
+                {
+                    "id": "61834c2663a6ece6",
+                    "type": "subflow",
+                    "name": "BranchJoin",
+                    "info": "\nTotal count is the total number of branches expected to join.\n\nPosition in sequence should be from 1 to total count.\n\nBoth variables are set via the node UI.",
+                    "category": "PHYSICS",
+                    "in": [
+                        {
+                            "x": 140,
+                            "y": 120,
+                            "wires": [
+                                {
+                                    "id": "6cf5b4224f0daa69"
+                                }
+                            ]
+                        }
+                    ],
+                    "out": [
+                        {
+                            "x": 520,
+                            "y": 120,
+                            "wires": [
+                                {
+                                    "id": "6cf5b4224f0daa69",
+                                    "port": 0
+                                }
+                            ]
+                        }
+                    ],
+                    "env": [
+                        {
+                            "name": "totalcount",
+                            "type": "num",
+                            "value": "",
+                            "ui": {
+                                "label": {
+                                    "en-US": "Total Count"
+                                }
+                            }
+                        },
+                        {
+                            "name": "position",
+                            "type": "num",
+                            "value": "",
+                            "ui": {
+                                "label": {
+                                    "en-US": "Position in sequence"
+                                }
+                            }
+                        }
+                    ],
+                    "meta": {},
+                    "color": "#FFF0F0"
+                },
+                {
+                    "id": "82b665f654048ecf",
+                    "type": "function",
+                    "z": "694cb784968dc0b9",
+                    "name": "",
+                    "func": "msg.annotations={};\nmsg.annotations.executorMode=env.get('Executor Mode');",
+                    "outputs": 1,
+                    "noerr": 0,
+                    "initialize": "// Code added here will be run once\n// whenever the node is started.\n\n//msg.payload.imageName=env.get('Image Name');\n//return msg;",
+                    "finalize": "",
+                    "libs": [],
+                    "x": 360,
+                    "y": 140,
+                    "wires": [
+                        []
+                    ]
+                },
+                {
+                    "id": "eeb5210da7efebd3",
+                    "type": "comment",
+                    "z": "694cb784968dc0b9",
+                    "name": "Instructions",
+                    "info": "The Executor Mode Annotator is a mean to describe to the PHYSICS Environment the execution mode of a given flow. There are three options\n1) Service mode: the selected flow will be deployed as a Node-RED service, thus always running\n2) Node-RED Function mode: the selected flow will be wrapped around a Node-RED runtime and registered to a target Openwhisk platform, where it will be executed as a Node-RED runtime function\n3) Native Sequence: the included functions will be packaged and registered individually at the Openwhisk platform, while their links (workflow) will be translated to the native Openwhisk sequence format and registered to the Openwhisk platform. This mode at the moment is limited to pure function nodes of Node-RED, while the workflow description is limited by the sequence abilities of Openwhisk. ",
+                    "x": 560,
+                    "y": 280,
+                    "wires": []
+                },
+                {
+                    "id": "694cb784968dc0b9",
+                    "type": "subflow",
+                    "name": "Executor Mode",
+                    "info": "The Executor Mode Annotator is a mean to describe to the PHYSICS Environment the execution mode of a given flow. There are three options\n1) Service mode: the selected flow will be deployed as a Node-RED service, thus always running\n2) Node-RED Function mode: the selected flow will be wrapped around a Node-RED runtime and registered to a target Openwhisk platform, where it will be executed as a Node-RED runtime function\n3) Native Sequence: the included functions will be packaged and registered individually at the Openwhisk platform, while their links (workflow) will be translated to the native Openwhisk sequence format and registered to the Openwhisk platform. This mode at the moment is limited to pure function nodes of Node-RED, while the workflow description is limited by the sequence abilities of Openwhisk. ",
+                    "category": "PHYSICS Annotators",
+                    "in": [],
+                    "out": [],
+                    "env": [
+                        {
+                            "name": "Executor Mode",
+                            "type": "str",
+                            "value": "",
+                            "ui": {
+                                "type": "select",
+                                "opts": {
+                                    "opts": [
+                                        {
+                                            "l": {
+                                                "en-US": "Service"
+                                            },
+                                            "v": "Service"
+                                        },
+                                        {
+                                            "l": {
+                                                "en-US": "NoderedFunction"
+                                            },
+                                            "v": "NoderedFunction"
+                                        },
+                                        {
+                                            "l": {
+                                                "en-US": "NativeSequence"
+                                            },
+                                            "v": "NativeSequence"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    ],
+                    "meta": {},
+                    "color": "#C0DEED",
+                    "icon": "font-awesome/fa-angle-right"
+                },
+                {
+                    "id": "c66966a2d36f06b5",
+                    "type": "function",
+                    "z": "dd8835083692860a",
+                    "name": "add sizing",
+                    "func": "\nmsg.annotations={};\nmsg.annotations.sizing={};\nmsg.annotations.sizing.memory=env.get('memory');\nmsg.annotations.sizing.timeout=env.get('timeout');\n\nreturn msg;\n",
+                    "outputs": 1,
+                    "noerr": 0,
+                    "initialize": "// Code added here will be run once\n// whenever the node is started.\n\n//msg.payload.imageName=env.get('Image Name');\n//return msg;",
+                    "finalize": "",
+                    "libs": [],
+                    "x": 300,
+                    "y": 60,
+                    "wires": [
+                        []
+                    ]
+                },
+                {
+                    "id": "dd8835083692860a",
+                    "type": "subflow",
+                    "name": "SizingAnnotator",
+                    "info": "This node should be used to dictate what is the necessary size in terms of memory and timeout of the registered action in Openwhisk.\n\nIt is assumed that this node is used at the flow level, indicating that the annotation refers to the container configuration of a docker action that includes the overall flow in the used tab.\n",
+                    "category": "PHYSICS Annotators",
+                    "in": [
+                        {
+                            "x": 120,
+                            "y": 60,
+                            "wires": [
+                                {
+                                    "id": "c66966a2d36f06b5"
+                                }
+                            ]
+                        }
+                    ],
+                    "out": [
+                        {
+                            "x": 440,
+                            "y": 60,
+                            "wires": [
+                                {
+                                    "id": "c66966a2d36f06b5",
+                                    "port": 0
+                                }
+                            ]
+                        }
+                    ],
+                    "env": [
+                        {
+                            "name": "memory",
+                            "type": "num",
+                            "value": "",
+                            "ui": {
+                                "label": {
+                                    "en-US": "Memory (MB)"
+                                }
+                            }
+                        },
+                        {
+                            "name": "timeout",
+                            "type": "num",
+                            "value": "",
+                            "ui": {
+                                "icon": "font-awesome/fa-times-circle-o",
+                                "label": {
+                                    "en-US": "Timeout (millisecs)"
+                                }
+                            }
+                        }
+                    ],
+                    "meta": {},
+                    "color": "#E9967A",
+                    "icon": "font-awesome/fa-arrows-h"
+                },
+                {
+                    "id": "170d11b5c7d5b61a",
+                    "type": "comment",
+                    "z": "40ce9e05d2b123a0",
+                    "name": "",
+                    "info": "",
+                    "x": 140,
+                    "y": 60,
+                    "wires": []
+                },
+                {
+                    "id": "40ce9e05d2b123a0",
+                    "type": "subflow",
+                    "name": "architecture",
+                    "info": "",
+                    "category": "PHYSICS Annotators",
+                    "in": [],
+                    "out": [],
+                    "env": [
+                        {
+                            "name": "gpu_enabled",
+                            "type": "str",
+                            "value": "",
+                            "ui": {
+                                "type": "select",
+                                "opts": {
+                                    "opts": [
+                                        {
+                                            "l": {
+                                                "en-US": "true"
+                                            },
+                                            "v": "true"
+                                        },
+                                        {
+                                            "l": {
+                                                "en-US": "false"
+                                            },
+                                            "v": "false"
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        {
+                            "name": "architecture",
+                            "type": "str",
+                            "value": "",
+                            "ui": {
+                                "type": "select",
+                                "opts": {
+                                    "opts": [
+                                        {
+                                            "l": {
+                                                "en-US": "x86_64"
+                                            },
+                                            "v": "x86_64"
+                                        },
+                                        {
+                                            "l": {
+                                                "en-US": "arm64"
+                                            },
+                                            "v": "arm64"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    ],
+                    "meta": {},
+                    "color": "#87A980",
+                    "icon": "font-awesome/fa-object-group"
+                },
+                {
+                    "id": "30ee5c09f384361d",
+                    "type": "comment",
+                    "z": "05f045b87080a61e",
+                    "name": "README",
+                    "info": "The node is used to indicate at the flow level the locality of this flow with relation to a set of standard locations by name ",
+                    "x": 400,
+                    "y": 220,
+                    "wires": []
+                },
+                {
+                    "id": "05f045b87080a61e",
+                    "type": "subflow",
+                    "name": "Locality(flow level)",
+                    "info": "",
+                    "category": "PHYSICS Annotators",
+                    "in": [],
+                    "out": [],
+                    "env": [
+                        {
+                            "name": "locality",
+                            "type": "str",
+                            "value": "",
+                            "ui": {
+                                "type": "select",
+                                "opts": {
+                                    "opts": [
+                                        {
+                                            "l": {
+                                                "en-US": "HPC"
+                                            },
+                                            "v": "HPC"
+                                        },
+                                        {
+                                            "l": {
+                                                "en-US": "Cloud"
+                                            },
+                                            "v": "Cloud"
+                                        },
+                                        {
+                                            "l": {
+                                                "en-US": "Edge"
+                                            },
+                                            "v": "Edge"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    ],
+                    "meta": {},
+                    "color": "#D8BFD8",
+                    "icon": "font-awesome/fa-braille"
+                }
+            ],
+            "artifact": "registry.apps.ocphub.physics-faas.eu/custom/ehealth:19",
+            "type": "image"
+        }
+    ],
+    "displayName": "",
+    "branchName": "ehealth"
+}

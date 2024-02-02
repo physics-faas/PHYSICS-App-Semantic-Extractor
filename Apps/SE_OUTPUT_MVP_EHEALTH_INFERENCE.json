@@ -1,0 +1,585 @@
+[
+    {
+        "@context": {
+            "@version": 1.1,
+            "@vocab": "http://www.physics-h2020.eu/physics/1.0.0/",
+            "flow": "http://example_composer.physics.eu/flow/",
+            "function": "http://example_composer.physics.eu/function/",
+            "param": "http://example_parameters_repository.physics.eu/",
+            "app": "http://example_composer.physics.eu/app/",
+            "owner": "http://example_owners_repository.physics.eu/",
+            "proglang": "http://languages.programming.physics.eu/",
+            "js_lib": "http://languages.programming.physics.eu/javascript/lib/"
+        },
+        "@id": "http://example_composer.physics.eu/app/",
+        "@type": "Application",
+        "hasFlow": {
+            "@id": "flow:f4a0fb9518d4df8d",
+            "@type": "Flow",
+            "consumesREST": {
+                "@id": "flow:f4a0fb9518d4df8d/interface/d0eb89f611e377fd",
+                "@type": "REST",
+                "hasHttpMethod": "POST",
+                "interfaceURI": "localhost:1880/run",
+                "label": "Send request"
+            },
+            "definesInterface": [
+                {
+                    "@id": "flow:f4a0fb9518d4df8d/interface/3ec2ee2e0cd2bb1b.out0",
+                    "@type": "MessageWire",
+                    "isNodeOutputOf": "flow:f4a0fb9518d4df8d/node/3ec2ee2e0cd2bb1b"
+                },
+                {
+                    "@id": "flow:f4a0fb9518d4df8d/interface/bfc262ed8d69643a.out0",
+                    "@type": "MessageWire",
+                    "isNodeOutputOf": "flow:f4a0fb9518d4df8d/node/bfc262ed8d69643a"
+                },
+                {
+                    "@id": "flow:f4a0fb9518d4df8d/interface/8fe0a12ef00c83e0.out0",
+                    "@type": "MessageWire",
+                    "isNodeOutputOf": "function:8fe0a12ef00c83e0"
+                },
+                {
+                    "@id": "flow:f4a0fb9518d4df8d/interface/a3107530757941c9.out0",
+                    "@type": "MessageWire",
+                    "isNodeOutputOf": "function:a3107530757941c9"
+                },
+                {
+                    "@id": "flow:f4a0fb9518d4df8d/interface/9e2f3aa450c84658.out0",
+                    "@type": "MessageWire",
+                    "isNodeOutputOf": "function:9e2f3aa450c84658"
+                },
+                {
+                    "@id": "flow:f4a0fb9518d4df8d/interface/a929760723e0c2c5.out0",
+                    "@type": "MessageWire",
+                    "isNodeOutputOf": "function:a929760723e0c2c5"
+                },
+                {
+                    "@id": "flow:f4a0fb9518d4df8d/interface/5f46f2f372d50ec2",
+                    "@type": "RESTOutput"
+                },
+                {
+                    "@id": "flow:f4a0fb9518d4df8d/interface/a3bf1605553dc582",
+                    "@type": "REST",
+                    "allowsUpload": false,
+                    "hasHttpMethod": "POST",
+                    "interfaceURI": "/run",
+                    "isNodeInputOf": "function:9e2f3aa450c84658"
+                },
+                {
+                    "@id": "flow:f4a0fb9518d4df8d/interface/b4e22c25249c9de1",
+                    "@type": "REST",
+                    "allowsUpload": false,
+                    "hasHttpMethod": "POST",
+                    "interfaceToInterface": "flow:f4a0fb9518d4df8d/interface/13d4f7c0acaa0a39",
+                    "interfaceURI": "/init"
+                },
+                {
+                    "@id": "flow:f4a0fb9518d4df8d/interface/13d4f7c0acaa0a39",
+                    "@type": "RESTOutput"
+                }
+            ],
+            "executorMode": "NoderedFunction",
+            "exposesREST": [
+                "flow:f4a0fb9518d4df8d/interface/a3bf1605553dc582",
+                "flow:f4a0fb9518d4df8d/interface/b4e22c25249c9de1"
+            ],
+            "hasFunction": [
+                {
+                    "@id": "function:8fe0a12ef00c83e0",
+                    "@type": "Function",
+                    "funcCode": "var input = msg.payload;\nmsg.payload = {};\nerrors = input[1];\nif (input[0] == \"\") {\n    msg.payload.errors = JSON.stringify(errors);\n    msg.statusCode = 500;\n} else {\n    msg.payload.out = input[0];\n    msg.payload.errors = JSON.stringify(errors);\n}\nmsg.filename = '/data/scripts/out_' + msg._msgid;\nmsg.result = msg.payload;\nreturn msg;\n",
+                    "label": "Prepare response"
+                },
+                {
+                    "@id": "function:a3107530757941c9",
+                    "@type": "Function",
+                    "funcCode": "msg.payload = {};\nmsg.payload.value = {};\nmsg.payload.value.input = \"[{\\\"patient\\\":\\\"4140D\\\",\\\"date\\\":\\\"10-06-2022\\\",\\\"vector\\\":[-0.17563081,0.37319498,0.22020688,0.80695292,-0.14483578,0.82998543,-0.37742864,1.66220971,-0.65614964,-0.14292737,-0.37938052,0.79727469,0.11874357,-1.01171128,0.36931477]},{\\\"patient\\\":\\\"4140D\\\",\\\"date\\\":\\\"10-06-2022\\\",\\\"vector\\\":[-0.17563081,0.38092934,0.77517288,0.60602839,-0.74486557,0.55876642,-0.97958379,0.6130755,-1.33591593,0.23242436,0.20101902,0.57318741,-0.32033507,-0.32264458,0.70643433]},{\\\"patient\\\":\\\"4140D\\\",\\\"date\\\":\\\"10-06-2022\\\",\\\"vector\\\":[-0.17563081,0.40445467,1.08207716,0.75746139,-0.0749294,0.90057979,0.08020928,0.44294563,-0.95483483,0.79288105,0.84270299,1.23749778,0.99690085,-0.08768413,0.79027754]},{\\\"patient\\\":\\\"4140D\\\",\\\"date\\\":\\\"10-06-2022\\\",\\\"vector\\\":[-0.17563081,0.40896638,0.95170053,0.42175769,-1.12061238,0.47985993,-0.97055147,1.12346512,-0.0361204,0.53064902,0.24427862,1.03798781,0.48402748,0.4104772,1.2217207]},{\\\"patient\\\":\\\"4140D\\\",\\\"date\\\":\\\"10-06-2022\\\",\\\"vector\\\":[-0.17563081,0.39253087,-0.00477934,0.53616301,-0.60796557,0.86801974,0.23074807,1.18017507,0.04627552,0.75174661,0.44976169,1.17316305,0.82348324,0.90750891,1.51517193]},{\\\"patient\\\":\\\"4140D\\\",\\\"date\\\":\\\"10-06-2022\\\",\\\"vector\\\":[-0.17563081,0.41380036,0.89401176,0.55280539,-0.40407195,0.74137306,-0.1215127,0.66978546,-0.5119568,1.0756803,0.8210732,0.43006069,-1.13576682,0.33027435,0.62084439]},{\\\"patient\\\":\\\"4140D\\\",\\\"date\\\":\\\"10-06-2022\\\",\\\"vector\\\":[-0.17563081,0.43055813,1.23437552,0.2466346,-1.42354004,0.21542495,-1.64195446,0.69814044,-0.38424313,1.27621067,1.05179103,0.44379507,-1.03614394,-0.47288371,-0.61933637]},{\\\"patient\\\":\\\"4140D\\\",\\\"date\\\":\\\"10-06-2022\\\",\\\"vector\\\":[-0.17563081,0.43378078,1.12476685,0.14893176,-1.64491026,0.27156963,-1.32582301,0.17357333,-1.05988962,1.50245007,1.09865559,0.19585333,-1.66708887,0.46808769,0.83045241]},{\\\"patient\\\":\\\"4140D\\\",\\\"date\\\":\\\"10-06-2022\\\",\\\"vector\\\":[-0.17563081,0.4179898,0.41634871,0.19798855,-1.27207621,0.28847097,-1.13614413,0.42876814,-0.53667557,0.68490315,0.17578426,0.23705648,-1.35346127,0.54038322,0.83743934]},{\\\"patient\\\":\\\"4140D\\\",\\\"date\\\":\\\"10-06-2022\\\",\\\"vector\\\":[-0.17563081,0.37738442,-1.15970858,0.17140037,-1.32159323,0.21450978,-1.34689844,0.18775082,-0.80858208,-0.22005444,-0.85523605,0.39680903,-0.86272633,0.34382976,0.45315798]}]\";\nmsg.payload.value.model = \"benchmark_tristate_NN_no_valid\";\n\nreturn msg;",
+                    "hasNodeOutput": "flow:f4a0fb9518d4df8d/interface/d0eb89f611e377fd",
+                    "label": "Prepare input"
+                },
+                {
+                    "@id": "function:9e2f3aa450c84658",
+                    "@type": "Function",
+                    "funcCode": "msg.cla = \"'\" + msg.payload.value.input + \"' \" + msg.payload.value.model + \" \" + 'out_' + msg._msgid;\nreturn msg;",
+                    "label": "Prepare CLA"
+                },
+                {
+                    "@id": "function:a929760723e0c2c5",
+                    "@type": "Function",
+                    "funcCode": "msg.result.predictions = msg.payload;\nmsg.payload = {};\nmsg.payload = msg.result;\nreturn msg;\n",
+                    "label": "final"
+                },
+                {
+                    "@id": "function:6cf5b4224f0daa69",
+                    "@type": "Function",
+                    "funcCode": "\n//need to push the new parts down a LIFO structure?\nif (msg.hasOwnProperty(\"parts\")){\n    var parts={};\n    parts=msg.parts;\n    delete msg.parts;\n    msg.parts={};\n    msg.parts.parts=parts;\n    msg.parts.id=msg._msgid;\n} else {\n    msg.parts={};\n    msg.parts.id=msg._msgid;\n}\n\nmsg.parts.count=env.get('totalcount');\nmsg.parts.len=1;\nmsg.parts.index=env.get('position')-1;\nmsg.parts.type=\"array\";\n\n//msg.topic='topic2';\n\n\nreturn msg;",
+                    "label": "create artificial msg.parts"
+                },
+                {
+                    "@id": "function:82b665f654048ecf",
+                    "@type": "Function",
+                    "funcCode": "msg.annotations={};\nmsg.annotations.executorMode=env.get('Executor Mode');",
+                    "initCode": "// Code added here will be run once\n// whenever the node is started.\n\n//msg.payload.imageName=env.get('Image Name');\n//return msg;"
+                },
+                {
+                    "@id": "function:c66966a2d36f06b5",
+                    "@type": "Function",
+                    "funcCode": "\nmsg.annotations={};\nmsg.annotations.sizing={};\nmsg.annotations.sizing.memory=env.get('memory');\nmsg.annotations.sizing.timeout=env.get('timeout');\n\nreturn msg;\n",
+                    "initCode": "// Code added here will be run once\n// whenever the node is started.\n\n//msg.payload.imageName=env.get('Image Name');\n//return msg;",
+                    "label": "add sizing"
+                },
+                {
+                    "@id": "function:79574bee858dc748",
+                    "@type": "Function",
+                    "funcCode": "\nreturn msg;"
+                }
+            ],
+            "hasJSONDescription": {
+                "artifact": "registry.apps.ocphub.physics-faas.eu/custom/ehealth:17",
+                "artifactType": "image",
+                "id": "f4a0fb9518d4df8d",
+                "label": "Inference",
+                "nodes": [
+                    {
+                        "disabled": false,
+                        "id": "f4a0fb9518d4df8d",
+                        "label": "Inference",
+                        "type": "tab"
+                    },
+                    {
+                        "addpay": "cla",
+                        "command": "python3 /data/scripts/inference.py",
+                        "id": "48676e3bbd5ccbdd",
+                        "name": "Infer with Python",
+                        "oldrc": false,
+                        "type": "exec",
+                        "useSpawn": "false",
+                        "winHide": false,
+                        "wires": [
+                            "bfc262ed8d69643a",
+                            "3ec2ee2e0cd2bb1b"
+                        ],
+                        "x": 410,
+                        "y": 360,
+                        "z": "f4a0fb9518d4df8d"
+                    },
+                    {
+                        "id": "41dd301dce34ce6e",
+                        "once": false,
+                        "onceDelay": 0.1,
+                        "payloadType": "date",
+                        "props": [
+                            {
+                                "p": "payload"
+                            },
+                            {
+                                "p": "topic",
+                                "vt": "str"
+                            }
+                        ],
+                        "type": "inject",
+                        "wires": "a3107530757941c9",
+                        "x": 120,
+                        "y": 680,
+                        "z": "f4a0fb9518d4df8d"
+                    },
+                    {
+                        "authType": "basic",
+                        "id": "d0eb89f611e377fd",
+                        "method": "POST",
+                        "name": "Send request",
+                        "paytoqs": "ignore",
+                        "persist": false,
+                        "ret": "obj",
+                        "senderr": false,
+                        "type": "http request",
+                        "url": "localhost:1880/run",
+                        "wires": "4078b21395814fb2",
+                        "x": 490,
+                        "y": 680,
+                        "z": "f4a0fb9518d4df8d"
+                    },
+                    {
+                        "active": true,
+                        "complete": "true",
+                        "console": false,
+                        "id": "4078b21395814fb2",
+                        "name": "Inference",
+                        "statusType": "auto",
+                        "targetType": "full",
+                        "tosidebar": true,
+                        "tostatus": false,
+                        "type": "debug",
+                        "x": 660,
+                        "y": 680,
+                        "z": "f4a0fb9518d4df8d"
+                    },
+                    {
+                        "id": "5f46f2f372d50ec2",
+                        "type": "http response",
+                        "x": 870,
+                        "y": 460,
+                        "z": "f4a0fb9518d4df8d"
+                    },
+                    {
+                        "accumulate": false,
+                        "build": "array",
+                        "count": "2",
+                        "id": "89bbfca9894f9583",
+                        "joiner": "\\n",
+                        "joinerType": "str",
+                        "key": "topic",
+                        "mode": "auto",
+                        "property": "payload",
+                        "propertyType": "msg",
+                        "reduceRight": false,
+                        "type": "join",
+                        "wires": "8fe0a12ef00c83e0",
+                        "x": 770,
+                        "y": 340,
+                        "z": "f4a0fb9518d4df8d"
+                    },
+                    {
+                        "func": "var input = msg.payload;\nmsg.payload = {};\nerrors = input[1];\nif (input[0] == \"\") {\n    msg.payload.errors = JSON.stringify(errors);\n    msg.statusCode = 500;\n} else {\n    msg.payload.out = input[0];\n    msg.payload.errors = JSON.stringify(errors);\n}\nmsg.filename = '/data/scripts/out_' + msg._msgid;\nmsg.result = msg.payload;\nreturn msg;\n",
+                        "id": "8fe0a12ef00c83e0",
+                        "name": "Prepare response",
+                        "noerr": 0,
+                        "outputs": 1,
+                        "type": "function",
+                        "wires": "91e8d9a937614015",
+                        "x": 210,
+                        "y": 460,
+                        "z": "f4a0fb9518d4df8d"
+                    },
+                    {
+                        "env": [
+                            {
+                                "name": "totalcount",
+                                "type": "num",
+                                "value": "2"
+                            },
+                            {
+                                "name": "position",
+                                "type": "num",
+                                "value": "2"
+                            }
+                        ],
+                        "id": "3ec2ee2e0cd2bb1b",
+                        "subflow": "61834c2663a6ece6",
+                        "type": "subflow:61834c2663a6ece6",
+                        "wires": "89bbfca9894f9583",
+                        "x": 610,
+                        "y": 360,
+                        "z": "f4a0fb9518d4df8d"
+                    },
+                    {
+                        "env": [
+                            {
+                                "name": "totalcount",
+                                "type": "num",
+                                "value": "2"
+                            },
+                            {
+                                "name": "position",
+                                "type": "num",
+                                "value": "1"
+                            }
+                        ],
+                        "id": "bfc262ed8d69643a",
+                        "subflow": "61834c2663a6ece6",
+                        "type": "subflow:61834c2663a6ece6",
+                        "wires": "89bbfca9894f9583",
+                        "x": 610,
+                        "y": 320,
+                        "z": "f4a0fb9518d4df8d"
+                    },
+                    {
+                        "id": "a3bf1605553dc582",
+                        "method": "post",
+                        "type": "http in",
+                        "upload": false,
+                        "url": "/run",
+                        "wires": "9e2f3aa450c84658",
+                        "x": 80,
+                        "y": 360,
+                        "z": "f4a0fb9518d4df8d"
+                    },
+                    {
+                        "func": "msg.payload = {};\nmsg.payload.value = {};\nmsg.payload.value.input = \"[{\\\"patient\\\":\\\"4140D\\\",\\\"date\\\":\\\"10-06-2022\\\",\\\"vector\\\":[-0.17563081,0.37319498,0.22020688,0.80695292,-0.14483578,0.82998543,-0.37742864,1.66220971,-0.65614964,-0.14292737,-0.37938052,0.79727469,0.11874357,-1.01171128,0.36931477]},{\\\"patient\\\":\\\"4140D\\\",\\\"date\\\":\\\"10-06-2022\\\",\\\"vector\\\":[-0.17563081,0.38092934,0.77517288,0.60602839,-0.74486557,0.55876642,-0.97958379,0.6130755,-1.33591593,0.23242436,0.20101902,0.57318741,-0.32033507,-0.32264458,0.70643433]},{\\\"patient\\\":\\\"4140D\\\",\\\"date\\\":\\\"10-06-2022\\\",\\\"vector\\\":[-0.17563081,0.40445467,1.08207716,0.75746139,-0.0749294,0.90057979,0.08020928,0.44294563,-0.95483483,0.79288105,0.84270299,1.23749778,0.99690085,-0.08768413,0.79027754]},{\\\"patient\\\":\\\"4140D\\\",\\\"date\\\":\\\"10-06-2022\\\",\\\"vector\\\":[-0.17563081,0.40896638,0.95170053,0.42175769,-1.12061238,0.47985993,-0.97055147,1.12346512,-0.0361204,0.53064902,0.24427862,1.03798781,0.48402748,0.4104772,1.2217207]},{\\\"patient\\\":\\\"4140D\\\",\\\"date\\\":\\\"10-06-2022\\\",\\\"vector\\\":[-0.17563081,0.39253087,-0.00477934,0.53616301,-0.60796557,0.86801974,0.23074807,1.18017507,0.04627552,0.75174661,0.44976169,1.17316305,0.82348324,0.90750891,1.51517193]},{\\\"patient\\\":\\\"4140D\\\",\\\"date\\\":\\\"10-06-2022\\\",\\\"vector\\\":[-0.17563081,0.41380036,0.89401176,0.55280539,-0.40407195,0.74137306,-0.1215127,0.66978546,-0.5119568,1.0756803,0.8210732,0.43006069,-1.13576682,0.33027435,0.62084439]},{\\\"patient\\\":\\\"4140D\\\",\\\"date\\\":\\\"10-06-2022\\\",\\\"vector\\\":[-0.17563081,0.43055813,1.23437552,0.2466346,-1.42354004,0.21542495,-1.64195446,0.69814044,-0.38424313,1.27621067,1.05179103,0.44379507,-1.03614394,-0.47288371,-0.61933637]},{\\\"patient\\\":\\\"4140D\\\",\\\"date\\\":\\\"10-06-2022\\\",\\\"vector\\\":[-0.17563081,0.43378078,1.12476685,0.14893176,-1.64491026,0.27156963,-1.32582301,0.17357333,-1.05988962,1.50245007,1.09865559,0.19585333,-1.66708887,0.46808769,0.83045241]},{\\\"patient\\\":\\\"4140D\\\",\\\"date\\\":\\\"10-06-2022\\\",\\\"vector\\\":[-0.17563081,0.4179898,0.41634871,0.19798855,-1.27207621,0.28847097,-1.13614413,0.42876814,-0.53667557,0.68490315,0.17578426,0.23705648,-1.35346127,0.54038322,0.83743934]},{\\\"patient\\\":\\\"4140D\\\",\\\"date\\\":\\\"10-06-2022\\\",\\\"vector\\\":[-0.17563081,0.37738442,-1.15970858,0.17140037,-1.32159323,0.21450978,-1.34689844,0.18775082,-0.80858208,-0.22005444,-0.85523605,0.39680903,-0.86272633,0.34382976,0.45315798]}]\";\nmsg.payload.value.model = \"benchmark_tristate_NN_no_valid\";\n\nreturn msg;",
+                        "id": "a3107530757941c9",
+                        "name": "Prepare input",
+                        "noerr": 0,
+                        "outputs": 1,
+                        "type": "function",
+                        "wires": [
+                            "d0eb89f611e377fd",
+                            "2c2d1ebff6a7cc1b"
+                        ],
+                        "x": 300,
+                        "y": 680,
+                        "z": "f4a0fb9518d4df8d"
+                    },
+                    {
+                        "func": "msg.cla = \"'\" + msg.payload.value.input + \"' \" + msg.payload.value.model + \" \" + 'out_' + msg._msgid;\nreturn msg;",
+                        "id": "9e2f3aa450c84658",
+                        "name": "Prepare CLA",
+                        "noerr": 0,
+                        "outputs": 1,
+                        "type": "function",
+                        "wires": "48676e3bbd5ccbdd",
+                        "x": 230,
+                        "y": 360,
+                        "z": "f4a0fb9518d4df8d"
+                    },
+                    {
+                        "id": "c2a8ddbb8642a71c",
+                        "name": "Manual invocation section",
+                        "type": "comment",
+                        "x": 130,
+                        "y": 580,
+                        "z": "f4a0fb9518d4df8d"
+                    },
+                    {
+                        "allProps": false,
+                        "chunk": false,
+                        "encoding": "none",
+                        "format": "utf8",
+                        "id": "91e8d9a937614015",
+                        "sendError": false,
+                        "type": "file in",
+                        "wires": "25518d73172e8ecf",
+                        "x": 380,
+                        "y": 460,
+                        "z": "f4a0fb9518d4df8d"
+                    },
+                    {
+                        "id": "25518d73172e8ecf",
+                        "pretty": false,
+                        "property": "payload",
+                        "type": "json",
+                        "wires": "a929760723e0c2c5",
+                        "x": 510,
+                        "y": 460,
+                        "z": "f4a0fb9518d4df8d"
+                    },
+                    {
+                        "func": "msg.result.predictions = msg.payload;\nmsg.payload = {};\nmsg.payload = msg.result;\nreturn msg;\n",
+                        "id": "a929760723e0c2c5",
+                        "name": "final",
+                        "noerr": 0,
+                        "outputs": 1,
+                        "type": "function",
+                        "wires": "a49f32e21f2ceea2",
+                        "x": 630,
+                        "y": 460,
+                        "z": "f4a0fb9518d4df8d"
+                    },
+                    {
+                        "appendNewline": true,
+                        "createDir": false,
+                        "encoding": "none",
+                        "id": "a49f32e21f2ceea2",
+                        "overwriteFile": "delete",
+                        "type": "file",
+                        "wires": "5f46f2f372d50ec2",
+                        "x": 750,
+                        "y": 460,
+                        "z": "f4a0fb9518d4df8d"
+                    },
+                    {
+                        "env": {
+                            "name": "Executor Mode",
+                            "type": "str",
+                            "value": "NoderedFunction"
+                        },
+                        "id": "7cd54384e3001590",
+                        "subflow": "694cb784968dc0b9",
+                        "type": "subflow:694cb784968dc0b9",
+                        "x": 300,
+                        "y": 100,
+                        "z": "f4a0fb9518d4df8d"
+                    },
+                    {
+                        "id": "e0a44f9c057781b6",
+                        "name": "Annotations section",
+                        "type": "comment",
+                        "x": 110,
+                        "y": 40,
+                        "z": "f4a0fb9518d4df8d"
+                    },
+                    {
+                        "env": [
+                            {
+                                "name": "memory",
+                                "type": "num",
+                                "value": "512"
+                            },
+                            {
+                                "name": "timeout",
+                                "type": "num",
+                                "value": "300000"
+                            }
+                        ],
+                        "id": "738be79c50ce5ea0",
+                        "subflow": "dd8835083692860a",
+                        "type": "subflow:dd8835083692860a",
+                        "x": 100,
+                        "y": 100,
+                        "z": "f4a0fb9518d4df8d"
+                    },
+                    {
+                        "env": {
+                            "name": "locality",
+                            "type": "str",
+                            "value": "aws"
+                        },
+                        "id": "445882e3891e2a31",
+                        "info": "\n\nWe need to somehow retrieve the existing locations or similar way to have dynamic information on the available sites",
+                        "subflow": "05f045b87080a61e",
+                        "type": "subflow:05f045b87080a61e",
+                        "x": 510,
+                        "y": 100,
+                        "z": "f4a0fb9518d4df8d"
+                    },
+                    {
+                        "id": "b286543636b19b47",
+                        "name": "Endpoints' definition section",
+                        "type": "comment",
+                        "x": 140,
+                        "y": 220,
+                        "z": "f4a0fb9518d4df8d"
+                    },
+                    {
+                        "id": "b4e22c25249c9de1",
+                        "method": "post",
+                        "type": "http in",
+                        "upload": false,
+                        "url": "/init",
+                        "wires": "13d4f7c0acaa0a39",
+                        "x": 80,
+                        "y": 280,
+                        "z": "f4a0fb9518d4df8d"
+                    },
+                    {
+                        "id": "13d4f7c0acaa0a39",
+                        "type": "http response",
+                        "x": 380,
+                        "y": 280,
+                        "z": "f4a0fb9518d4df8d"
+                    },
+                    {
+                        "id": "2c2d1ebff6a7cc1b",
+                        "pretty": false,
+                        "property": "payload.value.input",
+                        "type": "json",
+                        "wires": "99c7424da4aad1d3",
+                        "x": 490,
+                        "y": 620,
+                        "z": "f4a0fb9518d4df8d"
+                    },
+                    {
+                        "active": true,
+                        "complete": "payload",
+                        "console": false,
+                        "id": "99c7424da4aad1d3",
+                        "name": "Input data",
+                        "statusType": "auto",
+                        "targetType": "msg",
+                        "tosidebar": true,
+                        "tostatus": false,
+                        "type": "debug",
+                        "x": 660,
+                        "y": 620,
+                        "z": "f4a0fb9518d4df8d"
+                    },
+                    {
+                        "func": "\n//need to push the new parts down a LIFO structure?\nif (msg.hasOwnProperty(\"parts\")){\n    var parts={};\n    parts=msg.parts;\n    delete msg.parts;\n    msg.parts={};\n    msg.parts.parts=parts;\n    msg.parts.id=msg._msgid;\n} else {\n    msg.parts={};\n    msg.parts.id=msg._msgid;\n}\n\nmsg.parts.count=env.get('totalcount');\nmsg.parts.len=1;\nmsg.parts.index=env.get('position')-1;\nmsg.parts.type=\"array\";\n\n//msg.topic='topic2';\n\n\nreturn msg;",
+                        "id": "6cf5b4224f0daa69",
+                        "name": "create artificial msg.parts",
+                        "noerr": 0,
+                        "outputs": 1,
+                        "type": "function",
+                        "x": 330,
+                        "y": 120,
+                        "z": "61834c2663a6ece6"
+                    },
+                    {
+                        "func": "\n//need to push the new parts down a LIFO structure?\nif (msg.hasOwnProperty(\"parts\")){\n    var parts={};\n    parts=msg.parts;\n    delete msg.parts;\n    msg.parts={};\n    msg.parts.parts=parts;\n    msg.parts.id=msg._msgid;\n} else {\n    msg.parts={};\n    msg.parts.id=msg._msgid;\n}\n\nmsg.parts.count=env.get('totalcount');\nmsg.parts.len=1;\nmsg.parts.index=env.get('position')-1;\nmsg.parts.type=\"array\";\n\n//msg.topic='topic2';\n\n\nreturn msg;",
+                        "id": "6cf5b4224f0daa69",
+                        "name": "create artificial msg.parts",
+                        "noerr": 0,
+                        "outputs": 1,
+                        "type": "function",
+                        "x": 330,
+                        "y": 120,
+                        "z": "61834c2663a6ece6"
+                    },
+                    {
+                        "func": "msg.annotations={};\nmsg.annotations.executorMode=env.get('Executor Mode');",
+                        "id": "82b665f654048ecf",
+                        "initialize": "// Code added here will be run once\n// whenever the node is started.\n\n//msg.payload.imageName=env.get('Image Name');\n//return msg;",
+                        "noerr": 0,
+                        "outputs": 1,
+                        "type": "function",
+                        "x": 360,
+                        "y": 140,
+                        "z": "694cb784968dc0b9"
+                    },
+                    {
+                        "id": "eeb5210da7efebd3",
+                        "info": "The Executor Mode Annotator is a mean to describe to the PHYSICS Environment the execution mode of a given flow. There are three options\n1) Service mode: the selected flow will be deployed as a Node-RED service, thus always running\n2) Node-RED Function mode: the selected flow will be wrapped around a Node-RED runtime and registered to a target Openwhisk platform, where it will be executed as a Node-RED runtime function\n3) Native Sequence: the included functions will be packaged and registered individually at the Openwhisk platform, while their links (workflow) will be translated to the native Openwhisk sequence format and registered to the Openwhisk platform. This mode at the moment is limited to pure function nodes of Node-RED, while the workflow description is limited by the sequence abilities of Openwhisk. ",
+                        "name": "Instructions",
+                        "type": "comment",
+                        "x": 560,
+                        "y": 280,
+                        "z": "694cb784968dc0b9"
+                    },
+                    {
+                        "func": "\nmsg.annotations={};\nmsg.annotations.sizing={};\nmsg.annotations.sizing.memory=env.get('memory');\nmsg.annotations.sizing.timeout=env.get('timeout');\n\nreturn msg;\n",
+                        "id": "c66966a2d36f06b5",
+                        "initialize": "// Code added here will be run once\n// whenever the node is started.\n\n//msg.payload.imageName=env.get('Image Name');\n//return msg;",
+                        "name": "add sizing",
+                        "noerr": 0,
+                        "outputs": 1,
+                        "type": "function",
+                        "x": 300,
+                        "y": 60,
+                        "z": "dd8835083692860a"
+                    },
+                    {
+                        "func": "\nreturn msg;",
+                        "id": "79574bee858dc748",
+                        "noerr": 0,
+                        "outputs": 1,
+                        "type": "function",
+                        "x": 420,
+                        "y": 140,
+                        "z": "05f045b87080a61e"
+                    }
+                ]
+            },
+            "hasNode": [
+                {
+                    "@id": "flow:f4a0fb9518d4df8d/node/3ec2ee2e0cd2bb1b",
+                    "@type": "SubFlow",
+                    "hasTemplate": "flow:61834c2663a6ece6"
+                },
+                {
+                    "@id": "flow:f4a0fb9518d4df8d/node/bfc262ed8d69643a",
+                    "@type": "SubFlow",
+                    "hasTemplate": "flow:61834c2663a6ece6"
+                }
+            ],
+            "hasSoftwareArtifact": {
+                "@id": "registry.apps.ocphub.physics-faas.eu/custom/ehealth:17",
+                "@type": "SoftwareImage"
+            },
+            "label": "Inference",
+            "locality": "AWS cluster",
+            "memory": "256",
+            "timeout": "60000"
+        },
+        "isTopLevelComposite": true
+    }
+]

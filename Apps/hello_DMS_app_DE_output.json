@@ -1,0 +1,1518 @@
+{
+  "flows": [
+    {
+      "flowID": "3dc59d6aea6e35a4",
+      "flowName": "Hello_DMS",
+      "flow": [
+        {
+          "id": "3dc59d6aea6e35a4",
+          "type": "tab",
+          "label": "Hello_DMS",
+          "disabled": false,
+          "info": "",
+          "env": []
+        },
+        {
+          "id": "3acefcfb6e6a91ea",
+          "type": "http in",
+          "z": "3dc59d6aea6e35a4",
+          "name": "",
+          "url": "/init",
+          "method": "post",
+          "upload": false,
+          "swaggerDoc": "",
+          "x": 360,
+          "y": 160,
+          "wires": [
+            [
+              "8cf8bcdd0361dcf7"
+            ]
+          ]
+        },
+        {
+          "id": "b519f76492b660c7",
+          "type": "http in",
+          "z": "3dc59d6aea6e35a4",
+          "name": "",
+          "url": "/run",
+          "method": "post",
+          "upload": false,
+          "swaggerDoc": "",
+          "x": 360,
+          "y": 260,
+          "wires": [
+            [
+              "2347840f70beb926",
+              "1b65c81292a1cc77"
+            ]
+          ]
+        },
+        {
+          "id": "8cf8bcdd0361dcf7",
+          "type": "http response",
+          "z": "3dc59d6aea6e35a4",
+          "name": "",
+          "x": 660,
+          "y": 160,
+          "wires": []
+        },
+        {
+          "id": "d484c0db85f77685",
+          "type": "http response",
+          "z": "3dc59d6aea6e35a4",
+          "name": "",
+          "x": 930,
+          "y": 320,
+          "wires": []
+        },
+        {
+          "id": "2347840f70beb926",
+          "type": "function",
+          "z": "3dc59d6aea6e35a4",
+          "name": "hello world",
+          "func": "\nconsole.log(msg);\nmsg.payload='hello '+msg.payload.value.name;\nreturn msg;",
+          "outputs": 1,
+          "noerr": 0,
+          "initialize": "",
+          "finalize": "",
+          "libs": [],
+          "x": 570,
+          "y": 260,
+          "wires": [
+            [
+              "223f577e6b96a222"
+            ]
+          ]
+        },
+        {
+          "id": "7f89bdaad11eb775",
+          "type": "comment",
+          "z": "3dc59d6aea6e35a4",
+          "name": "OW SKELETON with hello world function",
+          "info": "",
+          "x": 460,
+          "y": 340,
+          "wires": []
+        },
+        {
+          "id": "dc598c2fb4701083",
+          "type": "subflow:694cb784968dc0b9",
+          "z": "3dc59d6aea6e35a4",
+          "name": "",
+          "env": [
+            {
+              "name": "Executor Mode",
+              "value": "NoderedFunction",
+              "type": "str"
+            }
+          ],
+          "x": 220,
+          "y": 420,
+          "wires": []
+        },
+        {
+          "id": "1fcff8400467c8f4",
+          "type": "subflow:dd8835083692860a",
+          "z": "3dc59d6aea6e35a4",
+          "name": "",
+          "env": [
+            {
+              "name": "memory",
+              "value": "512",
+              "type": "num"
+            },
+            {
+              "name": "timeout",
+              "value": "120000",
+              "type": "num"
+            }
+          ],
+          "x": 220,
+          "y": 480,
+          "wires": [
+            []
+          ]
+        },
+        {
+          "id": "cbb90d5abd6aeb85",
+          "type": "subflow:f0b9b88b6dcb2ece",
+          "z": "3dc59d6aea6e35a4",
+          "name": "",
+          "env": [
+            {
+              "name": "goal",
+              "value": "performance",
+              "type": "str"
+            }
+          ],
+          "x": 270,
+          "y": 540,
+          "wires": []
+        },
+        {
+          "id": "a928d25a87bb1f70",
+          "type": "subflow:94dffc86e4af9a58",
+          "z": "3dc59d6aea6e35a4",
+          "name": "",
+          "env": [
+            {
+              "name": "importance",
+              "value": "high",
+              "type": "str"
+            }
+          ],
+          "x": 240,
+          "y": 600,
+          "wires": []
+        },
+        {
+          "id": "e92d973a0c36b990",
+          "type": "subflow:05f045b87080a61e",
+          "z": "3dc59d6aea6e35a4",
+          "name": "",
+          "env": [
+            {
+              "name": "locality",
+              "value": "aws",
+              "type": "str"
+            }
+          ],
+          "x": 230,
+          "y": 660,
+          "wires": []
+        },
+        {
+          "id": "223f577e6b96a222",
+          "type": "function",
+          "z": "3dc59d6aea6e35a4",
+          "name": "write",
+          "func": "var data=msg.payload;\nmsg.payload={};\nmsg.payload.data=data;\nmsg.data=data;\nreturn msg;",
+          "outputs": 1,
+          "noerr": 0,
+          "initialize": "",
+          "finalize": "",
+          "libs": [],
+          "x": 750,
+          "y": 260,
+          "wires": [
+            [
+              "0628036e6e37430a",
+              "cabbea3d9687c2e4"
+            ]
+          ]
+        },
+        {
+          "id": "0628036e6e37430a",
+          "type": "subflow:d5cdb05c4a8f64a4",
+          "z": "3dc59d6aea6e35a4",
+          "name": "write",
+          "env": [
+            {
+              "name": "dms_job_id",
+              "value": "ss",
+              "type": "str"
+            },
+            {
+              "name": "dms_pocket_dst_file",
+              "value": "dd",
+              "type": "str"
+            },
+            {
+              "name": "dms_operation",
+              "value": "dms-w",
+              "type": "str"
+            },
+            {
+              "name": "creds",
+              "type": "cred"
+            },
+            {
+              "name": "dms_size",
+              "value": "10",
+              "type": "num"
+            }
+          ],
+          "x": 650,
+          "y": 320,
+          "wires": [
+            [
+              "3402a8de3203b61c",
+              "7988bc52cb5a9350"
+            ]
+          ]
+        },
+        {
+          "id": "3402a8de3203b61c",
+          "type": "function",
+          "z": "3dc59d6aea6e35a4",
+          "name": "results",
+          "func": "var input=msg.payload;\n\nmsg.payload={};\nmsg.payload.dmsResult=input.response.result;\nmsg.payload.data=msg.data;\nreturn msg;",
+          "outputs": 1,
+          "noerr": 0,
+          "initialize": "",
+          "finalize": "",
+          "libs": [],
+          "x": 770,
+          "y": 320,
+          "wires": [
+            [
+              "d484c0db85f77685",
+              "690e6fa8cb324459"
+            ]
+          ]
+        },
+        {
+          "id": "1b65c81292a1cc77",
+          "type": "debug",
+          "z": "3dc59d6aea6e35a4",
+          "name": "",
+          "active": true,
+          "tosidebar": true,
+          "console": false,
+          "tostatus": false,
+          "complete": "false",
+          "statusVal": "",
+          "statusType": "auto",
+          "x": 530,
+          "y": 200,
+          "wires": []
+        },
+        {
+          "id": "cabbea3d9687c2e4",
+          "type": "debug",
+          "z": "3dc59d6aea6e35a4",
+          "name": "",
+          "active": true,
+          "tosidebar": true,
+          "console": false,
+          "tostatus": false,
+          "complete": "false",
+          "statusVal": "",
+          "statusType": "auto",
+          "x": 950,
+          "y": 260,
+          "wires": []
+        },
+        {
+          "id": "7988bc52cb5a9350",
+          "type": "debug",
+          "z": "3dc59d6aea6e35a4",
+          "name": "",
+          "active": true,
+          "tosidebar": true,
+          "console": false,
+          "tostatus": false,
+          "complete": "false",
+          "statusVal": "",
+          "statusType": "auto",
+          "x": 730,
+          "y": 460,
+          "wires": []
+        },
+        {
+          "id": "690e6fa8cb324459",
+          "type": "debug",
+          "z": "3dc59d6aea6e35a4",
+          "name": "",
+          "active": true,
+          "tosidebar": true,
+          "console": false,
+          "tostatus": false,
+          "complete": "false",
+          "statusVal": "",
+          "statusType": "auto",
+          "x": 930,
+          "y": 520,
+          "wires": []
+        },
+        {
+          "id": "f6e5aeef996faf78",
+          "type": "subflow:789351ac.02c9d",
+          "z": "3dc59d6aea6e35a4",
+          "name": "",
+          "x": 630,
+          "y": 620,
+          "wires": [
+            [],
+            [],
+            []
+          ]
+        },
+        {
+          "id": "82b665f654048ecf",
+          "type": "function",
+          "z": "694cb784968dc0b9",
+          "name": "",
+          "func": "msg.annotations={};\nmsg.annotations.executorMode=env.get('Executor Mode');",
+          "outputs": 1,
+          "noerr": 0,
+          "initialize": "// Code added here will be run once\n// whenever the node is started.\n\n//msg.payload.imageName=env.get('Image Name');\n//return msg;",
+          "finalize": "",
+          "libs": [],
+          "x": 360,
+          "y": 140,
+          "wires": [
+            []
+          ]
+        },
+        {
+          "id": "eeb5210da7efebd3",
+          "type": "comment",
+          "z": "694cb784968dc0b9",
+          "name": "Instructions",
+          "info": "The Executor Mode Annotator is a mean to describe to the PHYSICS Environment the execution mode of a given flow. There are three options\n1) Service mode: the selected flow will be deployed as a Node-RED service, thus always running\n2) Node-RED Function mode: the selected flow will be wrapped around a Node-RED runtime and registered to a target Openwhisk platform, where it will be executed as a Node-RED runtime function\n3) Native Sequence: the included functions will be packaged and registered individually at the Openwhisk platform, while their links (workflow) will be translated to the native Openwhisk sequence format and registered to the Openwhisk platform. This mode at the moment is limited to pure function nodes of Node-RED, while the workflow description is limited by the sequence abilities of Openwhisk. ",
+          "x": 560,
+          "y": 280,
+          "wires": []
+        },
+        {
+          "id": "694cb784968dc0b9",
+          "type": "subflow",
+          "name": "Executor Mode",
+          "info": "The Executor Mode Annotator is a mean to describe to the PHYSICS Environment the execution mode of a given flow. There are three options\n1) Service mode: the selected flow will be deployed as a Node-RED service, thus always running\n2) Node-RED Function mode: the selected flow will be wrapped around a Node-RED runtime and registered to a target Openwhisk platform, where it will be executed as a Node-RED runtime function\n3) Native Sequence: the included functions will be packaged and registered individually at the Openwhisk platform, while their links (workflow) will be translated to the native Openwhisk sequence format and registered to the Openwhisk platform. This mode at the moment is limited to pure function nodes of Node-RED, while the workflow description is limited by the sequence abilities of Openwhisk. ",
+          "category": "PHYSICS Annotators",
+          "in": [],
+          "out": [],
+          "env": [
+            {
+              "name": "Executor Mode",
+              "type": "str",
+              "value": "",
+              "ui": {
+                "type": "select",
+                "opts": {
+                  "opts": [
+                    {
+                      "l": {
+                        "en-US": "Service"
+                      },
+                      "v": "Service"
+                    },
+                    {
+                      "l": {
+                        "en-US": "NoderedFunction"
+                      },
+                      "v": "NoderedFunction"
+                    },
+                    {
+                      "l": {
+                        "en-US": "NativeSequence"
+                      },
+                      "v": "NativeSequence"
+                    }
+                  ]
+                }
+              }
+            }
+          ],
+          "meta": {},
+          "color": "#C0DEED",
+          "icon": "font-awesome/fa-angle-right"
+        },
+        {
+          "id": "c66966a2d36f06b5",
+          "type": "function",
+          "z": "dd8835083692860a",
+          "name": "add sizing",
+          "func": "\nmsg.annotations={};\nmsg.annotations.sizing={};\nmsg.annotations.sizing.memory=env.get('memory');\nmsg.annotations.sizing.timeout=env.get('timeout');\n\nreturn msg;\n",
+          "outputs": 1,
+          "noerr": 0,
+          "initialize": "// Code added here will be run once\n// whenever the node is started.\n\n//msg.payload.imageName=env.get('Image Name');\n//return msg;",
+          "finalize": "",
+          "libs": [],
+          "x": 300,
+          "y": 60,
+          "wires": [
+            []
+          ]
+        },
+        {
+          "id": "dd8835083692860a",
+          "type": "subflow",
+          "name": "SizingAnnotator",
+          "info": "This node should be used to dictate what is the necessary size in terms of memory and timeout of the registered action in Openwhisk.\n\nIt is assumed that this node is used at the flow level, indicating that the annotation refers to the container configuration of a docker action that includes the overall flow in the used tab.\n",
+          "category": "PHYSICS Annotators",
+          "in": [
+            {
+              "x": 120,
+              "y": 60,
+              "wires": [
+                {
+                  "id": "c66966a2d36f06b5"
+                }
+              ]
+            }
+          ],
+          "out": [
+            {
+              "x": 440,
+              "y": 60,
+              "wires": [
+                {
+                  "id": "c66966a2d36f06b5",
+                  "port": 0
+                }
+              ]
+            }
+          ],
+          "env": [
+            {
+              "name": "memory",
+              "type": "num",
+              "value": "",
+              "ui": {
+                "label": {
+                  "en-US": "Memory (MB)"
+                }
+              }
+            },
+            {
+              "name": "timeout",
+              "type": "num",
+              "value": "",
+              "ui": {
+                "icon": "font-awesome/fa-times-circle-o",
+                "label": {
+                  "en-US": "Timeout (millisecs)"
+                }
+              }
+            }
+          ],
+          "meta": {},
+          "color": "#E9967A",
+          "icon": "font-awesome/fa-arrows-h"
+        },
+        {
+          "id": "5697feaf2b80f2ef",
+          "type": "function",
+          "z": "f0b9b88b6dcb2ece",
+          "name": "",
+          "func": "\nreturn msg;",
+          "outputs": 1,
+          "noerr": 0,
+          "initialize": "",
+          "finalize": "",
+          "libs": [],
+          "x": 190,
+          "y": 80,
+          "wires": [
+            []
+          ]
+        },
+        {
+          "id": "f0b9b88b6dcb2ece",
+          "type": "subflow",
+          "name": "Optimization Goal (Flow Level)",
+          "info": "",
+          "category": "PHYSICS Annotators",
+          "in": [],
+          "out": [],
+          "env": [
+            {
+              "name": "goal",
+              "type": "str",
+              "value": "",
+              "ui": {
+                "type": "select",
+                "opts": {
+                  "opts": [
+                    {
+                      "l": {
+                        "en-US": "performance"
+                      },
+                      "v": "performance"
+                    },
+                    {
+                      "l": {
+                        "en-US": "energy"
+                      },
+                      "v": "energy"
+                    },
+                    {
+                      "l": {
+                        "en-US": "availability"
+                      },
+                      "v": "availability"
+                    }
+                  ]
+                }
+              }
+            }
+          ],
+          "meta": {},
+          "color": "#FFAAAA",
+          "icon": "font-awesome/fa-sliders"
+        },
+        {
+          "id": "0ac25ab60b652265",
+          "type": "function",
+          "z": "94dffc86e4af9a58",
+          "name": "",
+          "func": "msg.annotations={};\nmsg.annotations.importance=env.get('importance');",
+          "outputs": 1,
+          "noerr": 0,
+          "initialize": "// Code added here will be run once\n// whenever the node is started.\n\n//msg.payload.imageName=env.get('Image Name');\n//return msg;",
+          "finalize": "",
+          "libs": [],
+          "x": 200,
+          "y": 80,
+          "wires": [
+            []
+          ]
+        },
+        {
+          "id": "94dffc86e4af9a58",
+          "type": "subflow",
+          "name": "Importance (Flow level)",
+          "info": "",
+          "category": "PHYSICS Annotators",
+          "in": [],
+          "out": [],
+          "env": [
+            {
+              "name": "importance",
+              "type": "str",
+              "value": "",
+              "ui": {
+                "type": "select",
+                "opts": {
+                  "opts": [
+                    {
+                      "l": {
+                        "en-US": "high"
+                      },
+                      "v": "high"
+                    },
+                    {
+                      "l": {
+                        "en-US": "medium"
+                      },
+                      "v": "medium"
+                    },
+                    {
+                      "l": {
+                        "en-US": "low"
+                      },
+                      "v": "low"
+                    }
+                  ]
+                }
+              }
+            }
+          ],
+          "meta": {},
+          "color": "#3FADB5",
+          "icon": "node-red/alert.svg"
+        },
+        {
+          "id": "79574bee858dc748",
+          "type": "function",
+          "z": "05f045b87080a61e",
+          "name": "",
+          "func": "\nreturn msg;",
+          "outputs": 1,
+          "noerr": 0,
+          "initialize": "",
+          "finalize": "",
+          "libs": [],
+          "x": 420,
+          "y": 140,
+          "wires": [
+            []
+          ]
+        },
+        {
+          "id": "05f045b87080a61e",
+          "type": "subflow",
+          "name": "Locality(flow level)",
+          "info": "",
+          "category": "PHYSICS Annotators",
+          "in": [],
+          "out": [],
+          "env": [
+            {
+              "name": "locality",
+              "type": "str",
+              "value": ""
+            }
+          ],
+          "meta": {},
+          "color": "#D8BFD8",
+          "icon": "font-awesome/fa-braille"
+        },
+        {
+          "id": "795bfb0aa4e6606a",
+          "type": "tls-config",
+          "z": "d5cdb05c4a8f64a4",
+          "name": "",
+          "cert": "",
+          "key": "",
+          "ca": "",
+          "certname": "",
+          "keyname": "",
+          "caname": "",
+          "servername": "",
+          "verifyservercert": false,
+          "alpnprotocol": ""
+        },
+        {
+          "id": "b1565887a7f49105",
+          "type": "function",
+          "z": "d5cdb05c4a8f64a4",
+          "name": "adapt",
+          "func": "\nif (msg.hasOwnProperty('dms_job_id')){\n} else {\n    msg.dms_job_id=env.get('dms_job_id');\n}\n\nif (msg.hasOwnProperty('dms_size')){\n} else {\n    msg.dms_size=env.get('dms_size');\n}\n\nif (msg.hasOwnProperty('dms_location')){\n} else {\n    msg.dms_location=env.get('dms_location');\n}\n\n\nif (msg.hasOwnProperty('dms_operation')){\n} else {\n    msg.dms_operation=env.get('dms_operation');\n}\n\nif (msg.hasOwnProperty('dms_namespace')){\n} else {\n    msg.namespace=env.get('dms_namespace');\n}\n\n\nif (msg.hasOwnProperty('dms_pocket_dst_file')){\n    //msg.dms_pocket_dst_file=msg.payload.dms_pocket_dst_file;\n} else {\n    msg.dms_pocket_dst_file=env.get('dms_pocket_dst_file');\n}\n\nif (msg.hasOwnProperty('creds')){\n    //msg.creds=msg.payload.dms_namespace;\n} else {\n    msg.creds=env.get('creds');\n}\n\n\nreturn msg;",
+          "outputs": 1,
+          "noerr": 0,
+          "initialize": "",
+          "finalize": "",
+          "libs": [],
+          "x": 250,
+          "y": 80,
+          "wires": [
+            [
+              "ccb0503362a32b2a",
+              "4856665561ef0433"
+            ]
+          ]
+        },
+        {
+          "id": "ccb0503362a32b2a",
+          "type": "function",
+          "z": "d5cdb05c4a8f64a4",
+          "name": "insert action invocation url and auth",
+          "func": "//msg.url='http://10.100.59.182:3233/api/v1/namespaces/guest/actions/dockeraction';\nmsg.url=msg.dms_location+'/namespaces/'+msg.namespace+'/actions/'+msg.dms_operation;\n\nconsole.log(msg.creds);\nmsg.creds='178f79b4-4540-449c-a815-f3b50602aeca:0EWLwLLxVWFsBrW4Lq7Y1EuTYRcfVSsYjXQANDQ78nO9tgzT6B2nui2whli9wlc5';\nmsg.headers={};\nvar auth = 'Basic ' + new Buffer(msg.creds).toString('base64');\nmsg.headers = {\n    \"Authorization\": auth\n}\n\n\nmsg.payload.jobid=msg.dms_job_id;\nmsg.payload.pocketFile= msg.dms_pocket_dst_file;\nmsg.payload.size=msg.dms_size;\n\nreturn msg;",
+          "outputs": 1,
+          "noerr": 0,
+          "initialize": "",
+          "finalize": "",
+          "libs": [],
+          "x": 340,
+          "y": 140,
+          "wires": [
+            [
+              "3457bb2065109dc6",
+              "2c3be5d81299426d"
+            ]
+          ]
+        },
+        {
+          "id": "3457bb2065109dc6",
+          "type": "http request",
+          "z": "d5cdb05c4a8f64a4",
+          "name": "",
+          "method": "POST",
+          "ret": "obj",
+          "paytoqs": "ignore",
+          "url": "",
+          "tls": "795bfb0aa4e6606a",
+          "persist": false,
+          "proxy": "",
+          "authType": "basic",
+          "x": 290,
+          "y": 200,
+          "wires": [
+            [
+              "28af37e1ffcddb70",
+              "2faee81a277aefcd"
+            ]
+          ]
+        },
+        {
+          "id": "28af37e1ffcddb70",
+          "type": "function",
+          "z": "d5cdb05c4a8f64a4",
+          "name": "add OW activation id from reply",
+          "func": "\nmsg.activationID=msg.headers['x-openwhisk-activation-id'];\n\n//msg.url='http://10.100.59.182:3233/api/v1/namespaces/_/activations/'+msg.activationID;\n\nmsg.url=msg.dms_location+'/namespaces/'+msg.namespace+'/activations/'+msg.activationID;\n\nreturn msg;",
+          "outputs": 1,
+          "noerr": 0,
+          "initialize": "",
+          "finalize": "",
+          "libs": [],
+          "x": 350,
+          "y": 260,
+          "wires": [
+            [
+              "f8348bbae5afdb07"
+            ]
+          ]
+        },
+        {
+          "id": "f8348bbae5afdb07",
+          "type": "subflow:789351ac.02c9d",
+          "z": "d5cdb05c4a8f64a4",
+          "name": "",
+          "env": [
+            {
+              "name": "maxAttempts",
+              "value": "20",
+              "type": "str"
+            },
+            {
+              "name": "pollPeriod",
+              "value": "10000",
+              "type": "str"
+            },
+            {
+              "name": "method",
+              "value": "POST",
+              "type": "str"
+            },
+            {
+              "name": "functionChain",
+              "value": "false",
+              "type": "bool"
+            }
+          ],
+          "x": 330,
+          "y": 320,
+          "wires": [
+            [],
+            [
+              "e5351303862f506c"
+            ],
+            []
+          ]
+        },
+        {
+          "id": "f3dce7600cf573ec",
+          "type": "debug",
+          "z": "d5cdb05c4a8f64a4",
+          "name": "SUCCESS",
+          "active": true,
+          "tosidebar": true,
+          "console": false,
+          "tostatus": false,
+          "complete": "true",
+          "targetType": "full",
+          "statusVal": "",
+          "statusType": "auto",
+          "x": 930,
+          "y": 300,
+          "wires": []
+        },
+        {
+          "id": "e5351303862f506c",
+          "type": "debug",
+          "z": "d5cdb05c4a8f64a4",
+          "name": "RETRY FAIL",
+          "active": true,
+          "tosidebar": true,
+          "console": false,
+          "tostatus": false,
+          "complete": "true",
+          "targetType": "full",
+          "statusVal": "",
+          "statusType": "auto",
+          "x": 930,
+          "y": 340,
+          "wires": []
+        },
+        {
+          "id": "9749a0001a768f9a",
+          "type": "debug",
+          "z": "d5cdb05c4a8f64a4",
+          "name": "FINAL FAIL",
+          "active": true,
+          "tosidebar": true,
+          "console": false,
+          "tostatus": false,
+          "complete": "true",
+          "targetType": "full",
+          "statusVal": "",
+          "statusType": "auto",
+          "x": 930,
+          "y": 380,
+          "wires": []
+        },
+        {
+          "id": "4856665561ef0433",
+          "type": "debug",
+          "z": "d5cdb05c4a8f64a4",
+          "name": "",
+          "active": true,
+          "tosidebar": true,
+          "console": false,
+          "tostatus": false,
+          "complete": "true",
+          "targetType": "full",
+          "statusVal": "",
+          "statusType": "auto",
+          "x": 440,
+          "y": 80,
+          "wires": []
+        },
+        {
+          "id": "2c3be5d81299426d",
+          "type": "debug",
+          "z": "d5cdb05c4a8f64a4",
+          "name": "",
+          "active": true,
+          "tosidebar": true,
+          "console": false,
+          "tostatus": false,
+          "complete": "true",
+          "targetType": "full",
+          "statusVal": "",
+          "statusType": "auto",
+          "x": 570,
+          "y": 140,
+          "wires": []
+        },
+        {
+          "id": "2faee81a277aefcd",
+          "type": "debug",
+          "z": "d5cdb05c4a8f64a4",
+          "name": "",
+          "active": true,
+          "tosidebar": true,
+          "console": false,
+          "tostatus": false,
+          "complete": "true",
+          "targetType": "full",
+          "statusVal": "",
+          "statusType": "auto",
+          "x": 690,
+          "y": 200,
+          "wires": []
+        },
+        {
+          "id": "d5cdb05c4a8f64a4",
+          "type": "subflow",
+          "name": "DMS Interface",
+          "info": "The data to be written needs to be included in the \nmsg.payload.data.\n\nThe operation can be selected from the UI (Read/Write/Lookup) or can be set via the msg.operation field.\n\nThe job_id can be set from the UI  or can be set via the msg.job_id field. \n\nThe pocket destination file can be set from the UI  or can be set via the msg.pocket_dst_file field.\n\nThe pocket server location can be set from the UI or via the msg.dms_location field.\n\nThe credentials (user:key) for OW can be set either through the UI or through the msg.creds parameter.\n\nThe size parameter should be set either through the msg.dms_size or the UI.\n\nIn all cases, the incoming message parameters override the UI set ones. \n\nInternal dms function details:\n * /wp4namespace/dms-w:\n - input: '--param data \"hello world\" ' this param indicates the data to be stored in dms.\n - output: return {\"jobid\": jobid, \"pocketFile\": pocketFile,  \"size\": len(text)} The jobid is the identifier of the file where is stored the information, the pocketFile is the path where the jobId file is stored and the len is the amount of data to read in MB. \n * /wp4namespace/dms-r:\n - input:  --param jobid \"jobidX\" --param pocketFile \"pocketFileX\" --param size 100.\n - output: return {\"jobid\": jobid, \"pocketFile\": pocketFile}\n * /wp4namespace/dms-l:\n - input: --param jobid \"jobidX\" --param pocketFile \"pocketFileX\"\n - output:  return {\"result\": result} True if exists, false otherwise",
+          "category": "PHYSICS Annotators",
+          "in": [
+            {
+              "x": 100,
+              "y": 80,
+              "wires": [
+                {
+                  "id": "b1565887a7f49105"
+                }
+              ]
+            }
+          ],
+          "out": [
+            {
+              "x": 740,
+              "y": 260,
+              "wires": [
+                {
+                  "id": "f8348bbae5afdb07",
+                  "port": 0
+                },
+                {
+                  "id": "f8348bbae5afdb07",
+                  "port": 2
+                }
+              ]
+            }
+          ],
+          "env": [
+            {
+              "name": "dms_location",
+              "type": "str",
+              "value": "https://openwhisk.apps.ocphub.physics-faas.eu/api/v1"
+            },
+            {
+              "name": "dms_job_id",
+              "type": "str",
+              "value": "",
+              "ui": {
+                "label": {
+                  "en-US": "Custom Job ID"
+                }
+              }
+            },
+            {
+              "name": "dms_pocket_dst_file",
+              "type": "str",
+              "value": "",
+              "ui": {
+                "label": {
+                  "en-US": "Destination File"
+                }
+              }
+            },
+            {
+              "name": "dms_operation",
+              "type": "str",
+              "value": "",
+              "ui": {
+                "type": "select",
+                "opts": {
+                  "opts": [
+                    {
+                      "l": {
+                        "en-US": "Read"
+                      },
+                      "v": "dms-r"
+                    },
+                    {
+                      "l": {
+                        "en-US": "Write"
+                      },
+                      "v": "dms-w"
+                    },
+                    {
+                      "l": {
+                        "en-US": "Lookup"
+                      },
+                      "v": "dms-l"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "dms_namespace",
+              "type": "str",
+              "value": "wp4namespace",
+              "ui": {
+                "label": {
+                  "en-US": "OW namespace"
+                }
+              }
+            },
+            {
+              "name": "creds",
+              "type": "cred"
+            },
+            {
+              "name": "dms_size",
+              "type": "num",
+              "value": "",
+              "ui": {
+                "label": {
+                  "en-US": "size"
+                }
+              }
+            }
+          ],
+          "meta": {},
+          "color": "#FFAAAA",
+          "icon": "font-awesome/fa-database"
+        },
+        {
+          "id": "2934f390.711324",
+          "type": "tls-config",
+          "z": "789351ac.02c9d",
+          "name": "",
+          "cert": "",
+          "key": "",
+          "ca": "",
+          "certname": "",
+          "keyname": "",
+          "caname": "",
+          "servername": "",
+          "verifyservercert": false
+        },
+        {
+          "id": "7d194c10.33b51c",
+          "type": "function",
+          "z": "789351ac.02c9d",
+          "name": "defaults+activation id",
+          "func": "\nif (msg.hasOwnProperty('maxAttempts')){\n    msg.iterations=msg.maxAttempts;\n} else {\n    msg.iterations=env.get('maxAttempts');\n}\n//needed to reset the iterations after function chaining\nmsg.defaultAttempts=msg.iterations;\n\nif (msg.hasOwnProperty('pollPeriod')){\n    \n} else {\n    msg.pollPeriod=env.get('pollPeriod');\n}\n\nif (msg.hasOwnProperty('method')){\n    \n} else {\n    msg.method=env.get('method');\n}\n\nif (msg.hasOwnProperty('url')){\n    \n} else {\n    msg.url=env.get('url');\n}\n\nif (msg.hasOwnProperty('retryCode')){\n    \n} else {\n    msg.retryCode=env.get('retryCode');\n}\n\nif (msg.hasOwnProperty('acceptCode')){\n    \n} else {\n    msg.acceptCode=env.get('acceptCode');\n}\n\nif (msg.hasOwnProperty('creds')){\n    \n} else {\n    msg.creds=env.get('creds');\n}\n\nif (msg.hasOwnProperty('functionChain')){\n    \n} else {\n    msg.functionChain=env.get('functionChain');\n}\n\nif (msg.hasOwnProperty('inputData')){\n    if (msg.inputData.hasOwnProperty('creds')){\n        msg.creds=msg.inputData.creds;\n    }\n}\n\n\n\nmsg.delay=msg.pollPeriod;\nmsg.start=Date.now();\nreturn msg;",
+          "outputs": 1,
+          "noerr": 0,
+          "initialize": "",
+          "finalize": "",
+          "libs": [],
+          "x": 200,
+          "y": 160,
+          "wires": [
+            [
+              "cad17b04.a2b4d8"
+            ]
+          ]
+        },
+        {
+          "id": "4be3f205.3e8dc4",
+          "type": "function",
+          "z": "789351ac.02c9d",
+          "name": "iterations--",
+          "func": "msg.iterations=msg.iterations-1;\nreturn msg;",
+          "outputs": 1,
+          "noerr": 0,
+          "x": 350,
+          "y": 300,
+          "wires": [
+            [
+              "c2cf68b7.263d4",
+              "d8305759.866988"
+            ]
+          ]
+        },
+        {
+          "id": "c2cf68b7.263d4",
+          "type": "switch",
+          "z": "789351ac.02c9d",
+          "name": "if iterations finished",
+          "property": "iterations",
+          "propertyType": "msg",
+          "rules": [
+            {
+              "t": "gte",
+              "v": "1",
+              "vt": "num"
+            },
+            {
+              "t": "lt",
+              "v": "1",
+              "vt": "num"
+            }
+          ],
+          "checkall": "true",
+          "repair": false,
+          "outputs": 2,
+          "x": 550,
+          "y": 300,
+          "wires": [
+            [
+              "cad17b04.a2b4d8"
+            ],
+            []
+          ]
+        },
+        {
+          "id": "76299695.812bd8",
+          "type": "comment",
+          "z": "789351ac.02c9d",
+          "name": "SUCCESS",
+          "info": "",
+          "x": 1100,
+          "y": 60,
+          "wires": []
+        },
+        {
+          "id": "48093072.b17a6",
+          "type": "comment",
+          "z": "789351ac.02c9d",
+          "name": "FINAL FAIL",
+          "info": "",
+          "x": 890,
+          "y": 360,
+          "wires": []
+        },
+        {
+          "id": "d5960f2f.2e9448",
+          "type": "delay",
+          "z": "789351ac.02c9d",
+          "name": "delay",
+          "pauseType": "delayv",
+          "timeout": "5",
+          "timeoutUnits": "seconds",
+          "rate": "1",
+          "nbRateUnits": "1",
+          "rateUnits": "second",
+          "randomFirst": "1",
+          "randomLast": "5",
+          "randomUnits": "seconds",
+          "drop": false,
+          "outputs": 1,
+          "x": 170,
+          "y": 300,
+          "wires": [
+            [
+              "4be3f205.3e8dc4"
+            ]
+          ]
+        },
+        {
+          "id": "471b3d64.265894",
+          "type": "http request",
+          "z": "789351ac.02c9d",
+          "name": "",
+          "method": "GET",
+          "ret": "obj",
+          "paytoqs": "ignore",
+          "url": "",
+          "tls": "2934f390.711324",
+          "persist": false,
+          "proxy": "",
+          "authType": "",
+          "x": 590,
+          "y": 160,
+          "wires": [
+            [
+              "8694180b.ec1c68"
+            ]
+          ]
+        },
+        {
+          "id": "8694180b.ec1c68",
+          "type": "switch",
+          "z": "789351ac.02c9d",
+          "name": "Status code check",
+          "property": "statusCode",
+          "propertyType": "msg",
+          "rules": [
+            {
+              "t": "lte",
+              "v": "acceptCode",
+              "vt": "msg"
+            },
+            {
+              "t": "gte",
+              "v": "retryCode",
+              "vt": "msg"
+            }
+          ],
+          "checkall": "true",
+          "repair": false,
+          "outputs": 2,
+          "x": 810,
+          "y": 160,
+          "wires": [
+            [
+              "f9d0aba7.72382"
+            ],
+            [
+              "d5960f2f.2e9448"
+            ]
+          ]
+        },
+        {
+          "id": "ef03414f.ad9d78",
+          "type": "comment",
+          "z": "789351ac.02c9d",
+          "name": "RETRY FAIL",
+          "info": "",
+          "x": 890,
+          "y": 260,
+          "wires": []
+        },
+        {
+          "id": "66bbc0cf.0c62f",
+          "type": "debug",
+          "z": "789351ac.02c9d",
+          "name": "BEFORE AUTH",
+          "active": true,
+          "tosidebar": true,
+          "console": false,
+          "tostatus": false,
+          "complete": "true",
+          "targetType": "full",
+          "x": 370,
+          "y": 100,
+          "wires": []
+        },
+        {
+          "id": "13791c2d.8cea7c",
+          "type": "debug",
+          "z": "789351ac.02c9d",
+          "name": "URL",
+          "active": true,
+          "tosidebar": true,
+          "console": true,
+          "tostatus": false,
+          "complete": "url",
+          "targetType": "msg",
+          "x": 580,
+          "y": 100,
+          "wires": []
+        },
+        {
+          "id": "cad17b04.a2b4d8",
+          "type": "function",
+          "z": "789351ac.02c9d",
+          "name": "add auth",
+          "func": "msg.headers={};\nvar auth = 'Basic ' + new Buffer(msg.creds).toString('base64');\nmsg.headers = {\n    \"Authorization\": auth\n}\n\nreturn msg;",
+          "outputs": 1,
+          "noerr": 0,
+          "initialize": "",
+          "finalize": "",
+          "libs": [],
+          "x": 420,
+          "y": 160,
+          "wires": [
+            [
+              "471b3d64.265894"
+            ]
+          ]
+        },
+        {
+          "id": "f2b7c4e4.a24c3",
+          "type": "function",
+          "z": "789351ac.02c9d",
+          "name": "adapt to new activation",
+          "func": "\n\nmsg.url=msg.payload.response.result.newActivationIDURL;\nmsg.iterations=msg.defaultAttempts+1;\nconsole.log('IN ADAPTATION TO ACTIVATION',msg.url);\nreturn msg;",
+          "outputs": 1,
+          "noerr": 0,
+          "initialize": "",
+          "finalize": "",
+          "libs": [],
+          "x": 1500,
+          "y": 160,
+          "wires": [
+            [
+              "d5960f2f.2e9448",
+              "ee1dbf44.7368f8"
+            ]
+          ]
+        },
+        {
+          "id": "c338e47b.b00ed",
+          "type": "comment",
+          "z": "789351ac.02c9d",
+          "name": "FUNCTION CHAIN CONTINUATION",
+          "info": "",
+          "x": 1240,
+          "y": 240,
+          "wires": []
+        },
+        {
+          "id": "ee1dbf44.7368f8",
+          "type": "debug",
+          "z": "789351ac.02c9d",
+          "name": "AFTER CONTINUATION IN Poll2Push",
+          "active": true,
+          "tosidebar": true,
+          "console": true,
+          "tostatus": false,
+          "complete": "payload",
+          "targetType": "msg",
+          "x": 1420,
+          "y": 300,
+          "wires": []
+        },
+        {
+          "id": "f9d0aba7.72382",
+          "type": "switch",
+          "z": "789351ac.02c9d",
+          "name": "is Chain",
+          "property": "functionChain",
+          "propertyType": "msg",
+          "rules": [
+            {
+              "t": "false"
+            },
+            {
+              "t": "true"
+            }
+          ],
+          "checkall": "true",
+          "repair": false,
+          "outputs": 2,
+          "x": 1020,
+          "y": 160,
+          "wires": [
+            [],
+            [
+              "6da1eea0.969368",
+              "1bbc6fa0.4879c"
+            ]
+          ]
+        },
+        {
+          "id": "6da1eea0.969368",
+          "type": "debug",
+          "z": "789351ac.02c9d",
+          "name": "RESULT STATUS",
+          "active": true,
+          "tosidebar": true,
+          "console": true,
+          "tostatus": false,
+          "complete": "payload",
+          "targetType": "msg",
+          "x": 1100,
+          "y": 300,
+          "wires": []
+        },
+        {
+          "id": "f20a68d.9711598",
+          "type": "debug",
+          "z": "789351ac.02c9d",
+          "name": "AFTER CODE CHECK",
+          "active": true,
+          "tosidebar": true,
+          "console": true,
+          "tostatus": false,
+          "complete": "functionChain",
+          "targetType": "msg",
+          "x": 890,
+          "y": 100,
+          "wires": []
+        },
+        {
+          "id": "36905e62.dfad92",
+          "type": "debug",
+          "z": "789351ac.02c9d",
+          "name": "TOP1",
+          "active": true,
+          "tosidebar": true,
+          "console": true,
+          "tostatus": false,
+          "complete": "payload",
+          "targetType": "msg",
+          "x": 1120,
+          "y": 100,
+          "wires": []
+        },
+        {
+          "id": "9610a737.bf275",
+          "type": "debug",
+          "z": "789351ac.02c9d",
+          "name": "TOP2",
+          "active": true,
+          "tosidebar": true,
+          "console": true,
+          "tostatus": false,
+          "complete": "payload",
+          "targetType": "msg",
+          "x": 1300,
+          "y": 100,
+          "wires": []
+        },
+        {
+          "id": "c52af08f.756ee8",
+          "type": "debug",
+          "z": "789351ac.02c9d",
+          "name": "TOP3",
+          "active": true,
+          "tosidebar": true,
+          "console": true,
+          "tostatus": false,
+          "complete": "payload",
+          "targetType": "msg",
+          "x": 1600,
+          "y": 100,
+          "wires": []
+        },
+        {
+          "id": "1bbc6fa0.4879c",
+          "type": "function",
+          "z": "789351ac.02c9d",
+          "name": "compare completion",
+          "func": "console.log('IN COMPARE COMPLETION',msg.payload.response);\nif (msg.payload.response.result.status==='Completed'){\n    return [msg,null];\n} else {\n    return [null,msg];\n}\n",
+          "outputs": 2,
+          "noerr": 0,
+          "initialize": "",
+          "finalize": "",
+          "libs": [],
+          "x": 1240,
+          "y": 160,
+          "wires": [
+            [
+              "c52af08f.756ee8"
+            ],
+            [
+              "f2b7c4e4.a24c3"
+            ]
+          ]
+        },
+        {
+          "id": "d8305759.866988",
+          "type": "debug",
+          "z": "789351ac.02c9d",
+          "name": "URL",
+          "active": true,
+          "tosidebar": true,
+          "console": true,
+          "tostatus": false,
+          "complete": "iterations",
+          "targetType": "msg",
+          "x": 500,
+          "y": 380,
+          "wires": []
+        },
+        {
+          "id": "789351ac.02c9d",
+          "type": "subflow",
+          "name": "PollTOPushConverterFC",
+          "info": "This helper node aims at performing synchronous calls for polling in case of an async API (calls that return prior to completion, e.g. in the case of non blocking calls in OW, the initial request is returned with a submission success and an activation id in order to follow up on the result). The main difference from the main PollTOPushConverter is that it supports also function chaining (through a msg.functionChain or UI set boolean parameter).\n\nThe according function should return as a response the following structure:\n- have a result.status field with the 'Completed' (if chain is finished) or 'Continuing' string if the function has handed over to a new function in the chain.\n- have a result.newActivationIDURL field that indicates the updated ID with which to check the follow-up action's status \n\nThe node also can get credentials from the msg.creds field of the input message.\n\nThe remaining operations are similar with the standard PollTOPushConverter. The node does polling to a specific endpoint in order to detect whether the function has successfully finished\n\nThe node has three outputs:\n - Output 1 indicates successful finalization of the API call\n - Output 2 indicates intermediate failure and was added to return the reason for failure\n - Output 3 indicates final failure after max attempts\n\nCurrently the node assumes that in case of failure we get a >=40X return code, but this may not always be the case.\n\nThe node can be configured for the URL (msg.url), the HTTP method (msg.method), the maximum attempts (msg.maxAttempts), polling period (msg.pollPeriod), the status code above which to retry (msg.retryCode) and the status code for deciding the final success (msg.acceptCode). The msg properties override the UI set properties.\n\nGiven that conditions upon which the initial call needs to be polled are highly dependent on the used API, the node assumes that the initial call has been performed a priori.\n\nCredentials for accessing the HTTP endpoint can be set via msg.creds or through the UI (input msg prevails).\n \n",
+          "category": "PHYSICS Helpers",
+          "in": [
+            {
+              "x": 60,
+              "y": 160,
+              "wires": [
+                {
+                  "id": "7d194c10.33b51c"
+                }
+              ]
+            }
+          ],
+          "out": [
+            {
+              "x": 1380,
+              "y": 40,
+              "wires": [
+                {
+                  "id": "f9d0aba7.72382",
+                  "port": 0
+                },
+                {
+                  "id": "1bbc6fa0.4879c",
+                  "port": 0
+                }
+              ]
+            },
+            {
+              "x": 780,
+              "y": 260,
+              "wires": [
+                {
+                  "id": "c2cf68b7.263d4",
+                  "port": 0
+                }
+              ]
+            },
+            {
+              "x": 780,
+              "y": 360,
+              "wires": [
+                {
+                  "id": "c2cf68b7.263d4",
+                  "port": 1
+                }
+              ]
+            }
+          ],
+          "env": [
+            {
+              "name": "maxAttempts",
+              "type": "str",
+              "value": "3"
+            },
+            {
+              "name": "pollPeriod",
+              "type": "str",
+              "value": "3000"
+            },
+            {
+              "name": "method",
+              "type": "str",
+              "value": ""
+            },
+            {
+              "name": "url",
+              "type": "str",
+              "value": "http://10.100.59.182:3233/api/v1/namespaces/_/activations/"
+            },
+            {
+              "name": "retryCode",
+              "type": "num",
+              "value": "202"
+            },
+            {
+              "name": "acceptCode",
+              "type": "num",
+              "value": "200"
+            },
+            {
+              "name": "functionChain",
+              "type": "bool",
+              "value": "true"
+            }
+          ],
+          "meta": {},
+          "color": "#b4e8a9"
+        }
+      ],
+      "artifact": "https://registry.apps.ocphub.physics-faas.eu/custom:45",
+      "type": "image"
+    }
+  ],
+  "displayName": "Application"
+}

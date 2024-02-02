@@ -143,6 +143,3 @@ dist
 
 # SvelteKit build / generate output
 .svelte-kit
-
-# Excluded PHYSICS config Files
-rfEndpoint.json

@@ -1,0 +1,107 @@
+[
+    {
+        "@context":{
+            "@version":1.1,
+            "@vocab":"http://www.physics-h2020.eu/physics/1.0.0/",
+            "flow":"http://example_composer.physics.eu/flow/",
+            "function":"http://example_composer.physics.eu/function/",
+            "param":"http://example_parameters_repository.physics.eu/",
+            "app":"http://example_composer.physics.eu/app/",
+            "owner":"http://example_owners_repository.physics.eu/",
+            "proglang":"http://languages.programming.physics.eu/",
+            "js_lib":"http://languages.programming.physics.eu/javascript/lib/"
+        },
+        "@id":"app:CustomImage",
+        "@type":"Application",
+        "hasFlow":{
+            "@id":"flow:dd9fae6b6942b547",
+            "@type":"Flow",
+            "customImage":"registry.apps.ocphub.physics-faas.eu/custom/george:171",
+            "hasFunction":{
+                "@id":"function:c66966a2d36f06b5",
+                "@type":"Function",
+                "funcCode":"\nmsg.annotations={};\nmsg.annotations.sizing={};\nmsg.annotations.sizing.memory=env.get('memory');\nmsg.annotations.sizing.timeout=env.get('timeout');\n\nreturn msg;\n",
+                "initCode":"// Code added here will be run once\n// whenever the node is started.\n\n//msg.payload.imageName=env.get('Image Name');\n//return msg;",
+                "label":"add sizing"
+            },
+            "hasJSONDescription":{
+                "artifact":"registry.apps.ocphub.physics-faas.eu/custom/george:171",
+                "artifactType":"image",
+                "id":"dd9fae6b6942b547",
+                "label":"myCustomAction",
+                "nodes":[
+                    {
+                        "disabled":false,
+                        "id":"dd9fae6b6942b547",
+                        "label":"myCustomAction",
+                        "type":"tab"
+                    },
+                    {
+                        "env":{
+                            "name":"customImage",
+                            "type":"str",
+                            "value":"registry.apps.ocphub.physics-faas.eu/custom/george:171"
+                        },
+                        "id":"3e4008afcef21679",
+                        "subflow":"b5d1dcf74fe240aa",
+                        "type":"subflow:b5d1dcf74fe240aa",
+                        "x":270,
+                        "y":140,
+                        "z":"dd9fae6b6942b547"
+                    },
+                    {
+                        "env":{
+                            "name":"memory",
+                            "type":"num",
+                            "value":"512"
+                        },
+                        "id":"626cb7ccd6b044a6",
+                        "subflow":"dd8835083692860a",
+                        "type":"subflow:dd8835083692860a",
+                        "x":200,
+                        "y":220,
+                        "z":"dd9fae6b6942b547"
+                    },
+                    {
+                        "id":"25e8c046a47e4bfe",
+                        "name":"Subflows need at least 1 node inside",
+                        "type":"comment",
+                        "x":250,
+                        "y":80,
+                        "z":"b5d1dcf74fe240aa"
+                    },
+                    {
+                        "func":"\nmsg.annotations={};\nmsg.annotations.sizing={};\nmsg.annotations.sizing.memory=env.get('memory');\nmsg.annotations.sizing.timeout=env.get('timeout');\n\nreturn msg;\n",
+                        "id":"c66966a2d36f06b5",
+                        "initialize":"// Code added here will be run once\n// whenever the node is started.\n\n//msg.payload.imageName=env.get('Image Name');\n//return msg;",
+                        "name":"add sizing",
+                        "noerr":0,
+                        "outputs":1,
+                        "type":"function",
+                        "x":300,
+                        "y":60,
+                        "z":"dd8835083692860a"
+                    }
+                ]
+            },
+            "hasSoftwareArtifact":{
+                "@id":"registry.apps.ocphub.physics-faas.eu/custom/george:171",
+                "@type":"SoftwareImage"
+            },
+            "label":"myCustomAction",
+            "memory":"512",
+            "performanceProfile":{
+                "location":"172.30.197.240",
+                "resources":{
+                    "cpu":"low",
+                    "fsreads":"medium",
+                    "fswrites":"low",
+                    "memory":"undefined",
+                    "networkreceived":"low",
+                    "networktransmitted":"low"
+                }
+            }
+        },
+        "isTopLevelComposite":true
+    }
+]

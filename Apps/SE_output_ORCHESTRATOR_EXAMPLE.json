@@ -1,0 +1,2594 @@
+[
+    {
+        "@context": {
+            "@version": 1.1,
+            "@vocab": "http://www.physics-h2020.eu/physics/1.0.0/",
+            "flow": "http://example_composer.physics.eu/flow/",
+            "function": "http://example_composer.physics.eu/function/",
+            "param": "http://example_parameters_repository.physics.eu/",
+            "app": "http://example_composer.physics.eu/app/",
+            "owner": "http://example_owners_repository.physics.eu/",
+            "proglang": "http://languages.programming.physics.eu/",
+            "js_lib": "http://languages.programming.physics.eu/javascript/lib/"
+        },
+        "@id": "http://example_composer.physics.eu/app/",
+        "@type": "Application",
+        "hasFlow": [
+            {
+                "@id": "flow:3dc59d6aea6e35a4",
+                "@type": "Flow",
+                "consumesREST": [
+                    {
+                        "@id": "flow:789351ac.02c9d/interface/471b3d64.265894",
+                        "@type": "REST",
+                        "hasHttpMethod": "GET"
+                    },
+                    {
+                        "@id": "flow:d5cdb05c4a8f64a4/interface/3457bb2065109dc6",
+                        "@type": "REST",
+                        "hasHttpMethod": "POST",
+                        "isNodeInputOf": "function:28af37e1ffcddb70"
+                    }
+                ],
+                "definesInterface": [
+                    {
+                        "@id": "flow:3dc59d6aea6e35a4/interface/1621f8dd5bf2de51.out0",
+                        "@type": "MessageWire",
+                        "isNodeInputOf": "function:3402a8de3203b61c",
+                        "isNodeOutputOf": "flow:3dc59d6aea6e35a4/node/1621f8dd5bf2de51"
+                    },
+                    {
+                        "@id": "flow:3dc59d6aea6e35a4/interface/f8348bbae5afdb07.out1",
+                        "@type": "MessageWire",
+                        "isNodeOutputOf": "flow:3dc59d6aea6e35a4/node/f8348bbae5afdb07"
+                    },
+                    {
+                        "@id": "flow:3dc59d6aea6e35a4/interface/2347840f70beb926.out0",
+                        "@type": "MessageWire",
+                        "isNodeInputOf": "function:223f577e6b96a222",
+                        "isNodeOutputOf": "function:2347840f70beb926"
+                    },
+                    {
+                        "@id": "flow:3dc59d6aea6e35a4/interface/223f577e6b96a222.out0",
+                        "@type": "MessageWire",
+                        "isNodeInputOf": "flow:3dc59d6aea6e35a4/node/1621f8dd5bf2de51",
+                        "isNodeOutputOf": "function:223f577e6b96a222"
+                    },
+                    {
+                        "@id": "flow:3dc59d6aea6e35a4/interface/3402a8de3203b61c.out0",
+                        "@type": "MessageWire",
+                        "isNodeOutputOf": "function:3402a8de3203b61c"
+                    },
+                    {
+                        "@id": "flow:3dc59d6aea6e35a4/interface/7d194c10.33b51c.out0",
+                        "@type": "MessageWire",
+                        "isNodeInputOf": "function:cad17b04.a2b4d8",
+                        "isNodeOutputOf": "function:7d194c10.33b51c"
+                    },
+                    {
+                        "@id": "flow:3dc59d6aea6e35a4/interface/4be3f205.3e8dc4.out0",
+                        "@type": "MessageWire",
+                        "isNodeOutputOf": "function:4be3f205.3e8dc4"
+                    },
+                    {
+                        "@id": "flow:3dc59d6aea6e35a4/interface/f2b7c4e4.a24c3.out0",
+                        "@type": "MessageWire",
+                        "isNodeOutputOf": "function:f2b7c4e4.a24c3"
+                    },
+                    {
+                        "@id": "flow:3dc59d6aea6e35a4/interface/1bbc6fa0.4879c.out0",
+                        "@type": "MessageWire",
+                        "isNodeOutputOf": "function:1bbc6fa0.4879c"
+                    },
+                    {
+                        "@id": "flow:3dc59d6aea6e35a4/interface/1bbc6fa0.4879c.out1",
+                        "@type": "MessageWire",
+                        "isNodeInputOf": "function:f2b7c4e4.a24c3",
+                        "isNodeOutputOf": "function:1bbc6fa0.4879c"
+                    },
+                    {
+                        "@id": "flow:3dc59d6aea6e35a4/interface/b1565887a7f49105.out0",
+                        "@type": "MessageWire",
+                        "isNodeInputOf": "function:ccb0503362a32b2a",
+                        "isNodeOutputOf": "function:b1565887a7f49105"
+                    },
+                    {
+                        "@id": "flow:3dc59d6aea6e35a4/interface/ccb0503362a32b2a.out0",
+                        "@type": "MessageWire",
+                        "isNodeOutputOf": "function:ccb0503362a32b2a"
+                    },
+                    {
+                        "@id": "flow:3dc59d6aea6e35a4/interface/28af37e1ffcddb70.out0",
+                        "@type": "MessageWire",
+                        "isNodeInputOf": "flow:3dc59d6aea6e35a4/node/f8348bbae5afdb07",
+                        "isNodeOutputOf": "function:28af37e1ffcddb70"
+                    },
+                    {
+                        "@id": "flow:3dc59d6aea6e35a4/interface/3acefcfb6e6a91ea",
+                        "@type": "REST",
+                        "allowsUpload": false,
+                        "hasHttpMethod": "POST",
+                        "interfaceToInterface": "flow:3dc59d6aea6e35a4/interface/8cf8bcdd0361dcf7",
+                        "interfaceURI": "/init"
+                    },
+                    {
+                        "@id": "flow:3dc59d6aea6e35a4/interface/b519f76492b660c7",
+                        "@type": "REST",
+                        "allowsUpload": false,
+                        "hasHttpMethod": "POST",
+                        "interfaceURI": "/run",
+                        "isNodeInputOf": "function:2347840f70beb926"
+                    },
+                    {
+                        "@id": "flow:3dc59d6aea6e35a4/interface/8cf8bcdd0361dcf7",
+                        "@type": "RESTOutput"
+                    },
+                    {
+                        "@id": "flow:3dc59d6aea6e35a4/interface/d484c0db85f77685",
+                        "@type": "RESTOutput"
+                    }
+                ],
+                "dms_job_id": "ss",
+                "dms_location": "https://openwhisk.apps.ocphub.physics-faas.eu/api/v1",
+                "dms_namespace": "wp4namespace",
+                "dms_operation": "dms-w",
+                "dms_pocket_dst_file": "dd",
+                "dms_size": "10",
+                "executorMode": "NoderedFunction",
+                "exposesREST": [
+                    "flow:3dc59d6aea6e35a4/interface/3acefcfb6e6a91ea",
+                    "flow:3dc59d6aea6e35a4/interface/b519f76492b660c7"
+                ],
+                "goal": "performance",
+                "hasFunction": [
+                    {
+                        "@id": "function:2347840f70beb926",
+                        "@type": "Function",
+                        "funcCode": "\nconsole.log(msg);\nmsg.payload='hello '+msg.payload.value.name;\nreturn msg;",
+                        "label": "hello world"
+                    },
+                    {
+                        "@id": "function:223f577e6b96a222",
+                        "@type": "Function",
+                        "funcCode": "var data=msg.payload;\nmsg.payload={};\nmsg.payload.data=data;\nmsg.data=data;\nreturn msg;",
+                        "label": "write"
+                    },
+                    {
+                        "@id": "function:3402a8de3203b61c",
+                        "@type": "Function",
+                        "funcCode": "var input=msg.payload;\n\nmsg.payload={};\nmsg.payload.dmsResult=input.response.result;\nmsg.payload.data=msg.data;\nreturn msg;",
+                        "hasNodeOutput": "flow:3dc59d6aea6e35a4/interface/d484c0db85f77685",
+                        "label": "results"
+                    },
+                    {
+                        "@id": "function:7d194c10.33b51c",
+                        "@type": "Function",
+                        "funcCode": "\nif (msg.hasOwnProperty('maxAttempts')){\n    msg.iterations=msg.maxAttempts;\n} else {\n    msg.iterations=env.get('maxAttempts');\n}\n//needed to reset the iterations after function chaining\nmsg.defaultAttempts=msg.iterations;\n\nif (msg.hasOwnProperty('pollPeriod')){\n    \n} else {\n    msg.pollPeriod=env.get('pollPeriod');\n}\n\nif (msg.hasOwnProperty('method')){\n    \n} else {\n    msg.method=env.get('method');\n}\n\nif (msg.hasOwnProperty('url')){\n    \n} else {\n    msg.url=env.get('url');\n}\n\nif (msg.hasOwnProperty('retryCode')){\n    \n} else {\n    msg.retryCode=env.get('retryCode');\n}\n\nif (msg.hasOwnProperty('acceptCode')){\n    \n} else {\n    msg.acceptCode=env.get('acceptCode');\n}\n\nif (msg.hasOwnProperty('creds')){\n    \n} else {\n    msg.creds=env.get('creds');\n}\n\nif (msg.hasOwnProperty('functionChain')){\n    \n} else {\n    msg.functionChain=env.get('functionChain');\n}\n\nif (msg.hasOwnProperty('inputData')){\n    if (msg.inputData.hasOwnProperty('creds')){\n        msg.creds=msg.inputData.creds;\n    }\n}\n\n\n\nmsg.delay=msg.pollPeriod;\nmsg.start=Date.now();\nreturn msg;",
+                        "label": "defaults+activation id"
+                    },
+                    {
+                        "@id": "function:4be3f205.3e8dc4",
+                        "@type": "Function",
+                        "funcCode": "msg.iterations=msg.iterations-1;\nreturn msg;",
+                        "label": "iterations--"
+                    },
+                    {
+                        "@id": "function:cad17b04.a2b4d8",
+                        "@type": "Function",
+                        "funcCode": "msg.headers={};\nvar auth = 'Basic ' + new Buffer(msg.creds).toString('base64');\nmsg.headers = {\n    \"Authorization\": auth\n}\n\nreturn msg;",
+                        "hasNodeOutput": "flow:789351ac.02c9d/interface/471b3d64.265894",
+                        "label": "add auth"
+                    },
+                    {
+                        "@id": "function:f2b7c4e4.a24c3",
+                        "@type": "Function",
+                        "funcCode": "\n\nmsg.url=msg.payload.response.result.newActivationIDURL;\nmsg.iterations=msg.defaultAttempts+1;\nconsole.log('IN ADAPTATION TO ACTIVATION',msg.url);\nreturn msg;",
+                        "label": "adapt to new activation"
+                    },
+                    {
+                        "@id": "function:1bbc6fa0.4879c",
+                        "@type": "Function",
+                        "funcCode": "console.log('IN COMPARE COMPLETION',msg.payload.response);\nif (msg.payload.response.result.status==='Completed'){\n    return [msg,null];\n} else {\n    return [null,msg];\n}\n",
+                        "label": "compare completion"
+                    },
+                    {
+                        "@id": "function:b1565887a7f49105",
+                        "@type": "Function",
+                        "funcCode": "\nif (msg.hasOwnProperty('dms_job_id')){\n} else {\n    msg.dms_job_id=env.get('dms_job_id');\n}\n\nif (msg.hasOwnProperty('dms_size')){\n} else {\n    msg.dms_size=env.get('dms_size');\n}\n\nif (msg.hasOwnProperty('dms_location')){\n} else {\n    msg.dms_location=env.get('dms_location');\n}\n\n\nif (msg.hasOwnProperty('dms_operation')){\n} else {\n    msg.dms_operation=env.get('dms_operation');\n}\n\nif (msg.hasOwnProperty('dms_namespace')){\n} else {\n    msg.namespace=env.get('dms_namespace');\n}\n\n\nif (msg.hasOwnProperty('dms_pocket_dst_file')){\n    //msg.dms_pocket_dst_file=msg.payload.dms_pocket_dst_file;\n} else {\n    msg.dms_pocket_dst_file=env.get('dms_pocket_dst_file');\n}\n\nif (msg.hasOwnProperty('creds')){\n    //msg.creds=msg.payload.dms_namespace;\n} else {\n    msg.creds=env.get('creds');\n}\n\n\nreturn msg;",
+                        "label": "adapt"
+                    },
+                    {
+                        "@id": "function:ccb0503362a32b2a",
+                        "@type": "Function",
+                        "funcCode": "//msg.url='http://10.100.59.182:3233/api/v1/namespaces/guest/actions/dockeraction';\nmsg.url=msg.dms_location+'/namespaces/'+msg.namespace+'/actions/'+msg.dms_operation;\n\nconsole.log(msg.creds);\n//msg.creds='';\nmsg.headers={};\nvar auth = 'Basic ' + new Buffer(msg.creds).toString('base64');\nmsg.headers = {\n    \"Authorization\": auth\n}\n\n\nmsg.payload.jobid=msg.dms_job_id;\nmsg.payload.pocketFile= msg.dms_pocket_dst_file;\nmsg.payload.size=msg.dms_size;\n\nreturn msg;",
+                        "hasNodeOutput": "flow:d5cdb05c4a8f64a4/interface/3457bb2065109dc6",
+                        "label": "insert action invocation url and auth"
+                    },
+                    {
+                        "@id": "function:28af37e1ffcddb70",
+                        "@type": "Function",
+                        "funcCode": "\nmsg.activationID=msg.headers['x-openwhisk-activation-id'];\n\n//msg.url='http://10.100.59.182:3233/api/v1/namespaces/_/activations/'+msg.activationID;\n\nmsg.url=msg.dms_location+'/namespaces/'+msg.namespace+'/activations/'+msg.activationID;\n\nreturn msg;",
+                        "label": "add OW activation id from reply"
+                    }
+                ],
+                "hasJSONDescription": {
+                    "artifact": "registry.apps.ocphub.physics-faas.eu/custom/george:101",
+                    "artifactType": "image",
+                    "id": "3dc59d6aea6e35a4",
+                    "label": "Hello_DMS",
+                    "nodes": [
+                        {
+                            "disabled": false,
+                            "id": "3dc59d6aea6e35a4",
+                            "label": "Hello_DMS",
+                            "type": "tab"
+                        },
+                        {
+                            "id": "3acefcfb6e6a91ea",
+                            "method": "post",
+                            "type": "http in",
+                            "upload": false,
+                            "url": "/init",
+                            "wires": "8cf8bcdd0361dcf7",
+                            "x": 360,
+                            "y": 160,
+                            "z": "3dc59d6aea6e35a4"
+                        },
+                        {
+                            "id": "b519f76492b660c7",
+                            "method": "post",
+                            "type": "http in",
+                            "upload": false,
+                            "url": "/run",
+                            "wires": [
+                                "2347840f70beb926",
+                                "1b65c81292a1cc77"
+                            ],
+                            "x": 360,
+                            "y": 260,
+                            "z": "3dc59d6aea6e35a4"
+                        },
+                        {
+                            "id": "8cf8bcdd0361dcf7",
+                            "type": "http response",
+                            "x": 660,
+                            "y": 160,
+                            "z": "3dc59d6aea6e35a4"
+                        },
+                        {
+                            "id": "d484c0db85f77685",
+                            "type": "http response",
+                            "x": 930,
+                            "y": 320,
+                            "z": "3dc59d6aea6e35a4"
+                        },
+                        {
+                            "func": "\nconsole.log(msg);\nmsg.payload='hello '+msg.payload.value.name;\nreturn msg;",
+                            "id": "2347840f70beb926",
+                            "name": "hello world",
+                            "noerr": 0,
+                            "outputs": 1,
+                            "type": "function",
+                            "wires": "223f577e6b96a222",
+                            "x": 570,
+                            "y": 260,
+                            "z": "3dc59d6aea6e35a4"
+                        },
+                        {
+                            "id": "7f89bdaad11eb775",
+                            "name": "OW SKELETON with hello world function",
+                            "type": "comment",
+                            "x": 460,
+                            "y": 340,
+                            "z": "3dc59d6aea6e35a4"
+                        },
+                        {
+                            "env": {
+                                "name": "Executor Mode",
+                                "type": "str",
+                                "value": "NoderedFunction"
+                            },
+                            "id": "dc598c2fb4701083",
+                            "subflow": "694cb784968dc0b9",
+                            "type": "subflow:694cb784968dc0b9",
+                            "x": 220,
+                            "y": 420,
+                            "z": "3dc59d6aea6e35a4"
+                        },
+                        {
+                            "env": [
+                                {
+                                    "name": "memory",
+                                    "type": "num",
+                                    "value": "512"
+                                },
+                                {
+                                    "name": "timeout",
+                                    "type": "num",
+                                    "value": "150000"
+                                }
+                            ],
+                            "id": "1fcff8400467c8f4",
+                            "subflow": "dd8835083692860a",
+                            "type": "subflow:dd8835083692860a",
+                            "x": 220,
+                            "y": 480,
+                            "z": "3dc59d6aea6e35a4"
+                        },
+                        {
+                            "env": {
+                                "name": "goal",
+                                "type": "str",
+                                "value": "performance"
+                            },
+                            "id": "cbb90d5abd6aeb85",
+                            "subflow": "f0b9b88b6dcb2ece",
+                            "type": "subflow:f0b9b88b6dcb2ece",
+                            "x": 270,
+                            "y": 540,
+                            "z": "3dc59d6aea6e35a4"
+                        },
+                        {
+                            "env": {
+                                "name": "importance",
+                                "type": "str",
+                                "value": "high"
+                            },
+                            "id": "a928d25a87bb1f70",
+                            "subflow": "94dffc86e4af9a58",
+                            "type": "subflow:94dffc86e4af9a58",
+                            "x": 240,
+                            "y": 600,
+                            "z": "3dc59d6aea6e35a4"
+                        },
+                        {
+                            "env": {
+                                "name": "locality",
+                                "type": "str",
+                                "value": "aws"
+                            },
+                            "id": "e92d973a0c36b990",
+                            "subflow": "05f045b87080a61e",
+                            "type": "subflow:05f045b87080a61e",
+                            "x": 230,
+                            "y": 660,
+                            "z": "3dc59d6aea6e35a4"
+                        },
+                        {
+                            "func": "var data=msg.payload;\nmsg.payload={};\nmsg.payload.data=data;\nmsg.data=data;\nreturn msg;",
+                            "id": "223f577e6b96a222",
+                            "name": "write",
+                            "noerr": 0,
+                            "outputs": 1,
+                            "type": "function",
+                            "wires": [
+                                "cabbea3d9687c2e4",
+                                "1621f8dd5bf2de51"
+                            ],
+                            "x": 750,
+                            "y": 260,
+                            "z": "3dc59d6aea6e35a4"
+                        },
+                        {
+                            "func": "var input=msg.payload;\n\nmsg.payload={};\nmsg.payload.dmsResult=input.response.result;\nmsg.payload.data=msg.data;\nreturn msg;",
+                            "id": "3402a8de3203b61c",
+                            "name": "results",
+                            "noerr": 0,
+                            "outputs": 1,
+                            "type": "function",
+                            "wires": [
+                                "d484c0db85f77685",
+                                "690e6fa8cb324459"
+                            ],
+                            "x": 770,
+                            "y": 320,
+                            "z": "3dc59d6aea6e35a4"
+                        },
+                        {
+                            "active": true,
+                            "complete": "false",
+                            "console": false,
+                            "id": "1b65c81292a1cc77",
+                            "statusType": "auto",
+                            "tosidebar": true,
+                            "tostatus": false,
+                            "type": "debug",
+                            "x": 530,
+                            "y": 200,
+                            "z": "3dc59d6aea6e35a4"
+                        },
+                        {
+                            "active": true,
+                            "complete": "false",
+                            "console": false,
+                            "id": "cabbea3d9687c2e4",
+                            "statusType": "auto",
+                            "tosidebar": true,
+                            "tostatus": false,
+                            "type": "debug",
+                            "x": 950,
+                            "y": 260,
+                            "z": "3dc59d6aea6e35a4"
+                        },
+                        {
+                            "active": true,
+                            "complete": "false",
+                            "console": false,
+                            "id": "7988bc52cb5a9350",
+                            "statusType": "auto",
+                            "tosidebar": true,
+                            "tostatus": false,
+                            "type": "debug",
+                            "x": 730,
+                            "y": 460,
+                            "z": "3dc59d6aea6e35a4"
+                        },
+                        {
+                            "active": true,
+                            "complete": "false",
+                            "console": false,
+                            "id": "690e6fa8cb324459",
+                            "statusType": "auto",
+                            "tosidebar": true,
+                            "tostatus": false,
+                            "type": "debug",
+                            "x": 930,
+                            "y": 520,
+                            "z": "3dc59d6aea6e35a4"
+                        },
+                        {
+                            "id": "f6e5aeef996faf78",
+                            "subflow": "789351ac.02c9d",
+                            "type": "subflow:789351ac.02c9d",
+                            "x": 630,
+                            "y": 620,
+                            "z": "3dc59d6aea6e35a4"
+                        },
+                        {
+                            "env": [
+                                {
+                                    "name": "dms_location",
+                                    "type": "str",
+                                    "value": "https://openwhisk.apps.ocphub.physics-faas.eu/api/v1"
+                                },
+                                {
+                                    "name": "dms_job_id",
+                                    "type": "str",
+                                    "value": "ss"
+                                },
+                                {
+                                    "name": "dms_pocket_dst_file",
+                                    "type": "str",
+                                    "value": "dd"
+                                },
+                                {
+                                    "name": "dms_operation",
+                                    "type": "str",
+                                    "value": "dms-w"
+                                },
+                                {
+                                    "name": "dms_namespace",
+                                    "type": "str",
+                                    "value": "wp4namespace"
+                                },
+                                {
+                                    "name": "dms_size",
+                                    "type": "num",
+                                    "value": "10"
+                                }
+                            ],
+                            "id": "1621f8dd5bf2de51",
+                            "name": "write",
+                            "subflow": "d5cdb05c4a8f64a4",
+                            "type": "subflow:d5cdb05c4a8f64a4",
+                            "wires": [
+                                "3402a8de3203b61c",
+                                "7988bc52cb5a9350"
+                            ],
+                            "x": 630,
+                            "y": 320,
+                            "z": "3dc59d6aea6e35a4"
+                        },
+                        {
+                            "id": "eeb5210da7efebd3",
+                            "info": "The Executor Mode Annotator is a mean to describe to the PHYSICS Environment the execution mode of a given flow. There are three options\n1) Service mode: the selected flow will be deployed as a Node-RED service, thus always running\n2) Node-RED Function mode: the selected flow will be wrapped around a Node-RED runtime and registered to a target Openwhisk platform, where it will be executed as a Node-RED runtime function\n3) Native Sequence: the included functions will be packaged and registered individually at the Openwhisk platform, while their links (workflow) will be translated to the native Openwhisk sequence format and registered to the Openwhisk platform. This mode at the moment is limited to pure function nodes of Node-RED, while the workflow description is limited by the sequence abilities of Openwhisk. ",
+                            "name": "Instructions",
+                            "type": "comment",
+                            "x": 560,
+                            "y": 280,
+                            "z": "694cb784968dc0b9"
+                        },
+                        {
+                            "id": "827476cff63f679c",
+                            "info": "The node is used to indicate memory and timing preferences for the final OW action.",
+                            "name": "README",
+                            "type": "comment",
+                            "x": 440,
+                            "y": 180,
+                            "z": "dd8835083692860a"
+                        },
+                        {
+                            "id": "a0dfe746ee0c085b",
+                            "info": "The node is used to set the desired optimization goal: performance/energy",
+                            "name": "README",
+                            "type": "comment",
+                            "x": 340,
+                            "y": 160,
+                            "z": "f0b9b88b6dcb2ece"
+                        },
+                        {
+                            "id": "1896904e3b2cf282",
+                            "info": "The node is used to indicate at the flow level what is the importance of the flow (to be taken under consideration in the scheduling aspects of PHYSICS)",
+                            "name": "README",
+                            "type": "comment",
+                            "x": 400,
+                            "y": 160,
+                            "z": "94dffc86e4af9a58"
+                        },
+                        {
+                            "id": "30ee5c09f384361d",
+                            "info": "The node is used to indicate at the flow level the locality of this flow with relation to a set of standard locations by name ",
+                            "name": "README",
+                            "type": "comment",
+                            "x": 400,
+                            "y": 220,
+                            "z": "05f045b87080a61e"
+                        },
+                        {
+                            "id": "2934f390.711324",
+                            "type": "tls-config",
+                            "verifyservercert": false,
+                            "z": "789351ac.02c9d"
+                        },
+                        {
+                            "func": "\nif (msg.hasOwnProperty('maxAttempts')){\n    msg.iterations=msg.maxAttempts;\n} else {\n    msg.iterations=env.get('maxAttempts');\n}\n//needed to reset the iterations after function chaining\nmsg.defaultAttempts=msg.iterations;\n\nif (msg.hasOwnProperty('pollPeriod')){\n    \n} else {\n    msg.pollPeriod=env.get('pollPeriod');\n}\n\nif (msg.hasOwnProperty('method')){\n    \n} else {\n    msg.method=env.get('method');\n}\n\nif (msg.hasOwnProperty('url')){\n    \n} else {\n    msg.url=env.get('url');\n}\n\nif (msg.hasOwnProperty('retryCode')){\n    \n} else {\n    msg.retryCode=env.get('retryCode');\n}\n\nif (msg.hasOwnProperty('acceptCode')){\n    \n} else {\n    msg.acceptCode=env.get('acceptCode');\n}\n\nif (msg.hasOwnProperty('creds')){\n    \n} else {\n    msg.creds=env.get('creds');\n}\n\nif (msg.hasOwnProperty('functionChain')){\n    \n} else {\n    msg.functionChain=env.get('functionChain');\n}\n\nif (msg.hasOwnProperty('inputData')){\n    if (msg.inputData.hasOwnProperty('creds')){\n        msg.creds=msg.inputData.creds;\n    }\n}\n\n\n\nmsg.delay=msg.pollPeriod;\nmsg.start=Date.now();\nreturn msg;",
+                            "id": "7d194c10.33b51c",
+                            "name": "defaults+activation id",
+                            "noerr": 0,
+                            "outputs": 1,
+                            "type": "function",
+                            "wires": "cad17b04.a2b4d8",
+                            "x": 200,
+                            "y": 160,
+                            "z": "789351ac.02c9d"
+                        },
+                        {
+                            "func": "msg.iterations=msg.iterations-1;\nreturn msg;",
+                            "id": "4be3f205.3e8dc4",
+                            "name": "iterations--",
+                            "noerr": 0,
+                            "outputs": 1,
+                            "type": "function",
+                            "wires": [
+                                "c2cf68b7.263d4",
+                                "d8305759.866988"
+                            ],
+                            "x": 350,
+                            "y": 300,
+                            "z": "789351ac.02c9d"
+                        },
+                        {
+                            "checkall": "true",
+                            "id": "c2cf68b7.263d4",
+                            "name": "if iterations finished",
+                            "outputs": 2,
+                            "property": "iterations",
+                            "propertyType": "msg",
+                            "repair": false,
+                            "rules": [
+                                {
+                                    "t": "gte",
+                                    "v": "1",
+                                    "vt": "num"
+                                },
+                                {
+                                    "t": "lt",
+                                    "v": "1",
+                                    "vt": "num"
+                                }
+                            ],
+                            "type": "switch",
+                            "wires": "cad17b04.a2b4d8",
+                            "x": 550,
+                            "y": 300,
+                            "z": "789351ac.02c9d"
+                        },
+                        {
+                            "id": "76299695.812bd8",
+                            "name": "SUCCESS",
+                            "type": "comment",
+                            "x": 1100,
+                            "y": 60,
+                            "z": "789351ac.02c9d"
+                        },
+                        {
+                            "id": "48093072.b17a6",
+                            "name": "FINAL FAIL",
+                            "type": "comment",
+                            "x": 890,
+                            "y": 360,
+                            "z": "789351ac.02c9d"
+                        },
+                        {
+                            "drop": false,
+                            "id": "d5960f2f.2e9448",
+                            "name": "delay",
+                            "nbRateUnits": "1",
+                            "outputs": 1,
+                            "pauseType": "delayv",
+                            "randomFirst": "1",
+                            "randomLast": "5",
+                            "randomUnits": "seconds",
+                            "rate": "1",
+                            "rateUnits": "second",
+                            "timeout": "5",
+                            "timeoutUnits": "seconds",
+                            "type": "delay",
+                            "wires": "4be3f205.3e8dc4",
+                            "x": 170,
+                            "y": 300,
+                            "z": "789351ac.02c9d"
+                        },
+                        {
+                            "id": "471b3d64.265894",
+                            "method": "GET",
+                            "paytoqs": "ignore",
+                            "persist": false,
+                            "ret": "obj",
+                            "tls": "2934f390.711324",
+                            "type": "http request",
+                            "wires": "8694180b.ec1c68",
+                            "x": 590,
+                            "y": 160,
+                            "z": "789351ac.02c9d"
+                        },
+                        {
+                            "checkall": "true",
+                            "id": "8694180b.ec1c68",
+                            "name": "Status code check",
+                            "outputs": 2,
+                            "property": "statusCode",
+                            "propertyType": "msg",
+                            "repair": false,
+                            "rules": [
+                                {
+                                    "t": "lte",
+                                    "v": "acceptCode",
+                                    "vt": "msg"
+                                },
+                                {
+                                    "t": "gte",
+                                    "v": "retryCode",
+                                    "vt": "msg"
+                                }
+                            ],
+                            "type": "switch",
+                            "wires": [
+                                "f9d0aba7.72382",
+                                "d5960f2f.2e9448"
+                            ],
+                            "x": 810,
+                            "y": 160,
+                            "z": "789351ac.02c9d"
+                        },
+                        {
+                            "id": "ef03414f.ad9d78",
+                            "name": "RETRY FAIL",
+                            "type": "comment",
+                            "x": 890,
+                            "y": 260,
+                            "z": "789351ac.02c9d"
+                        },
+                        {
+                            "active": true,
+                            "complete": "true",
+                            "console": false,
+                            "id": "66bbc0cf.0c62f",
+                            "name": "BEFORE AUTH",
+                            "targetType": "full",
+                            "tosidebar": true,
+                            "tostatus": false,
+                            "type": "debug",
+                            "x": 370,
+                            "y": 100,
+                            "z": "789351ac.02c9d"
+                        },
+                        {
+                            "active": true,
+                            "complete": "url",
+                            "console": true,
+                            "id": "13791c2d.8cea7c",
+                            "name": "URL",
+                            "targetType": "msg",
+                            "tosidebar": true,
+                            "tostatus": false,
+                            "type": "debug",
+                            "x": 580,
+                            "y": 100,
+                            "z": "789351ac.02c9d"
+                        },
+                        {
+                            "func": "msg.headers={};\nvar auth = 'Basic ' + new Buffer(msg.creds).toString('base64');\nmsg.headers = {\n    \"Authorization\": auth\n}\n\nreturn msg;",
+                            "id": "cad17b04.a2b4d8",
+                            "name": "add auth",
+                            "noerr": 0,
+                            "outputs": 1,
+                            "type": "function",
+                            "wires": "471b3d64.265894",
+                            "x": 420,
+                            "y": 160,
+                            "z": "789351ac.02c9d"
+                        },
+                        {
+                            "func": "\n\nmsg.url=msg.payload.response.result.newActivationIDURL;\nmsg.iterations=msg.defaultAttempts+1;\nconsole.log('IN ADAPTATION TO ACTIVATION',msg.url);\nreturn msg;",
+                            "id": "f2b7c4e4.a24c3",
+                            "name": "adapt to new activation",
+                            "noerr": 0,
+                            "outputs": 1,
+                            "type": "function",
+                            "wires": [
+                                "d5960f2f.2e9448",
+                                "ee1dbf44.7368f8"
+                            ],
+                            "x": 1500,
+                            "y": 160,
+                            "z": "789351ac.02c9d"
+                        },
+                        {
+                            "id": "c338e47b.b00ed",
+                            "name": "FUNCTION CHAIN CONTINUATION",
+                            "type": "comment",
+                            "x": 1240,
+                            "y": 240,
+                            "z": "789351ac.02c9d"
+                        },
+                        {
+                            "active": true,
+                            "complete": "payload",
+                            "console": true,
+                            "id": "ee1dbf44.7368f8",
+                            "name": "AFTER CONTINUATION IN Poll2Push",
+                            "targetType": "msg",
+                            "tosidebar": true,
+                            "tostatus": false,
+                            "type": "debug",
+                            "x": 1420,
+                            "y": 300,
+                            "z": "789351ac.02c9d"
+                        },
+                        {
+                            "checkall": "true",
+                            "id": "f9d0aba7.72382",
+                            "name": "is Chain",
+                            "outputs": 2,
+                            "property": "functionChain",
+                            "propertyType": "msg",
+                            "repair": false,
+                            "rules": [
+                                {
+                                    "t": "false"
+                                },
+                                {
+                                    "t": "true"
+                                }
+                            ],
+                            "type": "switch",
+                            "wires": [
+                                "6da1eea0.969368",
+                                "1bbc6fa0.4879c"
+                            ],
+                            "x": 1020,
+                            "y": 160,
+                            "z": "789351ac.02c9d"
+                        },
+                        {
+                            "active": true,
+                            "complete": "payload",
+                            "console": true,
+                            "id": "6da1eea0.969368",
+                            "name": "RESULT STATUS",
+                            "targetType": "msg",
+                            "tosidebar": true,
+                            "tostatus": false,
+                            "type": "debug",
+                            "x": 1100,
+                            "y": 300,
+                            "z": "789351ac.02c9d"
+                        },
+                        {
+                            "active": true,
+                            "complete": "functionChain",
+                            "console": true,
+                            "id": "f20a68d.9711598",
+                            "name": "AFTER CODE CHECK",
+                            "targetType": "msg",
+                            "tosidebar": true,
+                            "tostatus": false,
+                            "type": "debug",
+                            "x": 890,
+                            "y": 100,
+                            "z": "789351ac.02c9d"
+                        },
+                        {
+                            "active": true,
+                            "complete": "payload",
+                            "console": true,
+                            "id": "36905e62.dfad92",
+                            "name": "TOP1",
+                            "targetType": "msg",
+                            "tosidebar": true,
+                            "tostatus": false,
+                            "type": "debug",
+                            "x": 1120,
+                            "y": 100,
+                            "z": "789351ac.02c9d"
+                        },
+                        {
+                            "active": true,
+                            "complete": "payload",
+                            "console": true,
+                            "id": "9610a737.bf275",
+                            "name": "TOP2",
+                            "targetType": "msg",
+                            "tosidebar": true,
+                            "tostatus": false,
+                            "type": "debug",
+                            "x": 1300,
+                            "y": 100,
+                            "z": "789351ac.02c9d"
+                        },
+                        {
+                            "active": true,
+                            "complete": "payload",
+                            "console": true,
+                            "id": "c52af08f.756ee8",
+                            "name": "TOP3",
+                            "targetType": "msg",
+                            "tosidebar": true,
+                            "tostatus": false,
+                            "type": "debug",
+                            "x": 1600,
+                            "y": 100,
+                            "z": "789351ac.02c9d"
+                        },
+                        {
+                            "func": "console.log('IN COMPARE COMPLETION',msg.payload.response);\nif (msg.payload.response.result.status==='Completed'){\n    return [msg,null];\n} else {\n    return [null,msg];\n}\n",
+                            "id": "1bbc6fa0.4879c",
+                            "name": "compare completion",
+                            "noerr": 0,
+                            "outputs": 2,
+                            "type": "function",
+                            "wires": [
+                                "c52af08f.756ee8",
+                                "f2b7c4e4.a24c3"
+                            ],
+                            "x": 1240,
+                            "y": 160,
+                            "z": "789351ac.02c9d"
+                        },
+                        {
+                            "active": true,
+                            "complete": "iterations",
+                            "console": true,
+                            "id": "d8305759.866988",
+                            "name": "URL",
+                            "targetType": "msg",
+                            "tosidebar": true,
+                            "tostatus": false,
+                            "type": "debug",
+                            "x": 500,
+                            "y": 380,
+                            "z": "789351ac.02c9d"
+                        },
+                        {
+                            "id": "795bfb0aa4e6606a",
+                            "type": "tls-config",
+                            "verifyservercert": false,
+                            "z": "d5cdb05c4a8f64a4"
+                        },
+                        {
+                            "func": "\nif (msg.hasOwnProperty('dms_job_id')){\n} else {\n    msg.dms_job_id=env.get('dms_job_id');\n}\n\nif (msg.hasOwnProperty('dms_size')){\n} else {\n    msg.dms_size=env.get('dms_size');\n}\n\nif (msg.hasOwnProperty('dms_location')){\n} else {\n    msg.dms_location=env.get('dms_location');\n}\n\n\nif (msg.hasOwnProperty('dms_operation')){\n} else {\n    msg.dms_operation=env.get('dms_operation');\n}\n\nif (msg.hasOwnProperty('dms_namespace')){\n} else {\n    msg.namespace=env.get('dms_namespace');\n}\n\n\nif (msg.hasOwnProperty('dms_pocket_dst_file')){\n    //msg.dms_pocket_dst_file=msg.payload.dms_pocket_dst_file;\n} else {\n    msg.dms_pocket_dst_file=env.get('dms_pocket_dst_file');\n}\n\nif (msg.hasOwnProperty('creds')){\n    //msg.creds=msg.payload.dms_namespace;\n} else {\n    msg.creds=env.get('creds');\n}\n\n\nreturn msg;",
+                            "id": "b1565887a7f49105",
+                            "name": "adapt",
+                            "noerr": 0,
+                            "outputs": 1,
+                            "type": "function",
+                            "wires": [
+                                "ccb0503362a32b2a",
+                                "4856665561ef0433"
+                            ],
+                            "x": 250,
+                            "y": 80,
+                            "z": "d5cdb05c4a8f64a4"
+                        },
+                        {
+                            "func": "//msg.url='http://10.100.59.182:3233/api/v1/namespaces/guest/actions/dockeraction';\nmsg.url=msg.dms_location+'/namespaces/'+msg.namespace+'/actions/'+msg.dms_operation;\n\nconsole.log(msg.creds);\n//msg.creds='';\nmsg.headers={};\nvar auth = 'Basic ' + new Buffer(msg.creds).toString('base64');\nmsg.headers = {\n    \"Authorization\": auth\n}\n\n\nmsg.payload.jobid=msg.dms_job_id;\nmsg.payload.pocketFile= msg.dms_pocket_dst_file;\nmsg.payload.size=msg.dms_size;\n\nreturn msg;",
+                            "id": "ccb0503362a32b2a",
+                            "name": "insert action invocation url and auth",
+                            "noerr": 0,
+                            "outputs": 1,
+                            "type": "function",
+                            "wires": [
+                                "3457bb2065109dc6",
+                                "2c3be5d81299426d"
+                            ],
+                            "x": 340,
+                            "y": 140,
+                            "z": "d5cdb05c4a8f64a4"
+                        },
+                        {
+                            "authType": "basic",
+                            "id": "3457bb2065109dc6",
+                            "method": "POST",
+                            "paytoqs": "ignore",
+                            "persist": false,
+                            "ret": "obj",
+                            "tls": "795bfb0aa4e6606a",
+                            "type": "http request",
+                            "wires": [
+                                "28af37e1ffcddb70",
+                                "2faee81a277aefcd"
+                            ],
+                            "x": 290,
+                            "y": 200,
+                            "z": "d5cdb05c4a8f64a4"
+                        },
+                        {
+                            "func": "\nmsg.activationID=msg.headers['x-openwhisk-activation-id'];\n\n//msg.url='http://10.100.59.182:3233/api/v1/namespaces/_/activations/'+msg.activationID;\n\nmsg.url=msg.dms_location+'/namespaces/'+msg.namespace+'/activations/'+msg.activationID;\n\nreturn msg;",
+                            "id": "28af37e1ffcddb70",
+                            "name": "add OW activation id from reply",
+                            "noerr": 0,
+                            "outputs": 1,
+                            "type": "function",
+                            "wires": "f8348bbae5afdb07",
+                            "x": 350,
+                            "y": 260,
+                            "z": "d5cdb05c4a8f64a4"
+                        },
+                        {
+                            "env": [
+                                {
+                                    "name": "maxAttempts",
+                                    "type": "str",
+                                    "value": "20"
+                                },
+                                {
+                                    "name": "pollPeriod",
+                                    "type": "str",
+                                    "value": "10000"
+                                },
+                                {
+                                    "name": "method",
+                                    "type": "str",
+                                    "value": "POST"
+                                },
+                                {
+                                    "name": "functionChain",
+                                    "type": "bool",
+                                    "value": "false"
+                                }
+                            ],
+                            "id": "f8348bbae5afdb07",
+                            "subflow": "789351ac.02c9d",
+                            "type": "subflow:789351ac.02c9d",
+                            "wires": "e5351303862f506c",
+                            "x": 330,
+                            "y": 320,
+                            "z": "d5cdb05c4a8f64a4"
+                        },
+                        {
+                            "active": true,
+                            "complete": "true",
+                            "console": false,
+                            "id": "f3dce7600cf573ec",
+                            "name": "SUCCESS",
+                            "statusType": "auto",
+                            "targetType": "full",
+                            "tosidebar": true,
+                            "tostatus": false,
+                            "type": "debug",
+                            "x": 930,
+                            "y": 300,
+                            "z": "d5cdb05c4a8f64a4"
+                        },
+                        {
+                            "active": true,
+                            "complete": "true",
+                            "console": false,
+                            "id": "e5351303862f506c",
+                            "name": "RETRY FAIL",
+                            "statusType": "auto",
+                            "targetType": "full",
+                            "tosidebar": true,
+                            "tostatus": false,
+                            "type": "debug",
+                            "x": 930,
+                            "y": 340,
+                            "z": "d5cdb05c4a8f64a4"
+                        },
+                        {
+                            "active": true,
+                            "complete": "true",
+                            "console": false,
+                            "id": "9749a0001a768f9a",
+                            "name": "FINAL FAIL",
+                            "statusType": "auto",
+                            "targetType": "full",
+                            "tosidebar": true,
+                            "tostatus": false,
+                            "type": "debug",
+                            "x": 930,
+                            "y": 380,
+                            "z": "d5cdb05c4a8f64a4"
+                        },
+                        {
+                            "active": true,
+                            "complete": "true",
+                            "console": false,
+                            "id": "4856665561ef0433",
+                            "statusType": "auto",
+                            "targetType": "full",
+                            "tosidebar": true,
+                            "tostatus": false,
+                            "type": "debug",
+                            "x": 440,
+                            "y": 80,
+                            "z": "d5cdb05c4a8f64a4"
+                        },
+                        {
+                            "active": true,
+                            "complete": "true",
+                            "console": false,
+                            "id": "2c3be5d81299426d",
+                            "statusType": "auto",
+                            "targetType": "full",
+                            "tosidebar": true,
+                            "tostatus": false,
+                            "type": "debug",
+                            "x": 570,
+                            "y": 140,
+                            "z": "d5cdb05c4a8f64a4"
+                        },
+                        {
+                            "active": true,
+                            "complete": "true",
+                            "console": false,
+                            "id": "2faee81a277aefcd",
+                            "statusType": "auto",
+                            "targetType": "full",
+                            "tosidebar": true,
+                            "tostatus": false,
+                            "type": "debug",
+                            "x": 690,
+                            "y": 200,
+                            "z": "d5cdb05c4a8f64a4"
+                        }
+                    ]
+                },
+                "hasNode": [
+                    {
+                        "@id": "flow:3dc59d6aea6e35a4/node/f6e5aeef996faf78",
+                        "@type": "SubFlow",
+                        "hasTemplate": "flow:789351ac.02c9d"
+                    },
+                    {
+                        "@id": "flow:3dc59d6aea6e35a4/node/f8348bbae5afdb07",
+                        "@type": "SubFlow",
+                        "hasTemplate": "flow:789351ac.02c9d"
+                    }
+                ],
+                "hasSoftwareArtifact": {
+                    "@id": "registry.apps.ocphub.physics-faas.eu/custom/george:101",
+                    "@type": "SoftwareImage"
+                },
+                "importance": "high",
+                "label": "Hello_DMS",
+                "locality": "aws",
+                "memory": "512",
+                "timeout": "150000"
+            },
+            {
+                "@id": "flow:39ef55a8.55f96a",
+                "@type": "Flow",
+                "definesInterface": [
+                    {
+                        "@id": "flow:39ef55a8.55f96a/interface/f70d642d7d615561",
+                        "@type": "REST",
+                        "allowsUpload": false,
+                        "hasHttpMethod": "POST",
+                        "interfaceToInterface": "flow:39ef55a8.55f96a/interface/a8ea37eb3bb8cf23",
+                        "interfaceURI": "/init"
+                    },
+                    {
+                        "@id": "flow:39ef55a8.55f96a/interface/ee0278d90f6393a9",
+                        "@type": "REST",
+                        "allowsUpload": false,
+                        "hasHttpMethod": "POST",
+                        "interfaceURI": "/run",
+                        "isNodeInputOf": "function:f52b7bec399e315a"
+                    },
+                    {
+                        "@id": "flow:39ef55a8.55f96a/interface/a8ea37eb3bb8cf23",
+                        "@type": "RESTOutput"
+                    },
+                    {
+                        "@id": "flow:39ef55a8.55f96a/interface/ab91c6c51decfbab",
+                        "@type": "RESTOutput"
+                    }
+                ],
+                "executorMode": "NoderedFunction",
+                "exposesREST": [
+                    "flow:39ef55a8.55f96a/interface/f70d642d7d615561",
+                    "flow:39ef55a8.55f96a/interface/ee0278d90f6393a9"
+                ],
+                "goal": "performance",
+                "hasFunction": {
+                    "@id": "function:f52b7bec399e315a",
+                    "@type": "Function",
+                    "funcCode": "//console.log(msg);\n\nmsg.payload={'response':'hello '+msg.payload.value.name};\nreturn msg;",
+                    "hasNodeOutput": "flow:39ef55a8.55f96a/interface/ab91c6c51decfbab",
+                    "label": "hello world"
+                },
+                "hasJSONDescription": {
+                    "artifact": "registry.apps.ocphub.physics-faas.eu/custom/george:102",
+                    "artifactType": "image",
+                    "id": "39ef55a8.55f96a",
+                    "label": "HelloFunctionV2",
+                    "nodes": [
+                        {
+                            "disabled": false,
+                            "id": "39ef55a8.55f96a",
+                            "label": "HelloFunctionV2",
+                            "type": "tab"
+                        },
+                        {
+                            "id": "f70d642d7d615561",
+                            "method": "post",
+                            "type": "http in",
+                            "upload": false,
+                            "url": "/init",
+                            "wires": "a8ea37eb3bb8cf23",
+                            "x": 340,
+                            "y": 180,
+                            "z": "39ef55a8.55f96a"
+                        },
+                        {
+                            "id": "ee0278d90f6393a9",
+                            "method": "post",
+                            "type": "http in",
+                            "upload": false,
+                            "url": "/run",
+                            "wires": "f52b7bec399e315a",
+                            "x": 340,
+                            "y": 280,
+                            "z": "39ef55a8.55f96a"
+                        },
+                        {
+                            "id": "a8ea37eb3bb8cf23",
+                            "type": "http response",
+                            "x": 730,
+                            "y": 180,
+                            "z": "39ef55a8.55f96a"
+                        },
+                        {
+                            "id": "ab91c6c51decfbab",
+                            "type": "http response",
+                            "x": 870,
+                            "y": 380,
+                            "z": "39ef55a8.55f96a"
+                        },
+                        {
+                            "func": "//console.log(msg);\n\nmsg.payload={'response':'hello '+msg.payload.value.name};\nreturn msg;",
+                            "id": "f52b7bec399e315a",
+                            "name": "hello world",
+                            "noerr": 0,
+                            "outputs": 1,
+                            "type": "function",
+                            "wires": "ab91c6c51decfbab",
+                            "x": 630,
+                            "y": 280,
+                            "z": "39ef55a8.55f96a"
+                        },
+                        {
+                            "id": "47d1123d17b41031",
+                            "name": "OW SKELETON with hello world function",
+                            "type": "comment",
+                            "x": 440,
+                            "y": 360,
+                            "z": "39ef55a8.55f96a"
+                        },
+                        {
+                            "env": {
+                                "name": "Executor Mode",
+                                "type": "str",
+                                "value": "NoderedFunction"
+                            },
+                            "id": "129fabd43047059b",
+                            "subflow": "694cb784968dc0b9",
+                            "type": "subflow:694cb784968dc0b9",
+                            "x": 230,
+                            "y": 480,
+                            "z": "39ef55a8.55f96a"
+                        },
+                        {
+                            "env": [
+                                {
+                                    "name": "memory",
+                                    "type": "num",
+                                    "value": "512"
+                                },
+                                {
+                                    "name": "timeout",
+                                    "type": "num",
+                                    "value": "220000"
+                                }
+                            ],
+                            "id": "bba4b91d07643081",
+                            "subflow": "dd8835083692860a",
+                            "type": "subflow:dd8835083692860a",
+                            "x": 220,
+                            "y": 540,
+                            "z": "39ef55a8.55f96a"
+                        },
+                        {
+                            "env": {
+                                "name": "goal",
+                                "type": "str",
+                                "value": "performance"
+                            },
+                            "id": "46230eca45760f58",
+                            "subflow": "f0b9b88b6dcb2ece",
+                            "type": "subflow:f0b9b88b6dcb2ece",
+                            "x": 280,
+                            "y": 640,
+                            "z": "39ef55a8.55f96a"
+                        },
+                        {
+                            "env": {
+                                "name": "importance",
+                                "type": "str",
+                                "value": "high"
+                            },
+                            "id": "be87371dd5bad13a",
+                            "subflow": "94dffc86e4af9a58",
+                            "type": "subflow:94dffc86e4af9a58",
+                            "x": 260,
+                            "y": 740,
+                            "z": "39ef55a8.55f96a"
+                        },
+                        {
+                            "env": {
+                                "name": "locality",
+                                "type": "str",
+                                "value": "aws"
+                            },
+                            "id": "7ec29cdc3b1457ea",
+                            "subflow": "05f045b87080a61e",
+                            "type": "subflow:05f045b87080a61e",
+                            "x": 250,
+                            "y": 840,
+                            "z": "39ef55a8.55f96a"
+                        },
+                        {
+                            "id": "eeb5210da7efebd3",
+                            "info": "The Executor Mode Annotator is a mean to describe to the PHYSICS Environment the execution mode of a given flow. There are three options\n1) Service mode: the selected flow will be deployed as a Node-RED service, thus always running\n2) Node-RED Function mode: the selected flow will be wrapped around a Node-RED runtime and registered to a target Openwhisk platform, where it will be executed as a Node-RED runtime function\n3) Native Sequence: the included functions will be packaged and registered individually at the Openwhisk platform, while their links (workflow) will be translated to the native Openwhisk sequence format and registered to the Openwhisk platform. This mode at the moment is limited to pure function nodes of Node-RED, while the workflow description is limited by the sequence abilities of Openwhisk. ",
+                            "name": "Instructions",
+                            "type": "comment",
+                            "x": 560,
+                            "y": 280,
+                            "z": "694cb784968dc0b9"
+                        },
+                        {
+                            "id": "827476cff63f679c",
+                            "info": "The node is used to indicate memory and timing preferences for the final OW action.",
+                            "name": "README",
+                            "type": "comment",
+                            "x": 440,
+                            "y": 180,
+                            "z": "dd8835083692860a"
+                        },
+                        {
+                            "id": "a0dfe746ee0c085b",
+                            "info": "The node is used to set the desired optimization goal: performance/energy",
+                            "name": "README",
+                            "type": "comment",
+                            "x": 340,
+                            "y": 160,
+                            "z": "f0b9b88b6dcb2ece"
+                        },
+                        {
+                            "id": "1896904e3b2cf282",
+                            "info": "The node is used to indicate at the flow level what is the importance of the flow (to be taken under consideration in the scheduling aspects of PHYSICS)",
+                            "name": "README",
+                            "type": "comment",
+                            "x": 400,
+                            "y": 160,
+                            "z": "94dffc86e4af9a58"
+                        },
+                        {
+                            "id": "30ee5c09f384361d",
+                            "info": "The node is used to indicate at the flow level the locality of this flow with relation to a set of standard locations by name ",
+                            "name": "README",
+                            "type": "comment",
+                            "x": 400,
+                            "y": 220,
+                            "z": "05f045b87080a61e"
+                        }
+                    ]
+                },
+                "hasSoftwareArtifact": {
+                    "@id": "registry.apps.ocphub.physics-faas.eu/custom/george:102",
+                    "@type": "SoftwareImage"
+                },
+                "importance": "high",
+                "label": "HelloFunctionV2",
+                "locality": "aws",
+                "memory": "512",
+                "timeout": "220000"
+            },
+            {
+                "@id": "flow:e98bf48d7a877d25",
+                "@type": "Flow",
+                "affinity": "affinity",
+                "affinityAppID": "this",
+                "affinityArtefactID": "registry.apps.ocphub.physics-faas.eu/custom/george:102",
+                "consumesREST": {
+                    "@id": "flow:5813b63f70690303/interface/4b0793e93fa7e4c7",
+                    "@type": "REST",
+                    "hasHttpMethod": "POST"
+                },
+                "definesInterface": [
+                    {
+                        "@id": "flow:e98bf48d7a877d25/interface/ce0ad53cb5c6ef33.out0",
+                        "@type": "MessageWire",
+                        "isNodeOutputOf": "function:ce0ad53cb5c6ef33"
+                    },
+                    {
+                        "@id": "flow:e98bf48d7a877d25/interface/6c475d976512ab6c",
+                        "@type": "REST",
+                        "allowsUpload": false,
+                        "hasHttpMethod": "POST",
+                        "interfaceURI": "/run",
+                        "isNodeInputOf": "flow:e98bf48d7a877d25/node/da1cd4a2ba26b2ce"
+                    },
+                    {
+                        "@id": "flow:e98bf48d7a877d25/interface/d8ea5c991b7256b2",
+                        "@type": "REST",
+                        "allowsUpload": false,
+                        "hasHttpMethod": "POST",
+                        "interfaceToInterface": "flow:e98bf48d7a877d25/interface/0bf6e36501ea140c",
+                        "interfaceURI": "/init"
+                    },
+                    {
+                        "@id": "flow:e98bf48d7a877d25/interface/0bf6e36501ea140c",
+                        "@type": "RESTOutput"
+                    },
+                    {
+                        "@id": "flow:e98bf48d7a877d25/interface/729306c6b37c0ec0",
+                        "@type": "RESTOutput"
+                    }
+                ],
+                "executorMode": "NoderedFunction",
+                "exposesREST": [
+                    "flow:e98bf48d7a877d25/interface/6c475d976512ab6c",
+                    "flow:e98bf48d7a877d25/interface/d8ea5c991b7256b2"
+                ],
+                "hasFunction": [
+                    {
+                        "@id": "function:ce0ad53cb5c6ef33",
+                        "@type": "Function",
+                        "funcCode": "//msg.action=msg.payload.value.action;\n\nmsg.url=msg.payload.value.url;\nmsg.creds=msg.payload.value.creds;\n\nmsg.oldpayload=msg.payload;\nmsg.payload={};\nmsg.payload=msg.oldpayload.value.values;\n\nmsg.headers={};\nvar auth = 'Basic ' + new Buffer(msg.creds).toString('base64');\nmsg.headers = {\n    \"Authorization\": auth\n}\nreturn msg;"
+                    },
+                    {
+                        "@id": "function:933bd2f642873790",
+                        "@type": "Function",
+                        "funcCode": "msg.newpayload=msg.payload;\nmsg.payload=[];\nmsg.payload=msg.oldpayload;\nmsg.payload.value=msg.newpayload;\n\nmsg.payload.value.myvar=env.get('setsplit');\nreturn msg;"
+                    }
+                ],
+                "hasJSONDescription": {
+                    "artifact": "registry.apps.ocphub.physics-faas.eu/custom/george:103",
+                    "artifactType": "image",
+                    "id": "e98bf48d7a877d25",
+                    "label": "splitjoinFunction",
+                    "nodes": [
+                        {
+                            "disabled": false,
+                            "id": "e98bf48d7a877d25",
+                            "label": "splitjoinFunction",
+                            "type": "tab"
+                        },
+                        {
+                            "id": "6c475d976512ab6c",
+                            "method": "post",
+                            "type": "http in",
+                            "upload": false,
+                            "url": "/run",
+                            "wires": "da1cd4a2ba26b2ce",
+                            "x": 500,
+                            "y": 500,
+                            "z": "e98bf48d7a877d25"
+                        },
+                        {
+                            "id": "d8ea5c991b7256b2",
+                            "method": "post",
+                            "type": "http in",
+                            "upload": false,
+                            "url": "/init",
+                            "wires": "0bf6e36501ea140c",
+                            "x": 540,
+                            "y": 380,
+                            "z": "e98bf48d7a877d25"
+                        },
+                        {
+                            "id": "0bf6e36501ea140c",
+                            "type": "http response",
+                            "x": 830,
+                            "y": 380,
+                            "z": "e98bf48d7a877d25"
+                        },
+                        {
+                            "id": "729306c6b37c0ec0",
+                            "type": "http response",
+                            "x": 1090,
+                            "y": 500,
+                            "z": "e98bf48d7a877d25"
+                        },
+                        {
+                            "env": {
+                                "name": "Executor Mode",
+                                "type": "str",
+                                "value": "NoderedFunction"
+                            },
+                            "id": "e385b549bc1cae8d",
+                            "subflow": "694cb784968dc0b9",
+                            "type": "subflow:694cb784968dc0b9",
+                            "x": 500,
+                            "y": 600,
+                            "z": "e98bf48d7a877d25"
+                        },
+                        {
+                            "id": "da1cd4a2ba26b2ce",
+                            "subflow": "5813b63f70690303",
+                            "type": "subflow:5813b63f70690303",
+                            "wires": "729306c6b37c0ec0",
+                            "x": 780,
+                            "y": 500,
+                            "z": "e98bf48d7a877d25"
+                        },
+                        {
+                            "env": [
+                                {
+                                    "name": "affinityArtefactID",
+                                    "type": "str",
+                                    "value": "registry.apps.ocphub.physics-faas.eu/custom/george:102"
+                                },
+                                {
+                                    "name": "affinityAppID",
+                                    "type": "str",
+                                    "value": "this"
+                                },
+                                {
+                                    "name": "affinity",
+                                    "type": "str",
+                                    "value": "affinity"
+                                }
+                            ],
+                            "id": "84e7befdcccb2e4e",
+                            "subflow": "edfbba7dd979ecf1",
+                            "type": "subflow:edfbba7dd979ecf1",
+                            "x": 490,
+                            "y": 680,
+                            "z": "e98bf48d7a877d25"
+                        },
+                        {
+                            "id": "eeb5210da7efebd3",
+                            "info": "The Executor Mode Annotator is a mean to describe to the PHYSICS Environment the execution mode of a given flow. There are three options\n1) Service mode: the selected flow will be deployed as a Node-RED service, thus always running\n2) Node-RED Function mode: the selected flow will be wrapped around a Node-RED runtime and registered to a target Openwhisk platform, where it will be executed as a Node-RED runtime function\n3) Native Sequence: the included functions will be packaged and registered individually at the Openwhisk platform, while their links (workflow) will be translated to the native Openwhisk sequence format and registered to the Openwhisk platform. This mode at the moment is limited to pure function nodes of Node-RED, while the workflow description is limited by the sequence abilities of Openwhisk. ",
+                            "name": "Instructions",
+                            "type": "comment",
+                            "x": 560,
+                            "y": 280,
+                            "z": "694cb784968dc0b9"
+                        },
+                        {
+                            "api": "https://openwhisk.apps.ocphub.physics-faas.eu/api/v1",
+                            "id": "64f1be8afce20915",
+                            "name": "aws",
+                            "type": "openwhisk-service",
+                            "z": "5813b63f70690303"
+                        },
+                        {
+                            "id": "1f13a2c0346f82c6",
+                            "type": "tls-config",
+                            "verifyservercert": false,
+                            "z": "5813b63f70690303"
+                        },
+                        {
+                            "arraySplt": "1",
+                            "arraySpltType": "len",
+                            "id": "770ef202c7ccecb6",
+                            "splt": "\\n",
+                            "spltType": "str",
+                            "stream": false,
+                            "type": "split",
+                            "wires": [
+                                "cb539c8dcce538f8",
+                                "4b0793e93fa7e4c7"
+                            ],
+                            "x": 330,
+                            "y": 100,
+                            "z": "5813b63f70690303"
+                        },
+                        {
+                            "accumulate": "false",
+                            "build": "string",
+                            "id": "fef7008cea92f52d",
+                            "joiner": "\\n",
+                            "joinerType": "str",
+                            "key": "topic",
+                            "mode": "auto",
+                            "property": "payload",
+                            "propertyType": "msg",
+                            "reduceRight": false,
+                            "type": "join",
+                            "wires": "933bd2f642873790",
+                            "x": 650,
+                            "y": 100,
+                            "z": "5813b63f70690303"
+                        },
+                        {
+                            "id": "8ca660db8c891c1f",
+                            "name": "NEEDS CONFIGURATION WITH OW ENDPOINT",
+                            "type": "comment",
+                            "x": 470,
+                            "y": 160,
+                            "z": "5813b63f70690303"
+                        },
+                        {
+                            "func": "//msg.action=msg.payload.value.action;\n\nmsg.url=msg.payload.value.url;\nmsg.creds=msg.payload.value.creds;\n\nmsg.oldpayload=msg.payload;\nmsg.payload={};\nmsg.payload=msg.oldpayload.value.values;\n\nmsg.headers={};\nvar auth = 'Basic ' + new Buffer(msg.creds).toString('base64');\nmsg.headers = {\n    \"Authorization\": auth\n}\nreturn msg;",
+                            "id": "ce0ad53cb5c6ef33",
+                            "noerr": 0,
+                            "outputs": 1,
+                            "type": "function",
+                            "wires": "770ef202c7ccecb6",
+                            "x": 160,
+                            "y": 100,
+                            "z": "5813b63f70690303"
+                        },
+                        {
+                            "func": "msg.newpayload=msg.payload;\nmsg.payload=[];\nmsg.payload=msg.oldpayload;\nmsg.payload.value=msg.newpayload;\n\nmsg.payload.value.myvar=env.get('setsplit');\nreturn msg;",
+                            "id": "933bd2f642873790",
+                            "noerr": 0,
+                            "outputs": 1,
+                            "type": "function",
+                            "x": 800,
+                            "y": 100,
+                            "z": "5813b63f70690303"
+                        },
+                        {
+                            "active": true,
+                            "complete": "false",
+                            "console": false,
+                            "id": "cb539c8dcce538f8",
+                            "statusType": "auto",
+                            "tosidebar": true,
+                            "tostatus": false,
+                            "type": "debug",
+                            "x": 420,
+                            "y": 240,
+                            "z": "5813b63f70690303"
+                        },
+                        {
+                            "authType": "basic",
+                            "id": "4b0793e93fa7e4c7",
+                            "method": "POST",
+                            "paytoqs": "ignore",
+                            "persist": false,
+                            "ret": "obj",
+                            "senderr": false,
+                            "tls": "1f13a2c0346f82c6",
+                            "type": "http request",
+                            "wires": "fef7008cea92f52d",
+                            "x": 510,
+                            "y": 100,
+                            "z": "5813b63f70690303"
+                        },
+                        {
+                            "id": "1dc64fe5f2cdee5b",
+                            "info": "Affinity annotator node",
+                            "name": "README",
+                            "type": "comment",
+                            "x": 500,
+                            "y": 200,
+                            "z": "edfbba7dd979ecf1"
+                        }
+                    ]
+                },
+                "hasNode": {
+                    "@id": "flow:e98bf48d7a877d25/node/da1cd4a2ba26b2ce",
+                    "@type": "SubFlow",
+                    "hasNodeOutput": "flow:e98bf48d7a877d25/interface/729306c6b37c0ec0",
+                    "hasTemplate": "flow:5813b63f70690303"
+                },
+                "hasSoftwareArtifact": {
+                    "@id": "registry.apps.ocphub.physics-faas.eu/custom/george:103",
+                    "@type": "SoftwareImage"
+                },
+                "label": "splitjoinFunction"
+            },
+            {
+                "@id": "flow:d616400b75eac2fb",
+                "@type": "Flow",
+                "actionName": [
+                    "HelloFunctionV2",
+                    "Hello_DMS",
+                    "splitjoinFunction"
+                ],
+                "definesInterface": [
+                    {
+                        "@id": "flow:d616400b75eac2fb/interface/8810a3bc8cb78ac2.out0",
+                        "@type": "MessageWire",
+                        "isNodeInputOf": [
+                            "function:7418d9069a25f945",
+                            "function:65a2fd77d5dd173b"
+                        ],
+                        "isNodeOutputOf": "flow:d616400b75eac2fb/node/8810a3bc8cb78ac2"
+                    },
+                    {
+                        "@id": "flow:d616400b75eac2fb/interface/9ba268dcb3efb932.out0",
+                        "@type": "MessageWire",
+                        "isNodeOutputOf": "flow:d616400b75eac2fb/node/9ba268dcb3efb932"
+                    },
+                    {
+                        "@id": "flow:d616400b75eac2fb/interface/e05334d691cc7c32.out0",
+                        "@type": "MessageWire",
+                        "isNodeOutputOf": "flow:d616400b75eac2fb/node/e05334d691cc7c32"
+                    },
+                    {
+                        "@id": "flow:d616400b75eac2fb/interface/7418d9069a25f945.out0",
+                        "@type": "MessageWire",
+                        "isNodeInputOf": "flow:d616400b75eac2fb/node/9ba268dcb3efb932",
+                        "isNodeOutputOf": "function:7418d9069a25f945"
+                    },
+                    {
+                        "@id": "flow:d616400b75eac2fb/interface/65a2fd77d5dd173b.out0",
+                        "@type": "MessageWire",
+                        "isNodeInputOf": "flow:d616400b75eac2fb/node/e05334d691cc7c32",
+                        "isNodeOutputOf": "function:65a2fd77d5dd173b"
+                    },
+                    {
+                        "@id": "flow:d616400b75eac2fb/interface/b2131f1991cfb131.out0",
+                        "@type": "MessageWire",
+                        "isNodeInputOf": "flow:d616400b75eac2fb/node/8810a3bc8cb78ac2",
+                        "isNodeOutputOf": "function:b2131f1991cfb131"
+                    },
+                    {
+                        "@id": "flow:d616400b75eac2fb/interface/27c3b0af40ccb4e0.out0",
+                        "@type": "MessageWire",
+                        "isNodeInputOf": "flow:d616400b75eac2fb/node/d01b33ba9a399455",
+                        "isNodeOutputOf": "function:27c3b0af40ccb4e0"
+                    },
+                    {
+                        "@id": "flow:d616400b75eac2fb/interface/7d194c10.33b51c.out0",
+                        "@type": "MessageWire",
+                        "isNodeInputOf": "function:cad17b04.a2b4d8",
+                        "isNodeOutputOf": "function:7d194c10.33b51c"
+                    },
+                    {
+                        "@id": "flow:d616400b75eac2fb/interface/4be3f205.3e8dc4.out0",
+                        "@type": "MessageWire",
+                        "isNodeOutputOf": "function:4be3f205.3e8dc4"
+                    },
+                    {
+                        "@id": "flow:d616400b75eac2fb/interface/f2b7c4e4.a24c3.out0",
+                        "@type": "MessageWire",
+                        "isNodeOutputOf": "function:f2b7c4e4.a24c3"
+                    },
+                    {
+                        "@id": "flow:d616400b75eac2fb/interface/1bbc6fa0.4879c.out0",
+                        "@type": "MessageWire",
+                        "isNodeOutputOf": "function:1bbc6fa0.4879c"
+                    },
+                    {
+                        "@id": "flow:d616400b75eac2fb/interface/1bbc6fa0.4879c.out1",
+                        "@type": "MessageWire",
+                        "isNodeInputOf": "function:f2b7c4e4.a24c3",
+                        "isNodeOutputOf": "function:1bbc6fa0.4879c"
+                    },
+                    {
+                        "@id": "flow:3352c7dddc9aad6d/interface/b9c86339cffd54ea",
+                        "@type": "REST",
+                        "hasHttpMethod": "USE",
+                        "isNodeInputOf": "function:27c3b0af40ccb4e0"
+                    },
+                    {
+                        "@id": "flow:789351ac.02c9d/interface/471b3d64.265894",
+                        "@type": "REST",
+                        "hasHttpMethod": "GET"
+                    }
+                ],
+                "dependentAppID": "this",
+                "executorMode": "Service",
+                "hasFunction": [
+                    {
+                        "@id": "function:7418d9069a25f945",
+                        "@type": "Function",
+                        "funcCode": "msg.payload={};\nmsg.payload.value={};\nmsg.payload.value.name='george';\nreturn msg;"
+                    },
+                    {
+                        "@id": "function:65a2fd77d5dd173b",
+                        "@type": "Function",
+                        "funcCode": "msg.payload={};\nmsg.payload.value={};\nmsg.payload.value={\"values\":[\n    {'name':'george'},\n    {'name':'maria'},\n    {'name':'akis'},\n    {'name':'alex'}\n    ], \n    \"creds\":\"17dz39c2-62f7-3ed6-9b88-925ce4l3c104:459bO3xUERmNZ9v2BLU1dRYFpXlPkccOFqm31LdAsMgRU4VrNZ9dhORZGuLJGIqF\",\n    \"url\":\"https://openwhisk.apps.ocphub.physics-faas.eu/api/v1/namespaces/_/actions/HelloFunctionV2_b1d8d498-4197-420a-9ef8-56fec0c6d4ef.json?blocking=true\"\n};\n\n//msg.url='https://openwhisk.apps.ocphub.physics-faas.eu/api/v1/namespaces/_/actions/HelloFunctionV2_b1d8d498-4197-420a-9ef8-56fec0c6d4ef.json?blocking=true';\n\nreturn msg;"
+                    },
+                    {
+                        "@id": "function:b2131f1991cfb131",
+                        "@type": "Function",
+                        "funcCode": "msg.payload={};\nmsg.payload.value={};\nmsg.payload.value.name='george';\nreturn msg;"
+                    },
+                    {
+                        "@id": "function:60d351e91c4f1f19",
+                        "@type": "Function",
+                        "funcCode": "msg.url=env.get('OWendpoint');\nmsg.headers={};\nvar auth = 'Basic ' + new Buffer(env.get('token')).toString('base64');\nmsg.headers = {\n    \"Authorization\": auth\n}\n\nreturn msg;",
+                        "hasNodeOutput": "flow:3352c7dddc9aad6d/interface/b9c86339cffd54ea",
+                        "label": "GET ENV OF ENDPOINT AND KEYS"
+                    },
+                    {
+                        "@id": "function:27c3b0af40ccb4e0",
+                        "@type": "Function",
+                        "funcCode": "msg.headers={};\nmsg.url=env.get('')+'api/v1/namespaces/_/activations/';\nreturn msg;",
+                        "label": "change url"
+                    },
+                    {
+                        "@id": "function:09223c13e462b3ba",
+                        "@type": "Function",
+                        "funcCode": "const propnamevar=env.get('actionName')+'_OW_endpoint';\n//+1 for creds user:key\n\nvar globalenv = global.get(\"env2\");//needs to be set in the settings file, globalContext env2:process.env\nmsg.payload4=globalenv[propnamevar];\n\nreturn msg;"
+                    },
+                    {
+                        "@id": "function:7d194c10.33b51c",
+                        "@type": "Function",
+                        "funcCode": "\nif (msg.hasOwnProperty('maxAttempts')){\n    msg.iterations=msg.maxAttempts;\n} else {\n    msg.iterations=env.get('maxAttempts');\n}\n//needed to reset the iterations after function chaining\nmsg.defaultAttempts=msg.iterations;\n\nif (msg.hasOwnProperty('pollPeriod')){\n    \n} else {\n    msg.pollPeriod=env.get('pollPeriod');\n}\n\nif (msg.hasOwnProperty('method')){\n    \n} else {\n    msg.method=env.get('method');\n}\n\nif (msg.hasOwnProperty('url')){\n    \n} else {\n    msg.url=env.get('url');\n}\n\nif (msg.hasOwnProperty('retryCode')){\n    \n} else {\n    msg.retryCode=env.get('retryCode');\n}\n\nif (msg.hasOwnProperty('acceptCode')){\n    \n} else {\n    msg.acceptCode=env.get('acceptCode');\n}\n\nif (msg.hasOwnProperty('creds')){\n    \n} else {\n    msg.creds=env.get('creds');\n}\n\nif (msg.hasOwnProperty('functionChain')){\n    \n} else {\n    msg.functionChain=env.get('functionChain');\n}\n\nif (msg.hasOwnProperty('inputData')){\n    if (msg.inputData.hasOwnProperty('creds')){\n        msg.creds=msg.inputData.creds;\n    }\n}\n\n\n\nmsg.delay=msg.pollPeriod;\nmsg.start=Date.now();\nreturn msg;",
+                        "label": "defaults+activation id"
+                    },
+                    {
+                        "@id": "function:4be3f205.3e8dc4",
+                        "@type": "Function",
+                        "funcCode": "msg.iterations=msg.iterations-1;\nreturn msg;",
+                        "label": "iterations--"
+                    },
+                    {
+                        "@id": "function:cad17b04.a2b4d8",
+                        "@type": "Function",
+                        "funcCode": "msg.headers={};\nvar auth = 'Basic ' + new Buffer(msg.creds).toString('base64');\nmsg.headers = {\n    \"Authorization\": auth\n}\n\nreturn msg;",
+                        "hasNodeOutput": "flow:789351ac.02c9d/interface/471b3d64.265894",
+                        "label": "add auth"
+                    },
+                    {
+                        "@id": "function:f2b7c4e4.a24c3",
+                        "@type": "Function",
+                        "funcCode": "\n\nmsg.url=msg.payload.response.result.newActivationIDURL;\nmsg.iterations=msg.defaultAttempts+1;\nconsole.log('IN ADAPTATION TO ACTIVATION',msg.url);\nreturn msg;",
+                        "label": "adapt to new activation"
+                    },
+                    {
+                        "@id": "function:1bbc6fa0.4879c",
+                        "@type": "Function",
+                        "funcCode": "console.log('IN COMPARE COMPLETION',msg.payload.response);\nif (msg.payload.response.result.status==='Completed'){\n    return [msg,null];\n} else {\n    return [null,msg];\n}\n",
+                        "label": "compare completion"
+                    }
+                ],
+                "hasJSONDescription": {
+                    "artifact": "registry.apps.ocphub.physics-faas.eu/custom/george:99",
+                    "artifactType": "image",
+                    "id": "d616400b75eac2fb",
+                    "label": "Choreographer Service",
+                    "nodes": [
+                        {
+                            "disabled": false,
+                            "id": "d616400b75eac2fb",
+                            "label": "Choreographer Service",
+                            "type": "tab"
+                        },
+                        {
+                            "env": [
+                                {
+                                    "name": "OWendpoint",
+                                    "type": "str"
+                                },
+                                {
+                                    "name": "token",
+                                    "type": "cred"
+                                },
+                                {
+                                    "name": "actionName",
+                                    "type": "str",
+                                    "value": "HelloFunctionV2"
+                                },
+                                {
+                                    "name": "method",
+                                    "type": "str"
+                                }
+                            ],
+                            "id": "8810a3bc8cb78ac2",
+                            "name": "HelloFunctionV2",
+                            "subflow": "3352c7dddc9aad6d",
+                            "type": "subflow:3352c7dddc9aad6d",
+                            "wires": [
+                                "e7f535ba18f5292b",
+                                "7418d9069a25f945",
+                                "65a2fd77d5dd173b"
+                            ],
+                            "x": 440,
+                            "y": 460,
+                            "z": "d616400b75eac2fb"
+                        },
+                        {
+                            "env": [
+                                {
+                                    "name": "OWendpoint",
+                                    "type": "env"
+                                },
+                                {
+                                    "name": "token",
+                                    "type": "cred"
+                                },
+                                {
+                                    "name": "actionName",
+                                    "type": "str",
+                                    "value": "Hello_DMS"
+                                },
+                                {
+                                    "name": "method",
+                                    "type": "str"
+                                }
+                            ],
+                            "id": "9ba268dcb3efb932",
+                            "name": "dms",
+                            "subflow": "3352c7dddc9aad6d",
+                            "type": "subflow:3352c7dddc9aad6d",
+                            "wires": "71b69c0824b8d1a5",
+                            "x": 850,
+                            "y": 360,
+                            "z": "d616400b75eac2fb"
+                        },
+                        {
+                            "env": [
+                                {
+                                    "name": "OWendpoint",
+                                    "type": "env"
+                                },
+                                {
+                                    "name": "token",
+                                    "type": "cred"
+                                },
+                                {
+                                    "name": "actionName",
+                                    "type": "str",
+                                    "value": "splitjoinFunction"
+                                },
+                                {
+                                    "name": "dependentAppID",
+                                    "type": "str",
+                                    "value": "this"
+                                },
+                                {
+                                    "name": "method",
+                                    "type": "str"
+                                }
+                            ],
+                            "id": "e05334d691cc7c32",
+                            "name": "sj",
+                            "subflow": "3352c7dddc9aad6d",
+                            "type": "subflow:3352c7dddc9aad6d",
+                            "wires": "4d3d411586a1b3a6",
+                            "x": 850,
+                            "y": 540,
+                            "z": "d616400b75eac2fb"
+                        },
+                        {
+                            "id": "66611dafc701f137",
+                            "info": "All invoked actions in this flow should have been included in the defined application graph.\n\nTheir actual deployment can be performed in the same or other OW clusters. \n\nThis flow should be executed as a service or as a OW action. In both cases we need to find the \ndetails of the OW environment for each flow, as decided by WP4, as environment variables in the\ncontainer used to run this flow.\n\nWe have maintained the UI configuration of the OW action node, so that we can use this flow also in\na typical nodered environment. However the retrieved information from the environment variables prevail\nover the set ones in the UI.",
+                            "name": "INFO",
+                            "type": "comment",
+                            "x": 390,
+                            "y": 300,
+                            "z": "d616400b75eac2fb"
+                        },
+                        {
+                            "id": "6b7eef155fe168bc",
+                            "once": false,
+                            "onceDelay": 0.1,
+                            "payload": "{}",
+                            "payloadType": "json",
+                            "props": [
+                                {
+                                    "p": "payload"
+                                },
+                                {
+                                    "p": "topic",
+                                    "vt": "str"
+                                }
+                            ],
+                            "type": "inject",
+                            "wires": "b2131f1991cfb131",
+                            "x": 110,
+                            "y": 460,
+                            "z": "d616400b75eac2fb"
+                        },
+                        {
+                            "active": true,
+                            "complete": "true",
+                            "console": false,
+                            "id": "e7f535ba18f5292b",
+                            "statusType": "auto",
+                            "targetType": "full",
+                            "tosidebar": true,
+                            "tostatus": false,
+                            "type": "debug",
+                            "x": 450,
+                            "y": 360,
+                            "z": "d616400b75eac2fb"
+                        },
+                        {
+                            "id": "ac02549b1db0d74c",
+                            "info": "check how to pass info, maybe as annotations?\n\nhandle UI inputs as second after environment\n\n\n\n",
+                            "name": "FIX",
+                            "type": "comment",
+                            "x": 560,
+                            "y": 240,
+                            "z": "d616400b75eac2fb"
+                        },
+                        {
+                            "func": "msg.payload={};\nmsg.payload.value={};\nmsg.payload.value.name='george';\nreturn msg;",
+                            "id": "7418d9069a25f945",
+                            "noerr": 0,
+                            "outputs": 1,
+                            "type": "function",
+                            "wires": "9ba268dcb3efb932",
+                            "x": 660,
+                            "y": 360,
+                            "z": "d616400b75eac2fb"
+                        },
+                        {
+                            "func": "msg.payload={};\nmsg.payload.value={};\nmsg.payload.value={\"values\":[\n    {'name':'george'},\n    {'name':'maria'},\n    {'name':'akis'},\n    {'name':'alex'}\n    ], \n    \"creds\":\"17dz39c2-62f7-3ed6-9b88-925ce4l3c104:459bO3xUERmNZ9v2BLU1dRYFpXlPkccOFqm31LdAsMgRU4VrNZ9dhORZGuLJGIqF\",\n    \"url\":\"https://openwhisk.apps.ocphub.physics-faas.eu/api/v1/namespaces/_/actions/HelloFunctionV2_b1d8d498-4197-420a-9ef8-56fec0c6d4ef.json?blocking=true\"\n};\n\n//msg.url='https://openwhisk.apps.ocphub.physics-faas.eu/api/v1/namespaces/_/actions/HelloFunctionV2_b1d8d498-4197-420a-9ef8-56fec0c6d4ef.json?blocking=true';\n\nreturn msg;",
+                            "id": "65a2fd77d5dd173b",
+                            "noerr": 0,
+                            "outputs": 1,
+                            "type": "function",
+                            "wires": "e05334d691cc7c32",
+                            "x": 660,
+                            "y": 540,
+                            "z": "d616400b75eac2fb"
+                        },
+                        {
+                            "id": "079bfcdcd66f41ae",
+                            "info": "THE ORCHESTRATING FLOW IS ABLE TO BE EXECUTED ONLY AS A SERVICE DUE TO THE FACT THAT ENV VARIABLES CAN NOT BE PASSED IN OW ACTIONS.",
+                            "name": "LIMITATION",
+                            "type": "comment",
+                            "x": 310,
+                            "y": 160,
+                            "z": "d616400b75eac2fb"
+                        },
+                        {
+                            "env": [
+                                {
+                                    "name": "Executor Mode",
+                                    "type": "str",
+                                    "value": "Service"
+                                },
+                                {
+                                    "name": "isChoreographer",
+                                    "type": "str",
+                                    "value": "true"
+                                }
+                            ],
+                            "id": "5d32ba1c269db8e0",
+                            "subflow": "694cb784968dc0b9",
+                            "type": "subflow:694cb784968dc0b9",
+                            "x": 320,
+                            "y": 200,
+                            "z": "d616400b75eac2fb"
+                        },
+                        {
+                            "active": true,
+                            "complete": "false",
+                            "console": false,
+                            "id": "4d3d411586a1b3a6",
+                            "statusType": "auto",
+                            "tosidebar": true,
+                            "tostatus": false,
+                            "type": "debug",
+                            "x": 1030,
+                            "y": 540,
+                            "z": "d616400b75eac2fb"
+                        },
+                        {
+                            "active": true,
+                            "complete": "false",
+                            "console": false,
+                            "id": "71b69c0824b8d1a5",
+                            "statusType": "auto",
+                            "tosidebar": true,
+                            "tostatus": false,
+                            "type": "debug",
+                            "x": 1050,
+                            "y": 360,
+                            "z": "d616400b75eac2fb"
+                        },
+                        {
+                            "id": "f3871cad3d0f0969",
+                            "subflow": "789351ac.02c9d",
+                            "type": "subflow:789351ac.02c9d",
+                            "x": 450,
+                            "y": 820,
+                            "z": "d616400b75eac2fb"
+                        },
+                        {
+                            "func": "msg.payload={};\nmsg.payload.value={};\nmsg.payload.value.name='george';\nreturn msg;",
+                            "id": "b2131f1991cfb131",
+                            "noerr": 0,
+                            "outputs": 1,
+                            "type": "function",
+                            "wires": "8810a3bc8cb78ac2",
+                            "x": 260,
+                            "y": 460,
+                            "z": "d616400b75eac2fb"
+                        },
+                        {
+                            "id": "a80b2fa1299e3bb8",
+                            "type": "tls-config",
+                            "verifyservercert": true,
+                            "z": "3352c7dddc9aad6d"
+                        },
+                        {
+                            "id": "b9c86339cffd54ea",
+                            "method": "use",
+                            "paytoqs": "ignore",
+                            "persist": false,
+                            "ret": "obj",
+                            "tls": "a80b2fa1299e3bb8",
+                            "type": "http request",
+                            "wires": "27c3b0af40ccb4e0",
+                            "x": 370,
+                            "y": 180,
+                            "z": "3352c7dddc9aad6d"
+                        },
+                        {
+                            "func": "msg.url=env.get('OWendpoint');\nmsg.headers={};\nvar auth = 'Basic ' + new Buffer(env.get('token')).toString('base64');\nmsg.headers = {\n    \"Authorization\": auth\n}\n\nreturn msg;",
+                            "id": "60d351e91c4f1f19",
+                            "name": "GET ENV OF ENDPOINT AND KEYS",
+                            "noerr": 0,
+                            "outputs": 1,
+                            "type": "function",
+                            "wires": "b9c86339cffd54ea",
+                            "x": 350,
+                            "y": 120,
+                            "z": "3352c7dddc9aad6d"
+                        },
+                        {
+                            "id": "d01b33ba9a399455",
+                            "type": "subflow:789351ac.02c9d",
+                            "x": 390,
+                            "y": 300,
+                            "z": "3352c7dddc9aad6d"
+                        },
+                        {
+                            "func": "msg.headers={};\nmsg.url=env.get('')+'api/v1/namespaces/_/activations/';\nreturn msg;",
+                            "id": "27c3b0af40ccb4e0",
+                            "name": "change url",
+                            "noerr": 0,
+                            "outputs": 1,
+                            "type": "function",
+                            "wires": "d01b33ba9a399455",
+                            "x": 370,
+                            "y": 240,
+                            "z": "3352c7dddc9aad6d"
+                        },
+                        {
+                            "func": "const propnamevar=env.get('actionName')+'_OW_endpoint';\n//+1 for creds user:key\n\nvar globalenv = global.get(\"env2\");//needs to be set in the settings file, globalContext env2:process.env\nmsg.payload4=globalenv[propnamevar];\n\nreturn msg;",
+                            "id": "09223c13e462b3ba",
+                            "noerr": 0,
+                            "outputs": 1,
+                            "type": "function",
+                            "x": 260,
+                            "y": 80,
+                            "z": "3352c7dddc9aad6d"
+                        },
+                        {
+                            "id": "a80b2fa1299e3bb8",
+                            "type": "tls-config",
+                            "verifyservercert": true,
+                            "z": "3352c7dddc9aad6d"
+                        },
+                        {
+                            "id": "b9c86339cffd54ea",
+                            "method": "use",
+                            "paytoqs": "ignore",
+                            "persist": false,
+                            "ret": "obj",
+                            "tls": "a80b2fa1299e3bb8",
+                            "type": "http request",
+                            "wires": "27c3b0af40ccb4e0",
+                            "x": 370,
+                            "y": 180,
+                            "z": "3352c7dddc9aad6d"
+                        },
+                        {
+                            "func": "msg.url=env.get('OWendpoint');\nmsg.headers={};\nvar auth = 'Basic ' + new Buffer(env.get('token')).toString('base64');\nmsg.headers = {\n    \"Authorization\": auth\n}\n\nreturn msg;",
+                            "id": "60d351e91c4f1f19",
+                            "name": "GET ENV OF ENDPOINT AND KEYS",
+                            "noerr": 0,
+                            "outputs": 1,
+                            "type": "function",
+                            "wires": "b9c86339cffd54ea",
+                            "x": 350,
+                            "y": 120,
+                            "z": "3352c7dddc9aad6d"
+                        },
+                        {
+                            "id": "d01b33ba9a399455",
+                            "type": "subflow:789351ac.02c9d",
+                            "x": 390,
+                            "y": 300,
+                            "z": "3352c7dddc9aad6d"
+                        },
+                        {
+                            "func": "msg.headers={};\nmsg.url=env.get('')+'api/v1/namespaces/_/activations/';\nreturn msg;",
+                            "id": "27c3b0af40ccb4e0",
+                            "name": "change url",
+                            "noerr": 0,
+                            "outputs": 1,
+                            "type": "function",
+                            "wires": "d01b33ba9a399455",
+                            "x": 370,
+                            "y": 240,
+                            "z": "3352c7dddc9aad6d"
+                        },
+                        {
+                            "func": "const propnamevar=env.get('actionName')+'_OW_endpoint';\n//+1 for creds user:key\n\nvar globalenv = global.get(\"env2\");//needs to be set in the settings file, globalContext env2:process.env\nmsg.payload4=globalenv[propnamevar];\n\nreturn msg;",
+                            "id": "09223c13e462b3ba",
+                            "noerr": 0,
+                            "outputs": 1,
+                            "type": "function",
+                            "x": 260,
+                            "y": 80,
+                            "z": "3352c7dddc9aad6d"
+                        },
+                        {
+                            "id": "a80b2fa1299e3bb8",
+                            "type": "tls-config",
+                            "verifyservercert": true,
+                            "z": "3352c7dddc9aad6d"
+                        },
+                        {
+                            "id": "b9c86339cffd54ea",
+                            "method": "use",
+                            "paytoqs": "ignore",
+                            "persist": false,
+                            "ret": "obj",
+                            "tls": "a80b2fa1299e3bb8",
+                            "type": "http request",
+                            "wires": "27c3b0af40ccb4e0",
+                            "x": 370,
+                            "y": 180,
+                            "z": "3352c7dddc9aad6d"
+                        },
+                        {
+                            "func": "msg.url=env.get('OWendpoint');\nmsg.headers={};\nvar auth = 'Basic ' + new Buffer(env.get('token')).toString('base64');\nmsg.headers = {\n    \"Authorization\": auth\n}\n\nreturn msg;",
+                            "id": "60d351e91c4f1f19",
+                            "name": "GET ENV OF ENDPOINT AND KEYS",
+                            "noerr": 0,
+                            "outputs": 1,
+                            "type": "function",
+                            "wires": "b9c86339cffd54ea",
+                            "x": 350,
+                            "y": 120,
+                            "z": "3352c7dddc9aad6d"
+                        },
+                        {
+                            "id": "d01b33ba9a399455",
+                            "subflow": "789351ac.02c9d",
+                            "type": "subflow:789351ac.02c9d",
+                            "x": 390,
+                            "y": 300,
+                            "z": "3352c7dddc9aad6d"
+                        },
+                        {
+                            "func": "msg.headers={};\nmsg.url=env.get('')+'api/v1/namespaces/_/activations/';\nreturn msg;",
+                            "id": "27c3b0af40ccb4e0",
+                            "name": "change url",
+                            "noerr": 0,
+                            "outputs": 1,
+                            "type": "function",
+                            "wires": "d01b33ba9a399455",
+                            "x": 370,
+                            "y": 240,
+                            "z": "3352c7dddc9aad6d"
+                        },
+                        {
+                            "func": "const propnamevar=env.get('actionName')+'_OW_endpoint';\n//+1 for creds user:key\n\nvar globalenv = global.get(\"env2\");//needs to be set in the settings file, globalContext env2:process.env\nmsg.payload4=globalenv[propnamevar];\n\nreturn msg;",
+                            "id": "09223c13e462b3ba",
+                            "noerr": 0,
+                            "outputs": 1,
+                            "type": "function",
+                            "x": 260,
+                            "y": 80,
+                            "z": "3352c7dddc9aad6d"
+                        },
+                        {
+                            "id": "eeb5210da7efebd3",
+                            "info": "The Executor Mode Annotator is a mean to describe to the PHYSICS Environment the execution mode of a given flow. There are three options\n1) Service mode: the selected flow will be deployed as a Node-RED service, thus always running\n2) Node-RED Function mode: the selected flow will be wrapped around a Node-RED runtime and registered to a target Openwhisk platform, where it will be executed as a Node-RED runtime function\n3) Native Sequence: the included functions will be packaged and registered individually at the Openwhisk platform, while their links (workflow) will be translated to the native Openwhisk sequence format and registered to the Openwhisk platform. This mode at the moment is limited to pure function nodes of Node-RED, while the workflow description is limited by the sequence abilities of Openwhisk. ",
+                            "name": "Instructions",
+                            "type": "comment",
+                            "x": 560,
+                            "y": 280,
+                            "z": "694cb784968dc0b9"
+                        },
+                        {
+                            "id": "2934f390.711324",
+                            "type": "tls-config",
+                            "verifyservercert": false,
+                            "z": "789351ac.02c9d"
+                        },
+                        {
+                            "func": "\nif (msg.hasOwnProperty('maxAttempts')){\n    msg.iterations=msg.maxAttempts;\n} else {\n    msg.iterations=env.get('maxAttempts');\n}\n//needed to reset the iterations after function chaining\nmsg.defaultAttempts=msg.iterations;\n\nif (msg.hasOwnProperty('pollPeriod')){\n    \n} else {\n    msg.pollPeriod=env.get('pollPeriod');\n}\n\nif (msg.hasOwnProperty('method')){\n    \n} else {\n    msg.method=env.get('method');\n}\n\nif (msg.hasOwnProperty('url')){\n    \n} else {\n    msg.url=env.get('url');\n}\n\nif (msg.hasOwnProperty('retryCode')){\n    \n} else {\n    msg.retryCode=env.get('retryCode');\n}\n\nif (msg.hasOwnProperty('acceptCode')){\n    \n} else {\n    msg.acceptCode=env.get('acceptCode');\n}\n\nif (msg.hasOwnProperty('creds')){\n    \n} else {\n    msg.creds=env.get('creds');\n}\n\nif (msg.hasOwnProperty('functionChain')){\n    \n} else {\n    msg.functionChain=env.get('functionChain');\n}\n\nif (msg.hasOwnProperty('inputData')){\n    if (msg.inputData.hasOwnProperty('creds')){\n        msg.creds=msg.inputData.creds;\n    }\n}\n\n\n\nmsg.delay=msg.pollPeriod;\nmsg.start=Date.now();\nreturn msg;",
+                            "id": "7d194c10.33b51c",
+                            "name": "defaults+activation id",
+                            "noerr": 0,
+                            "outputs": 1,
+                            "type": "function",
+                            "wires": "cad17b04.a2b4d8",
+                            "x": 200,
+                            "y": 160,
+                            "z": "789351ac.02c9d"
+                        },
+                        {
+                            "func": "msg.iterations=msg.iterations-1;\nreturn msg;",
+                            "id": "4be3f205.3e8dc4",
+                            "name": "iterations--",
+                            "noerr": 0,
+                            "outputs": 1,
+                            "type": "function",
+                            "wires": [
+                                "c2cf68b7.263d4",
+                                "d8305759.866988"
+                            ],
+                            "x": 350,
+                            "y": 300,
+                            "z": "789351ac.02c9d"
+                        },
+                        {
+                            "checkall": "true",
+                            "id": "c2cf68b7.263d4",
+                            "name": "if iterations finished",
+                            "outputs": 2,
+                            "property": "iterations",
+                            "propertyType": "msg",
+                            "repair": false,
+                            "rules": [
+                                {
+                                    "t": "gte",
+                                    "v": "1",
+                                    "vt": "num"
+                                },
+                                {
+                                    "t": "lt",
+                                    "v": "1",
+                                    "vt": "num"
+                                }
+                            ],
+                            "type": "switch",
+                            "wires": "cad17b04.a2b4d8",
+                            "x": 550,
+                            "y": 300,
+                            "z": "789351ac.02c9d"
+                        },
+                        {
+                            "id": "76299695.812bd8",
+                            "name": "SUCCESS",
+                            "type": "comment",
+                            "x": 1100,
+                            "y": 60,
+                            "z": "789351ac.02c9d"
+                        },
+                        {
+                            "id": "48093072.b17a6",
+                            "name": "FINAL FAIL",
+                            "type": "comment",
+                            "x": 890,
+                            "y": 360,
+                            "z": "789351ac.02c9d"
+                        },
+                        {
+                            "drop": false,
+                            "id": "d5960f2f.2e9448",
+                            "name": "delay",
+                            "nbRateUnits": "1",
+                            "outputs": 1,
+                            "pauseType": "delayv",
+                            "randomFirst": "1",
+                            "randomLast": "5",
+                            "randomUnits": "seconds",
+                            "rate": "1",
+                            "rateUnits": "second",
+                            "timeout": "5",
+                            "timeoutUnits": "seconds",
+                            "type": "delay",
+                            "wires": "4be3f205.3e8dc4",
+                            "x": 170,
+                            "y": 300,
+                            "z": "789351ac.02c9d"
+                        },
+                        {
+                            "id": "471b3d64.265894",
+                            "method": "GET",
+                            "paytoqs": "ignore",
+                            "persist": false,
+                            "ret": "obj",
+                            "tls": "2934f390.711324",
+                            "type": "http request",
+                            "wires": "8694180b.ec1c68",
+                            "x": 590,
+                            "y": 160,
+                            "z": "789351ac.02c9d"
+                        },
+                        {
+                            "checkall": "true",
+                            "id": "8694180b.ec1c68",
+                            "name": "Status code check",
+                            "outputs": 2,
+                            "property": "statusCode",
+                            "propertyType": "msg",
+                            "repair": false,
+                            "rules": [
+                                {
+                                    "t": "lte",
+                                    "v": "acceptCode",
+                                    "vt": "msg"
+                                },
+                                {
+                                    "t": "gte",
+                                    "v": "retryCode",
+                                    "vt": "msg"
+                                }
+                            ],
+                            "type": "switch",
+                            "wires": [
+                                "f9d0aba7.72382",
+                                "d5960f2f.2e9448"
+                            ],
+                            "x": 810,
+                            "y": 160,
+                            "z": "789351ac.02c9d"
+                        },
+                        {
+                            "id": "ef03414f.ad9d78",
+                            "name": "RETRY FAIL",
+                            "type": "comment",
+                            "x": 890,
+                            "y": 260,
+                            "z": "789351ac.02c9d"
+                        },
+                        {
+                            "active": true,
+                            "complete": "true",
+                            "console": false,
+                            "id": "66bbc0cf.0c62f",
+                            "name": "BEFORE AUTH",
+                            "targetType": "full",
+                            "tosidebar": true,
+                            "tostatus": false,
+                            "type": "debug",
+                            "x": 370,
+                            "y": 100,
+                            "z": "789351ac.02c9d"
+                        },
+                        {
+                            "active": true,
+                            "complete": "url",
+                            "console": true,
+                            "id": "13791c2d.8cea7c",
+                            "name": "URL",
+                            "targetType": "msg",
+                            "tosidebar": true,
+                            "tostatus": false,
+                            "type": "debug",
+                            "x": 580,
+                            "y": 100,
+                            "z": "789351ac.02c9d"
+                        },
+                        {
+                            "func": "msg.headers={};\nvar auth = 'Basic ' + new Buffer(msg.creds).toString('base64');\nmsg.headers = {\n    \"Authorization\": auth\n}\n\nreturn msg;",
+                            "id": "cad17b04.a2b4d8",
+                            "name": "add auth",
+                            "noerr": 0,
+                            "outputs": 1,
+                            "type": "function",
+                            "wires": "471b3d64.265894",
+                            "x": 420,
+                            "y": 160,
+                            "z": "789351ac.02c9d"
+                        },
+                        {
+                            "func": "\n\nmsg.url=msg.payload.response.result.newActivationIDURL;\nmsg.iterations=msg.defaultAttempts+1;\nconsole.log('IN ADAPTATION TO ACTIVATION',msg.url);\nreturn msg;",
+                            "id": "f2b7c4e4.a24c3",
+                            "name": "adapt to new activation",
+                            "noerr": 0,
+                            "outputs": 1,
+                            "type": "function",
+                            "wires": [
+                                "d5960f2f.2e9448",
+                                "ee1dbf44.7368f8"
+                            ],
+                            "x": 1500,
+                            "y": 160,
+                            "z": "789351ac.02c9d"
+                        },
+                        {
+                            "id": "c338e47b.b00ed",
+                            "name": "FUNCTION CHAIN CONTINUATION",
+                            "type": "comment",
+                            "x": 1240,
+                            "y": 240,
+                            "z": "789351ac.02c9d"
+                        },
+                        {
+                            "active": true,
+                            "complete": "payload",
+                            "console": true,
+                            "id": "ee1dbf44.7368f8",
+                            "name": "AFTER CONTINUATION IN Poll2Push",
+                            "targetType": "msg",
+                            "tosidebar": true,
+                            "tostatus": false,
+                            "type": "debug",
+                            "x": 1420,
+                            "y": 300,
+                            "z": "789351ac.02c9d"
+                        },
+                        {
+                            "checkall": "true",
+                            "id": "f9d0aba7.72382",
+                            "name": "is Chain",
+                            "outputs": 2,
+                            "property": "functionChain",
+                            "propertyType": "msg",
+                            "repair": false,
+                            "rules": [
+                                {
+                                    "t": "false"
+                                },
+                                {
+                                    "t": "true"
+                                }
+                            ],
+                            "type": "switch",
+                            "wires": [
+                                "6da1eea0.969368",
+                                "1bbc6fa0.4879c"
+                            ],
+                            "x": 1020,
+                            "y": 160,
+                            "z": "789351ac.02c9d"
+                        },
+                        {
+                            "active": true,
+                            "complete": "payload",
+                            "console": true,
+                            "id": "6da1eea0.969368",
+                            "name": "RESULT STATUS",
+                            "targetType": "msg",
+                            "tosidebar": true,
+                            "tostatus": false,
+                            "type": "debug",
+                            "x": 1100,
+                            "y": 300,
+                            "z": "789351ac.02c9d"
+                        },
+                        {
+                            "active": true,
+                            "complete": "functionChain",
+                            "console": true,
+                            "id": "f20a68d.9711598",
+                            "name": "AFTER CODE CHECK",
+                            "targetType": "msg",
+                            "tosidebar": true,
+                            "tostatus": false,
+                            "type": "debug",
+                            "x": 890,
+                            "y": 100,
+                            "z": "789351ac.02c9d"
+                        },
+                        {
+                            "active": true,
+                            "complete": "payload",
+                            "console": true,
+                            "id": "36905e62.dfad92",
+                            "name": "TOP1",
+                            "targetType": "msg",
+                            "tosidebar": true,
+                            "tostatus": false,
+                            "type": "debug",
+                            "x": 1120,
+                            "y": 100,
+                            "z": "789351ac.02c9d"
+                        },
+                        {
+                            "active": true,
+                            "complete": "payload",
+                            "console": true,
+                            "id": "9610a737.bf275",
+                            "name": "TOP2",
+                            "targetType": "msg",
+                            "tosidebar": true,
+                            "tostatus": false,
+                            "type": "debug",
+                            "x": 1300,
+                            "y": 100,
+                            "z": "789351ac.02c9d"
+                        },
+                        {
+                            "active": true,
+                            "complete": "payload",
+                            "console": true,
+                            "id": "c52af08f.756ee8",
+                            "name": "TOP3",
+                            "targetType": "msg",
+                            "tosidebar": true,
+                            "tostatus": false,
+                            "type": "debug",
+                            "x": 1600,
+                            "y": 100,
+                            "z": "789351ac.02c9d"
+                        },
+                        {
+                            "func": "console.log('IN COMPARE COMPLETION',msg.payload.response);\nif (msg.payload.response.result.status==='Completed'){\n    return [msg,null];\n} else {\n    return [null,msg];\n}\n",
+                            "id": "1bbc6fa0.4879c",
+                            "name": "compare completion",
+                            "noerr": 0,
+                            "outputs": 2,
+                            "type": "function",
+                            "wires": [
+                                "c52af08f.756ee8",
+                                "f2b7c4e4.a24c3"
+                            ],
+                            "x": 1240,
+                            "y": 160,
+                            "z": "789351ac.02c9d"
+                        },
+                        {
+                            "active": true,
+                            "complete": "iterations",
+                            "console": true,
+                            "id": "d8305759.866988",
+                            "name": "URL",
+                            "targetType": "msg",
+                            "tosidebar": true,
+                            "tostatus": false,
+                            "type": "debug",
+                            "x": 500,
+                            "y": 380,
+                            "z": "789351ac.02c9d"
+                        }
+                    ]
+                },
+                "hasNode": [
+                    {
+                        "@id": "flow:d616400b75eac2fb/node/f3871cad3d0f0969",
+                        "@type": "SubFlow",
+                        "hasTemplate": "flow:789351ac.02c9d"
+                    },
+                    {
+                        "@id": "flow:d616400b75eac2fb/node/d01b33ba9a399455",
+                        "@type": "SubFlow",
+                        "hasTemplate": "flow:789351ac.02c9d"
+                    }
+                ],
+                "hasSoftwareArtifact": {
+                    "@id": "registry.apps.ocphub.physics-faas.eu/custom/george:99",
+                    "@type": "SoftwareImage"
+                },
+                "isChoreographer": "true",
+                "label": "Choreographer Service"
+            }
+        ],
+        "isTopLevelComposite": true
+    } 
+]

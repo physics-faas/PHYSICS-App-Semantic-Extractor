@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: semantic-extractor
+  labels:
+    app: semantic-extractor
+spec:
+  selector:
+    matchLabels:
+      app: semantic-extractor
+      version: v1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: semantic-extractor
+        version: v1
+    spec:
+      serviceAccountName: saanyuid
+      securityContext:
+        runAsUser: 0
+      containers:
+      - image: registry.apps.ocphub.physics-faas.eu/wp3/semantic-extractor:latest
+        #command: ['sh', '-c', "sleep 1000"]
+        name: semantic-extractor
+        env:
+        - name: TIME
+          value: {{time}}
+        ports:
+        - containerPort: 1880
+          name: semantic
+      imagePullSecrets:
+        - name: jenkinssecretregistry

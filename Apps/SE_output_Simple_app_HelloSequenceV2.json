@@ -1,0 +1,109 @@
+[
+    {
+        "@context": {
+            "@version": 1.1,
+            "@vocab": "http://www.physics-h2020.eu/physics/1.0.0/",
+            "flow": "http://example_composer.physics.eu/flow/",
+            "function": "http://example_composer.physics.eu/function/",
+            "param": "http://example_parameters_repository.physics.eu/",
+            "app": "http://example_composer.physics.eu/app/",
+            "owner": "http://example_owners_repository.physics.eu/",
+            "proglang": "http://languages.programming.physics.eu/",
+            "js_lib": "http://languages.programming.physics.eu/javascript/lib/"
+        },
+        "@id": "app:Application",
+        "@type": "Application",
+        "hasFlow": {
+            "@id": "flow:104348eeda17061b",
+            "@type": "Flow",
+            "definesInterface": {
+                "@id": "flow:104348eeda17061b/interface/8927b63106cb0dc5.out0",
+                "@type": "MessageWire",
+                "isNodeInputOf": "function:6682aa5726c78fc9",
+                "isNodeOutputOf": "function:8927b63106cb0dc5"
+            },
+            "executorMode": "NativeSequence",
+            "hasFunction": [
+                {
+                    "@id": "function:8927b63106cb0dc5",
+                    "@type": "Function",
+                    "funcCode": "\nmsg.payload=msg.payload.value+' hello';\nreturn msg;",
+                    "label": "hello",
+                    "sizingMB": "512"
+                },
+                {
+                    "@id": "function:6682aa5726c78fc9",
+                    "@type": "Function",
+                    "affinity": "Hello",
+                    "funcCode": "//implies affinity with the other function in the sequence\n\nmsg.payload=msg.payload.value+' world';\nreturn msg;",
+                    "label": "world"
+                }
+            ],
+            "hasJSONDescription": {
+                "artifact": "https://registry.apps.ocphub.physics-faas.eu/custom/george:78",
+                "artifactType": "image",
+                "id": "104348eeda17061b",
+                "label": "Sequence_v2",
+                "nodes": [
+                    {
+                        "disabled": false,
+                        "id": "104348eeda17061b",
+                        "label": "Sequence_v2",
+                        "type": "tab"
+                    },
+                    {
+                        "func": "//@sizingMB=512\nmsg.payload=msg.payload.value+' hello';\nreturn msg;",
+                        "id": "8927b63106cb0dc5",
+                        "name": "hello",
+                        "noerr": 0,
+                        "outputs": 1,
+                        "type": "function",
+                        "wires": "6682aa5726c78fc9",
+                        "x": 490,
+                        "y": 180,
+                        "z": "104348eeda17061b"
+                    },
+                    {
+                        "func": "//implies affinity with the other function in the sequence\n//@affinity=hello\nmsg.payload=msg.payload.value+' world';\nreturn msg;",
+                        "id": "6682aa5726c78fc9",
+                        "name": "world",
+                        "noerr": 0,
+                        "outputs": 1,
+                        "type": "function",
+                        "x": 660,
+                        "y": 180,
+                        "z": "104348eeda17061b"
+                    },
+                    {
+                        "env": {
+                            "name": "Executor Mode",
+                            "type": "str",
+                            "value": "NativeSequence"
+                        },
+                        "id": "fef4a8d9d2730b90",
+                        "subflow": "694cb784968dc0b9",
+                        "type": "subflow:694cb784968dc0b9",
+                        "x": 540,
+                        "y": 300,
+                        "z": "104348eeda17061b"
+                    },
+                    {
+                        "id": "eeb5210da7efebd3",
+                        "info": "The Executor Mode Annotator is a mean to describe to the PHYSICS Environment the execution mode of a given flow. There are three options\n1) Service mode: the selected flow will be deployed as a Node-RED service, thus always running\n2) Node-RED Function mode: the selected flow will be wrapped around a Node-RED runtime and registered to a target Openwhisk platform, where it will be executed as a Node-RED runtime function\n3) Native Sequence: the included functions will be packaged and registered individually at the Openwhisk platform, while their links (workflow) will be translated to the native Openwhisk sequence format and registered to the Openwhisk platform. This mode at the moment is limited to pure function nodes of Node-RED, while the workflow description is limited by the sequence abilities of Openwhisk. ",
+                        "name": "Instructions",
+                        "type": "comment",
+                        "x": 560,
+                        "y": 280,
+                        "z": "694cb784968dc0b9"
+                    }
+                ]
+            },
+            "hasSoftwareArtifact": {
+                "@id": "https://registry.apps.ocphub.physics-faas.eu/custom/george:78",
+                "@type": "SoftwareImage"
+            },
+            "label": "Sequence_v2"
+        },
+        "isTopLevelComposite": true
+    }
+]

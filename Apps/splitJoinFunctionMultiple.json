@@ -1,0 +1,1463 @@
+[
+    {
+        "id": "edfbba7dd979ecf1",
+        "type": "subflow",
+        "name": "Orchestrator Annotator",
+        "info": "\n\nThis is a semantic node to indicate that a flow is intended to make calls towards other actions. This information may be useful for the placement and optimization processes of PHYSICS. For example it can be used to indicate that this flow needs processing for understanding relationships between calls.\n\nThen the flow can be processed to extract info on which action it invokes, based on the post processing of the OW Action Semantic node. For this approach to work, we need to support a static action name assignment during build and registration of an action.",
+        "category": "PHYSICS Annotators",
+        "in": [],
+        "out": [],
+        "env": [
+            {
+                "name": "invokesActions",
+                "type": "bool",
+                "value": "true"
+            },
+            {
+                "name": "actionInvoked",
+                "type": "str",
+                "value": ""
+            }
+        ],
+        "meta": {},
+        "color": "#FFF0F0"
+    },
+    {
+        "id": "a1c3f6871bf719bb",
+        "type": "switch",
+        "z": "edfbba7dd979ecf1",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 290,
+        "y": 160,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "789351ac.02c9d",
+        "type": "subflow",
+        "name": "PollTOPushConverterFC",
+        "info": "This helper node aims at performing synchronous calls for polling in case of an async API (calls that return prior to completion, e.g. in the case of non blocking calls in OW, the initial request is returned with a submission success and an activation id in order to follow up on the result). The main difference from the main PollTOPushConverter is that it supports also function chaining (through a msg.functionChain or UI set boolean parameter).\n\nThe according function should return as a response the following structure:\n- have a result.status field with the 'Completed' (if chain is finished) or 'Continuing' string if the function has handed over to a new function in the chain.\n- have a result.newActivationIDURL field that indicates the updated ID with which to check the follow-up action's status \n\nThe node also can get credentials from the msg.creds field of the input message.\n\nThe remaining operations are similar with the standard PollTOPushConverter. The node does polling to a specific endpoint in order to detect whether the function has successfully finished\n\nThe node has three outputs:\n - Output 1 indicates successful finalization of the API call\n - Output 2 indicates intermediate failure and was added to return the reason for failure\n - Output 3 indicates final failure after max attempts\n\nCurrently the node assumes that in case of failure we get a >=40X return code, but this may not always be the case.\n\nThe node can be configured for the URL (msg.url), the HTTP method (msg.method), the maximum attempts (msg.maxAttempts), polling period (msg.pollPeriod), the status code above which to retry (msg.retryCode) and the status code for deciding the final success (msg.acceptCode). The msg properties override the UI set properties.\n\nGiven that conditions upon which the initial call needs to be polled are highly dependent on the used API, the node assumes that the initial call has been performed a priori.\n\nCredentials for accessing the HTTP endpoint can be set via msg.creds or through the UI (input msg prevails).\n \n",
+        "category": "PHYSICS Helpers",
+        "in": [
+            {
+                "x": 60,
+                "y": 160,
+                "wires": [
+                    {
+                        "id": "7d194c10.33b51c"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 1380,
+                "y": 40,
+                "wires": [
+                    {
+                        "id": "f9d0aba7.72382",
+                        "port": 0
+                    },
+                    {
+                        "id": "1bbc6fa0.4879c",
+                        "port": 0
+                    }
+                ]
+            },
+            {
+                "x": 780,
+                "y": 260,
+                "wires": [
+                    {
+                        "id": "c2cf68b7.263d4",
+                        "port": 0
+                    }
+                ]
+            },
+            {
+                "x": 780,
+                "y": 360,
+                "wires": [
+                    {
+                        "id": "c2cf68b7.263d4",
+                        "port": 1
+                    }
+                ]
+            }
+        ],
+        "env": [
+            {
+                "name": "maxAttempts",
+                "type": "str",
+                "value": "3"
+            },
+            {
+                "name": "pollPeriod",
+                "type": "str",
+                "value": "3000"
+            },
+            {
+                "name": "method",
+                "type": "str",
+                "value": ""
+            },
+            {
+                "name": "url",
+                "type": "str",
+                "value": "http://10.100.59.182:3233/api/v1/namespaces/_/activations/"
+            },
+            {
+                "name": "retryCode",
+                "type": "num",
+                "value": "202"
+            },
+            {
+                "name": "acceptCode",
+                "type": "num",
+                "value": "200"
+            },
+            {
+                "name": "functionChain",
+                "type": "bool",
+                "value": "true"
+            }
+        ],
+        "meta": {},
+        "color": "#b4e8a9"
+    },
+    {
+        "id": "7d194c10.33b51c",
+        "type": "function",
+        "z": "789351ac.02c9d",
+        "name": "defaults+activation id",
+        "func": "\nif (msg.hasOwnProperty('maxAttempts')){\n    msg.iterations=msg.maxAttempts;\n} else {\n    msg.iterations=env.get('maxAttempts');\n}\n//needed to reset the iterations after function chaining\nmsg.defaultAttempts=msg.iterations;\n\nif (msg.hasOwnProperty('pollPeriod')){\n    \n} else {\n    msg.pollPeriod=env.get('pollPeriod');\n}\n\nif (msg.hasOwnProperty('method')){\n    \n} else {\n    msg.method=env.get('method');\n}\n\nif (msg.hasOwnProperty('url')){\n    \n} else {\n    msg.url=env.get('url');\n}\n\nif (msg.hasOwnProperty('retryCode')){\n    \n} else {\n    msg.retryCode=env.get('retryCode');\n}\n\nif (msg.hasOwnProperty('acceptCode')){\n    \n} else {\n    msg.acceptCode=env.get('acceptCode');\n}\n\nif (msg.hasOwnProperty('creds')){\n    \n} else {\n    msg.creds=env.get('creds');\n}\n\nif (msg.hasOwnProperty('functionChain')){\n    \n} else {\n    msg.functionChain=env.get('functionChain');\n}\n\nif (msg.hasOwnProperty('inputData')){\n    if (msg.inputData.hasOwnProperty('creds')){\n        msg.creds=msg.inputData.creds;\n    }\n}\n\n\n\nmsg.delay=msg.pollPeriod;\nmsg.start=Date.now();\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 200,
+        "y": 160,
+        "wires": [
+            [
+                "cad17b04.a2b4d8"
+            ]
+        ]
+    },
+    {
+        "id": "4be3f205.3e8dc4",
+        "type": "function",
+        "z": "789351ac.02c9d",
+        "name": "iterations--",
+        "func": "msg.iterations=msg.iterations-1;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 350,
+        "y": 300,
+        "wires": [
+            [
+                "c2cf68b7.263d4",
+                "d8305759.866988"
+            ]
+        ]
+    },
+    {
+        "id": "c2cf68b7.263d4",
+        "type": "switch",
+        "z": "789351ac.02c9d",
+        "name": "if iterations finished",
+        "property": "iterations",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "gte",
+                "v": "1",
+                "vt": "num"
+            },
+            {
+                "t": "lt",
+                "v": "1",
+                "vt": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 550,
+        "y": 300,
+        "wires": [
+            [
+                "cad17b04.a2b4d8"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "76299695.812bd8",
+        "type": "comment",
+        "z": "789351ac.02c9d",
+        "name": "SUCCESS",
+        "info": "",
+        "x": 1100,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "48093072.b17a6",
+        "type": "comment",
+        "z": "789351ac.02c9d",
+        "name": "FINAL FAIL",
+        "info": "",
+        "x": 890,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "d5960f2f.2e9448",
+        "type": "delay",
+        "z": "789351ac.02c9d",
+        "name": "delay",
+        "pauseType": "delayv",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "outputs": 1,
+        "x": 170,
+        "y": 300,
+        "wires": [
+            [
+                "4be3f205.3e8dc4"
+            ]
+        ]
+    },
+    {
+        "id": "471b3d64.265894",
+        "type": "http request",
+        "z": "789351ac.02c9d",
+        "name": "",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "2934f390.711324",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "x": 590,
+        "y": 160,
+        "wires": [
+            [
+                "8694180b.ec1c68"
+            ]
+        ]
+    },
+    {
+        "id": "8694180b.ec1c68",
+        "type": "switch",
+        "z": "789351ac.02c9d",
+        "name": "Status code check",
+        "property": "statusCode",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "lte",
+                "v": "acceptCode",
+                "vt": "msg"
+            },
+            {
+                "t": "gte",
+                "v": "retryCode",
+                "vt": "msg"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 810,
+        "y": 160,
+        "wires": [
+            [
+                "f9d0aba7.72382"
+            ],
+            [
+                "d5960f2f.2e9448"
+            ]
+        ]
+    },
+    {
+        "id": "ef03414f.ad9d78",
+        "type": "comment",
+        "z": "789351ac.02c9d",
+        "name": "RETRY FAIL",
+        "info": "",
+        "x": 890,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "66bbc0cf.0c62f",
+        "type": "debug",
+        "z": "789351ac.02c9d",
+        "name": "BEFORE AUTH",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 370,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "13791c2d.8cea7c",
+        "type": "debug",
+        "z": "789351ac.02c9d",
+        "name": "URL",
+        "active": true,
+        "tosidebar": true,
+        "console": true,
+        "tostatus": false,
+        "complete": "url",
+        "targetType": "msg",
+        "x": 580,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "cad17b04.a2b4d8",
+        "type": "function",
+        "z": "789351ac.02c9d",
+        "name": "add auth",
+        "func": "msg.headers={};\nvar auth = 'Basic ' + new Buffer(msg.creds).toString('base64');\nmsg.headers = {\n    \"Authorization\": auth\n}\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 420,
+        "y": 160,
+        "wires": [
+            [
+                "471b3d64.265894"
+            ]
+        ]
+    },
+    {
+        "id": "f2b7c4e4.a24c3",
+        "type": "function",
+        "z": "789351ac.02c9d",
+        "name": "adapt to new activation",
+        "func": "\n\nmsg.url=msg.payload.response.result.newActivationIDURL;\nmsg.iterations=msg.defaultAttempts+1;\nconsole.log('IN ADAPTATION TO ACTIVATION',msg.url);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1500,
+        "y": 160,
+        "wires": [
+            [
+                "d5960f2f.2e9448",
+                "ee1dbf44.7368f8"
+            ]
+        ]
+    },
+    {
+        "id": "c338e47b.b00ed",
+        "type": "comment",
+        "z": "789351ac.02c9d",
+        "name": "FUNCTION CHAIN CONTINUATION",
+        "info": "",
+        "x": 1240,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "ee1dbf44.7368f8",
+        "type": "debug",
+        "z": "789351ac.02c9d",
+        "name": "AFTER CONTINUATION IN Poll2Push",
+        "active": true,
+        "tosidebar": true,
+        "console": true,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 1420,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "f9d0aba7.72382",
+        "type": "switch",
+        "z": "789351ac.02c9d",
+        "name": "is Chain",
+        "property": "functionChain",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "false"
+            },
+            {
+                "t": "true"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 1020,
+        "y": 160,
+        "wires": [
+            [],
+            [
+                "6da1eea0.969368",
+                "1bbc6fa0.4879c"
+            ]
+        ]
+    },
+    {
+        "id": "6da1eea0.969368",
+        "type": "debug",
+        "z": "789351ac.02c9d",
+        "name": "RESULT STATUS",
+        "active": true,
+        "tosidebar": true,
+        "console": true,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 1100,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "f20a68d.9711598",
+        "type": "debug",
+        "z": "789351ac.02c9d",
+        "name": "AFTER CODE CHECK",
+        "active": true,
+        "tosidebar": true,
+        "console": true,
+        "tostatus": false,
+        "complete": "functionChain",
+        "targetType": "msg",
+        "x": 890,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "36905e62.dfad92",
+        "type": "debug",
+        "z": "789351ac.02c9d",
+        "name": "TOP1",
+        "active": true,
+        "tosidebar": true,
+        "console": true,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 1120,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "9610a737.bf275",
+        "type": "debug",
+        "z": "789351ac.02c9d",
+        "name": "TOP2",
+        "active": true,
+        "tosidebar": true,
+        "console": true,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 1300,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "c52af08f.756ee8",
+        "type": "debug",
+        "z": "789351ac.02c9d",
+        "name": "TOP3",
+        "active": true,
+        "tosidebar": true,
+        "console": true,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 1600,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "1bbc6fa0.4879c",
+        "type": "function",
+        "z": "789351ac.02c9d",
+        "name": "compare completion",
+        "func": "console.log('IN COMPARE COMPLETION',msg.payload.response);\nif (msg.payload.response.result.status==='Completed'){\n    return [msg,null];\n} else {\n    return [null,msg];\n}\n",
+        "outputs": 2,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1240,
+        "y": 160,
+        "wires": [
+            [
+                "c52af08f.756ee8"
+            ],
+            [
+                "f2b7c4e4.a24c3"
+            ]
+        ]
+    },
+    {
+        "id": "d8305759.866988",
+        "type": "debug",
+        "z": "789351ac.02c9d",
+        "name": "URL",
+        "active": true,
+        "tosidebar": true,
+        "console": true,
+        "tostatus": false,
+        "complete": "iterations",
+        "targetType": "msg",
+        "x": 500,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "2934f390.711324",
+        "type": "tls-config",
+        "z": "789351ac.02c9d",
+        "name": "",
+        "cert": "",
+        "key": "",
+        "ca": "",
+        "certname": "",
+        "keyname": "",
+        "caname": "",
+        "servername": "",
+        "verifyservercert": false
+    },
+    {
+        "id": "dc80956e15e9e07b",
+        "type": "subflow",
+        "name": "SplitJoinMultiple",
+        "info": "This is a template subflow for parallelizing the execution of a function or process on the provided input data (Single Program Multiple Data pattern). The subflow gets the initial message and chunks it down based on the msg.payload.value.splitsize value. Each batch of input rows is forwared as input to one of three means of execution (configured in the msg.payload.value.execution as one of \"faas\",\"local_multithread\",\"local_multiprocess\"):\n * an Openwhisk web action URL (whose name is included in the msg.payload.value.action field)\n * a local thread or\n * a newly spawned local process (name of script to execute in msg.payload.value.shellscript)\n\nThe input is assumed to be an input array field. In the inner web action, it exists under msg.payload.value.input. In the top level message (input msg of the SJmultiple node) it is in the msg.payload.value.values field, for being able to include the SJmultiple node inside an Openwhisk action directly.\n\nTherefore if an array of 1000 rows (included in the msg.payload.value.values) is inserted and the splitsize is set to 10, it will create 100 inner calls of the msg.payload.value.action if the execution is set to \"faas\". In this case the Openwhisk action node needs also to be configured with the credentials and location of the available Openwhisk instance.\n\nThe solution of the msg.payload.value.splitsize was chosen since node properties of the Split node allow only environment variables to be used for setting the split size. These can be configured only at startup and thus can not be used for dynamic management of the pattern during runtime. Furthermore, with this dynamic setting we can also pass the splitsize as an argument when we incorporate this subflow around an HTTP endpoint and the splitsize can be an input argument.\n\nHowever it needs to be noted that now the functions used in the inner parallelized action need to be able to process arrays as inputs.\n\nThe flow includes also a rate limiter, in order to be aligned with any Openwhisk options regarding maximum invocations per minute. By setting the rate limiter to the according OW limit, we can avoid failures of action invocations due to this limit. The parameter can be set in the millisecond interarrival time (msg.paylod.value.maxOWmillisecinterarrival).\n\nFor the multiprocess execution mode (local_multiprocess option of execution), each splitted message results in a separate process of that script. The script needs to be adapted to the way the multiple values are passed. A randomized local file is used for storing the values for each execution, while the format of that storage appears in the debug window.\n\nThe data format of the msg.payload is specifically designed so that it is compatible with the way Openwhisk passes arguments so that this flow can be directly combined with a relevant wrapper and executed as a function.\n\nThe configuration parameters can also be set through the node menu, however the values in the incoming message will override any set values during node initialization.\n\nMsg.creds should include the credentials for using the OW target of the inner action.",
+        "category": "PHYSICS",
+        "in": [
+            {
+                "x": 200,
+                "y": 300,
+                "wires": [
+                    {
+                        "id": "e53456c2139266e4"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 1320,
+                "y": 620,
+                "wires": [
+                    {
+                        "id": "d9d299b0fe0812eb",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [
+            {
+                "name": "splitsize",
+                "type": "num",
+                "value": "1"
+            },
+            {
+                "name": "execution",
+                "type": "str",
+                "value": "faas",
+                "ui": {
+                    "label": {
+                        "en-US": "execution"
+                    },
+                    "type": "select",
+                    "opts": {
+                        "opts": [
+                            {
+                                "l": {
+                                    "en-US": "faas"
+                                },
+                                "v": "faas"
+                            },
+                            {
+                                "l": {
+                                    "en-US": "local_multithread"
+                                },
+                                "v": "local_multithread"
+                            },
+                            {
+                                "l": {
+                                    "en-US": "local_multiprocess"
+                                },
+                                "v": "local_multiprocess"
+                            }
+                        ]
+                    }
+                }
+            },
+            {
+                "name": "maxOWmillisecinterarrival",
+                "type": "num",
+                "value": "20"
+            },
+            {
+                "name": "innerActionURL",
+                "type": "str",
+                "value": "http://10.100.59.182:3233/api/v1/web/guest/default/dockeraction.json"
+            },
+            {
+                "name": "Shell script",
+                "type": "str",
+                "value": "/path/to/script"
+            },
+            {
+                "name": "OWendpoint",
+                "type": "str",
+                "value": "http://10.100.59.182:3233/api/v1/"
+            },
+            {
+                "name": "OWnamespace",
+                "type": "str",
+                "value": "_"
+            }
+        ],
+        "meta": {},
+        "color": "#FFAAAA"
+    },
+    {
+        "id": "906d6a37be3b38fb",
+        "type": "split",
+        "z": "dc80956e15e9e07b",
+        "name": "",
+        "splt": "\\n",
+        "spltType": "str",
+        "arraySplt": "1",
+        "arraySpltType": "len",
+        "stream": false,
+        "addname": "",
+        "x": 710,
+        "y": 300,
+        "wires": [
+            [
+                "3b41725545838f47"
+            ]
+        ]
+    },
+    {
+        "id": "656e24eb4ac6801c",
+        "type": "join",
+        "z": "dc80956e15e9e07b",
+        "name": "",
+        "mode": "auto",
+        "build": "string",
+        "property": "payload",
+        "propertyType": "msg",
+        "key": "topic",
+        "joiner": "\\n",
+        "joinerType": "str",
+        "accumulate": "false",
+        "timeout": "",
+        "count": "",
+        "reduceRight": false,
+        "x": 1050,
+        "y": 620,
+        "wires": [
+            [
+                "d9d299b0fe0812eb"
+            ]
+        ]
+    },
+    {
+        "id": "dbd5aba971e09814",
+        "type": "comment",
+        "z": "dc80956e15e9e07b",
+        "name": "NEEDS CONFIGURATION WITH OW ENDPOINT",
+        "info": "",
+        "x": 550,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "e53456c2139266e4",
+        "type": "function",
+        "z": "dc80956e15e9e07b",
+        "name": "adapt inputs",
+        "func": "//keep input settings\nif (msg.payload.value.hasOwnProperty('action')){\n    msg.action=msg.payload.value.action;\n} else {\n    msg.action=env.get('innerActionURL');\n}\n\nif (msg.payload.value.hasOwnProperty('shellscript')){\n    msg.shellscript=msg.payload.value.shellscript;\n} else {\n    msg.shellscript=env.get('Shell script');\n}\n\nif (msg.payload.value.hasOwnProperty('execution')){\n    msg.execution=msg.payload.value.execution;\n} else {\n    msg.execution=env.get('execution');\n}\n\nif (msg.payload.value.hasOwnProperty('splitsize')){\n    msg.splitsize=msg.payload.value.splitsize;\n} else {\n    msg.splitsize=env.get('splitsize');\n}\n\nif (msg.payload.value.hasOwnProperty('maxOWmillisecinterarrival')){\n    msg.rate=msg.payload.value.maxOWactionspersecond;\n} else {\n    msg.rate=env.get('maxOWmillisecinterarrival');\n}\n\n//can have also msg.rate based on OW limits for actions per minute\nif (msg.payload.value.hasOwnProperty('innerActionURL')){\n    msg.url=msg.payload.value.innerActionURL;\n} else {\n    msg.url=env.get('innerActionURL');\n}\n\n\nif (msg.payload.value.hasOwnProperty('OWnamespace')){\n    msg.OWnamespace=msg.payload.value.OWnamespace;\n} else {\n    msg.OWnamespace=env.get('OWnamespace');\n}\n\nif (msg.payload.value.hasOwnProperty('OWendpoint')){\n    msg.OWendpoint=msg.payload.value.OWendpoint;\n} else {\n    msg.OWendpoint=env.get('OWendpoint');\n}\n\n\n//move actual values to msg.payload\nmsg.oldpayload=msg.payload;\nmsg.payload={};\nmsg.payload=msg.oldpayload.value.values;\n\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 330,
+        "y": 300,
+        "wires": [
+            [
+                "122ff74424914e70"
+            ]
+        ]
+    },
+    {
+        "id": "d9d299b0fe0812eb",
+        "type": "function",
+        "z": "dc80956e15e9e07b",
+        "name": "adapt output",
+        "func": "msg.newpayload=msg.payload;\nmsg.payload=[];\nmsg.payload=msg.oldpayload;\nmsg.payload.value=msg.newpayload;\n\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1210,
+        "y": 620,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "122ff74424914e70",
+        "type": "function",
+        "z": "dc80956e15e9e07b",
+        "name": "array chunks",
+        "func": "var splitsize=1;\n\nif (msg.hasOwnProperty('splitsize')){\n    splitsize=msg.splitsize;\n}else{\n    splitsize=1;\n    }\n\nvar arrays = [];\n//console.log('\\nbefore splicing msg payload with splitsize:'+splitsize);    \nwhile (msg.payload.length > 0){ \n    //console.log('\\nsplicing');\n    arrays.push(msg.payload.splice(0, splitsize));  \n}\n  \n  \n\nmsg.payload=arrays;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 510,
+        "y": 300,
+        "wires": [
+            [
+                "906d6a37be3b38fb"
+            ]
+        ]
+    },
+    {
+        "id": "3b41725545838f47",
+        "type": "function",
+        "z": "dc80956e15e9e07b",
+        "name": "array to object",
+        "func": "\n//the Openwhisk specification needs objects as input arguments\nvar input=msg.payload;\n\nmsg.payload={};\nmsg.payload={input};\nreturn msg;\n\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 870,
+        "y": 300,
+        "wires": [
+            [
+                "6c26a112b5b70fa5"
+            ]
+        ]
+    },
+    {
+        "id": "6c26a112b5b70fa5",
+        "type": "delay",
+        "z": "dc80956e15e9e07b",
+        "name": "",
+        "pauseType": "rate",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "30",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": true,
+        "outputs": 1,
+        "x": 240,
+        "y": 420,
+        "wires": [
+            [
+                "fc22d5c0afab1183"
+            ]
+        ]
+    },
+    {
+        "id": "c2cc0e46bde1098c",
+        "type": "mp-function",
+        "z": "dc80956e15e9e07b",
+        "name": "threads-ADD MAX THREADS",
+        "rqs": "",
+        "func": "\n\n\nreturn msg;",
+        "persistent": false,
+        "outputs": 1,
+        "threads": "30",
+        "noerr": 0,
+        "x": 650,
+        "y": 720,
+        "wires": [
+            [
+                "656e24eb4ac6801c"
+            ]
+        ]
+    },
+    {
+        "id": "fc22d5c0afab1183",
+        "type": "switch",
+        "z": "dc80956e15e9e07b",
+        "name": "",
+        "property": "execution",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "faas",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "local_multithread",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "local_multiprocess",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 3,
+        "x": 290,
+        "y": 520,
+        "wires": [
+            [
+                "d1c098229988d4d8",
+                "5452bdd0ee52c9aa"
+            ],
+            [
+                "c2cc0e46bde1098c"
+            ],
+            [
+                "dc4eac2d6c92cac1",
+                "d61d4275bbe39678"
+            ]
+        ]
+    },
+    {
+        "id": "a7d020490ba20441",
+        "type": "comment",
+        "z": "dc80956e15e9e07b",
+        "name": "INPUT VALUES THROUGH FILE",
+        "info": "",
+        "x": 290,
+        "y": 840,
+        "wires": []
+    },
+    {
+        "id": "37b86b9497b37417",
+        "type": "function",
+        "z": "dc80956e15e9e07b",
+        "name": "randomize filename",
+        "func": "msg.filename='file_'+Math.random();\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 470,
+        "y": 820,
+        "wires": [
+            [
+                "76201d0e6519042b"
+            ]
+        ]
+    },
+    {
+        "id": "76201d0e6519042b",
+        "type": "file",
+        "z": "dc80956e15e9e07b",
+        "name": "",
+        "filename": "",
+        "appendNewline": false,
+        "createDir": false,
+        "overwriteFile": "true",
+        "encoding": "none",
+        "x": 630,
+        "y": 820,
+        "wires": [
+            [
+                "a19bc71cfb355df8"
+            ]
+        ]
+    },
+    {
+        "id": "a19bc71cfb355df8",
+        "type": "function",
+        "z": "dc80956e15e9e07b",
+        "name": "Prepare name&inputs",
+        "func": "\n//currently the values are in the msg.payload however the exec node\n//needs the command in the msg.payload.\n//Therefore we need to adapt msg fields and then check how the input\n//values are passed to the script, which is case specific\n//msg.values=msg.payload;\n//msg.payload=msg.shellscript;\n\n//how to pass inputs to the script depends on \n//how the script accepts them.\n//if inputs are passed through the cli command, e.g. /script input\n//then the relevant command needs to be built in this node, e.g. if\n//the msg.payload is a string:\n//msg.payload=msg.shellscript+' '+msg.payload;\n\n//if it is an array, it needs to be transformed to a string of values\n//by using the csv node before this node before using the above command\n\n\n//if it is too large, it can be stored in a file prior to this node\n//through the usage of the file node of Node-RED\n//and we can pass the filename argument as input in the script\n//In that case the script should read the input from the file\nmsg.payload=msg.shellscript+' '+msg.filename;\n\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 580,
+        "y": 880,
+        "wires": [
+            [
+                "ae551f31809f4569"
+            ]
+        ]
+    },
+    {
+        "id": "ae551f31809f4569",
+        "type": "exec",
+        "z": "dc80956e15e9e07b",
+        "command": "",
+        "addpay": "payload",
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "winHide": false,
+        "oldrc": false,
+        "name": "",
+        "x": 770,
+        "y": 880,
+        "wires": [
+            [
+                "656e24eb4ac6801c",
+                "a05211b1c6774ea3"
+            ],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "a05211b1c6774ea3",
+        "type": "file",
+        "z": "dc80956e15e9e07b",
+        "name": "",
+        "filename": "",
+        "appendNewline": true,
+        "createDir": false,
+        "overwriteFile": "delete",
+        "encoding": "none",
+        "x": 930,
+        "y": 880,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "dc4eac2d6c92cac1",
+        "type": "debug",
+        "z": "dc80956e15e9e07b",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 250,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "d61d4275bbe39678",
+        "type": "json",
+        "z": "dc80956e15e9e07b",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 310,
+        "y": 820,
+        "wires": [
+            [
+                "37b86b9497b37417"
+            ]
+        ]
+    },
+    {
+        "id": "f61dd9bc56320d68",
+        "type": "debug",
+        "z": "dc80956e15e9e07b",
+        "name": "RETRY FAIL",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 690,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "06d8ab84abbd709a",
+        "type": "debug",
+        "z": "dc80956e15e9e07b",
+        "name": "FINAL FAIL",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 690,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "d1c098229988d4d8",
+        "type": "debug",
+        "z": "dc80956e15e9e07b",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 330,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "c15ed6accb504a8c",
+        "type": "http request",
+        "z": "dc80956e15e9e07b",
+        "name": "",
+        "method": "POST",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "0db0f71170926ff9",
+        "persist": false,
+        "proxy": "",
+        "authType": "basic",
+        "x": 670,
+        "y": 440,
+        "wires": [
+            [
+                "320d254c59ba3535"
+            ]
+        ]
+    },
+    {
+        "id": "320d254c59ba3535",
+        "type": "switch",
+        "z": "dc80956e15e9e07b",
+        "name": "Code check",
+        "property": "statusCode",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "200",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "202",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 690,
+        "y": 480,
+        "wires": [
+            [
+                "5291299972d6d28d",
+                "656e24eb4ac6801c"
+            ],
+            [
+                "461a6c9c48a87b63"
+            ]
+        ]
+    },
+    {
+        "id": "5291299972d6d28d",
+        "type": "debug",
+        "z": "dc80956e15e9e07b",
+        "name": "FINISHED SUCCESSFULLY",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 920,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "461a6c9c48a87b63",
+        "type": "function",
+        "z": "dc80956e15e9e07b",
+        "name": "add OW activation id from reply",
+        "func": "\nmsg.activationID=msg.headers['x-openwhisk-activation-id'];\n\n//msg.url='http://10.100.59.182:3233/api/v1/namespaces/_/activations/'+msg.activationID;\n//msg.url=env.get('OWendpoint')+'namespaces/'+env.get('OWnamespace')+'/activations/'+msg.activationID;\nmsg.url=msg.OWendpoint+'namespaces/'+msg.OWnamespace+'/activations/'+msg.activationID;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 690,
+        "y": 520,
+        "wires": [
+            [
+                "06b30e69242b05c1"
+            ]
+        ]
+    },
+    {
+        "id": "dc6afe82eb52b1fd",
+        "type": "debug",
+        "z": "dc80956e15e9e07b",
+        "name": "FINISHED SUCCESSFULLY AFTER POLLING",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1100,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "06b30e69242b05c1",
+        "type": "subflow:789351ac.02c9d",
+        "z": "dc80956e15e9e07b",
+        "name": "",
+        "env": [
+            {
+                "name": "maxAttempts",
+                "value": "20",
+                "type": "str"
+            },
+            {
+                "name": "pollPeriod",
+                "value": "20000",
+                "type": "str"
+            },
+            {
+                "name": "functionChain",
+                "value": "false",
+                "type": "bool"
+            }
+        ],
+        "x": 690,
+        "y": 580,
+        "wires": [
+            [
+                "656e24eb4ac6801c",
+                "dc6afe82eb52b1fd"
+            ],
+            [
+                "f61dd9bc56320d68"
+            ],
+            [
+                "06d8ab84abbd709a"
+            ]
+        ]
+    },
+    {
+        "id": "5452bdd0ee52c9aa",
+        "type": "function",
+        "z": "dc80956e15e9e07b",
+        "name": "add auth",
+        "func": "msg.headers={};\nvar auth = 'Basic ' + new Buffer(msg.creds).toString('base64');\nmsg.headers = {\n    \"Authorization\": auth\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 500,
+        "y": 460,
+        "wires": [
+            [
+                "c15ed6accb504a8c"
+            ]
+        ]
+    },
+    {
+        "id": "0db0f71170926ff9",
+        "type": "tls-config",
+        "z": "dc80956e15e9e07b",
+        "name": "",
+        "cert": "",
+        "key": "",
+        "ca": "",
+        "certname": "",
+        "keyname": "",
+        "caname": "",
+        "servername": "",
+        "verifyservercert": false,
+        "alpnprotocol": ""
+    },
+    {
+        "id": "694cb784968dc0b9",
+        "type": "subflow",
+        "name": "Executor Mode",
+        "info": "The Executor Mode Annotator is a mean to describe to the PHYSICS Environment the execution mode of a given flow. There are three options\n1) Service mode: the selected flow will be deployed as a Node-RED service, thus always running\n2) Node-RED Function mode: the selected flow will be wrapped around a Node-RED runtime and registered to a target Openwhisk platform, where it will be executed as a Node-RED runtime function\n3) Native Sequence: the included functions will be packaged and registered individually at the Openwhisk platform, while their links (workflow) will be translated to the native Openwhisk sequence format and registered to the Openwhisk platform. This mode at the moment is limited to pure function nodes of Node-RED, while the workflow description is limited by the sequence abilities of Openwhisk. ",
+        "category": "PHYSICS Annotators",
+        "in": [],
+        "out": [],
+        "env": [
+            {
+                "name": "Executor Mode",
+                "type": "str",
+                "value": "",
+                "ui": {
+                    "type": "select",
+                    "opts": {
+                        "opts": [
+                            {
+                                "l": {
+                                    "en-US": "Service"
+                                },
+                                "v": "Service"
+                            },
+                            {
+                                "l": {
+                                    "en-US": "NoderedFunction"
+                                },
+                                "v": "NoderedFunction"
+                            },
+                            {
+                                "l": {
+                                    "en-US": "NativeSequence"
+                                },
+                                "v": "NativeSequence"
+                            }
+                        ]
+                    }
+                }
+            }
+        ],
+        "meta": {},
+        "color": "#C0DEED",
+        "icon": "font-awesome/fa-angle-right"
+    },
+    {
+        "id": "82b665f654048ecf",
+        "type": "function",
+        "z": "694cb784968dc0b9",
+        "name": "",
+        "func": "msg.annotations={};\nmsg.annotations.executorMode=env.get('Executor Mode');",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "// Code added here will be run once\n// whenever the node is started.\n\n//msg.payload.imageName=env.get('Image Name');\n//return msg;",
+        "finalize": "",
+        "libs": [],
+        "x": 360,
+        "y": 140,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "eeb5210da7efebd3",
+        "type": "comment",
+        "z": "694cb784968dc0b9",
+        "name": "Instructions",
+        "info": "The Executor Mode Annotator is a mean to describe to the PHYSICS Environment the execution mode of a given flow. There are three options\n1) Service mode: the selected flow will be deployed as a Node-RED service, thus always running\n2) Node-RED Function mode: the selected flow will be wrapped around a Node-RED runtime and registered to a target Openwhisk platform, where it will be executed as a Node-RED runtime function\n3) Native Sequence: the included functions will be packaged and registered individually at the Openwhisk platform, while their links (workflow) will be translated to the native Openwhisk sequence format and registered to the Openwhisk platform. This mode at the moment is limited to pure function nodes of Node-RED, while the workflow description is limited by the sequence abilities of Openwhisk. ",
+        "x": 560,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "6c475d976512ab6c",
+        "type": "http in",
+        "z": "e98bf48d7a877d25",
+        "name": "",
+        "url": "/run",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 540,
+        "y": 500,
+        "wires": [
+            [
+                "e9e20d06928e3a23"
+            ]
+        ]
+    },
+    {
+        "id": "d8ea5c991b7256b2",
+        "type": "http in",
+        "z": "e98bf48d7a877d25",
+        "name": "",
+        "url": "/init",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 540,
+        "y": 380,
+        "wires": [
+            [
+                "0bf6e36501ea140c"
+            ]
+        ]
+    },
+    {
+        "id": "0bf6e36501ea140c",
+        "type": "http response",
+        "z": "e98bf48d7a877d25",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 830,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "729306c6b37c0ec0",
+        "type": "http response",
+        "z": "e98bf48d7a877d25",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 1090,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "e385b549bc1cae8d",
+        "type": "subflow:694cb784968dc0b9",
+        "z": "e98bf48d7a877d25",
+        "name": "",
+        "env": [
+            {
+                "name": "Executor Mode",
+                "value": "NoderedFunction",
+                "type": "str"
+            }
+        ],
+        "x": 550,
+        "y": 700,
+        "wires": []
+    },
+    {
+        "id": "3a9c1b2b83bb202d",
+        "type": "subflow:dc80956e15e9e07b",
+        "z": "e98bf48d7a877d25",
+        "name": "",
+        "env": [
+            {
+                "name": "innerActionURL",
+                "value": "https://openwhisk.apps.ocphub.physics-faas.eu/api/v1/namespaces/wp4namespace/actions/delayaction",
+                "type": "str"
+            },
+            {
+                "name": "OWendpoint",
+                "value": "https://openwhisk.apps.ocphub.physics-faas.eu/api/v1/",
+                "type": "str"
+            },
+            {
+                "name": "OWnamespace",
+                "value": "wp4namespace",
+                "type": "str"
+            }
+        ],
+        "x": 900,
+        "y": 500,
+        "wires": [
+            [
+                "729306c6b37c0ec0"
+            ]
+        ]
+    },
+    {
+        "id": "e9e20d06928e3a23",
+        "type": "function",
+        "z": "e98bf48d7a877d25",
+        "name": "add test inputs",
+        "func": "\n//aws wp4\nmsg.creds='178f79b4-4540-449c-a815-f3b50602aeca:0EWLwLLxVWFsBrW4Lq7Y1EuTYRcfVSsYjXQANDQ78nO9tgzT6B2nui2whli9wlc5';\n\n//hua guest\n//msg.creds='23bc46b1-71f6-4ed5-8c54-816aa4f8c502:123zO3xZCLrMN6v2BKK1dXYFpXlPkccOFqm12CdAsMgRU4VrNZ9lyGVCGuMDGIwP';\n\n//aws wp3\n//msg.creds='17dz39c2-62f7-3ed6-9b88-925ce4l3c104:459bO3xUERmNZ9v2BLU1dRYFpXlPkccOFqm31LdAsMgRU4VrNZ9dhORZGuLJGIqF';\n\nmsg.payload={};\nmsg.payload.value={};\nmsg.payload.value={\"values\":[\n    {'run':'run1','delay':12000,'iterations':1},\n    {'run':'run2','delay':3000,'iterations':1},\n    {'run':'run3','delay':3000,'iterations':1},\n    {'run':'run4','delay':3000,'iterations':1},\n    ], \n    'action':'delayaction'\n    //\"execution\":'local_multiprocess', //or faas\n    //\"splitsize\":global.get('splitsize')\n    //\"maxOWmillisecinterarrival\":20\n};\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 700,
+        "y": 500,
+        "wires": [
+            [
+                "3a9c1b2b83bb202d"
+            ]
+        ]
+    },
+    {
+        "id": "22477494c486df5b",
+        "type": "subflow:edfbba7dd979ecf1",
+        "z": "e98bf48d7a877d25",
+        "name": "",
+        "env": [
+            {
+                "name": "actionInvoked",
+                "value": "https://openwhisk.apps.ocphub.physics-faas.eu/api/v1/namespaces/wp4namespace/actions/delayaction",
+                "type": "str"
+            }
+        ],
+        "x": 580,
+        "y": 760,
+        "wires": []
+    },
+    {
+        "id": "0e7ea46fab621636",
+        "type": "subflow:789351ac.02c9d",
+        "z": "e98bf48d7a877d25",
+        "name": "",
+        "x": 950,
+        "y": 700,
+        "wires": [
+            [],
+            [],
+            []
+        ]
+    }
+]

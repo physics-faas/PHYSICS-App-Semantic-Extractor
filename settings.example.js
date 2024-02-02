@@ -22,14 +22,14 @@
 
 module.exports = {
 
-/*******************************************************************************
- * Flow File and User Directory Settings
- *  - flowFile
- *  - credentialSecret
- *  - flowFilePretty
- *  - userDir
- *  - nodesDir
- ******************************************************************************/
+    /*******************************************************************************
+     * Flow File and User Directory Settings
+     *  - flowFile
+     *  - credentialSecret
+     *  - flowFilePretty
+     *  - userDir
+     *  - nodesDir
+     ******************************************************************************/
 
     /** The file containing the flows. If not set, defaults to flows_<hostname>.json **/
     flowFile: 'flows.json',
@@ -60,27 +60,19 @@ module.exports = {
      */
     //nodesDir: '/home/nol/.node-red/nodes',
 
-/*******************************************************************************
- * Security
- *  - adminAuth
- *  - https
- *  - httpsRefreshInterval
- *  - requireHttps
- *  - httpNodeAuth
- *  - httpStaticAuth
- ******************************************************************************/
+    /*******************************************************************************
+     * Security
+     *  - adminAuth
+     *  - https
+     *  - httpsRefreshInterval
+     *  - requireHttps
+     *  - httpNodeAuth
+     *  - httpStaticAuth
+     ******************************************************************************/
 
     /** To password protect the Node-RED editor and admin API, the following
      * property can be used. See http://nodered.org/docs/security.html for details.
      */
-    //adminAuth: {
-    //    type: "credentials",
-    //    users: [{
-    //        username: "admin",
-    //        password: "$2a$08$zZWtXTja0fB1pzD4sHCMyOCMYz2Z6dNbM6tl8sJogENOMcxWV9DN.",
-    //        permissions: "*"
-    //    }]
-    //},
     adminAuth: {
         type: "credentials",
         users: [{
@@ -133,19 +125,19 @@ module.exports = {
     //httpNodeAuth: {user:"user",pass:"$2a$08$zZWtXTja0fB1pzD4sHCMyOCMYz2Z6dNbM6tl8sJogENOMcxWV9DN."},
     //httpStaticAuth: {user:"user",pass:"$2a$08$zZWtXTja0fB1pzD4sHCMyOCMYz2Z6dNbM6tl8sJogENOMcxWV9DN."},
 
-/*******************************************************************************
- * Server Settings
- *  - uiPort
- *  - uiHost
- *  - apiMaxLength
- *  - httpServerOptions
- *  - httpAdminRoot
- *  - httpAdminMiddleware
- *  - httpNodeRoot
- *  - httpNodeCors
- *  - httpNodeMiddleware
- *  - httpStatic
- ******************************************************************************/
+    /*******************************************************************************
+     * Server Settings
+     *  - uiPort
+     *  - uiHost
+     *  - apiMaxLength
+     *  - httpServerOptions
+     *  - httpAdminRoot
+     *  - httpAdminMiddleware
+     *  - httpNodeRoot
+     *  - httpNodeCors
+     *  - httpNodeMiddleware
+     *  - httpStatic
+     ******************************************************************************/
 
     /** the tcp port that the Node-RED web server is listening on */
     uiPort: process.env.PORT || 1880,
@@ -229,93 +221,93 @@ module.exports = {
      */
     //httpStatic: '/home/nol/node-red-static/',
 
-/*******************************************************************************
- * Runtime Settings
- *  - lang
- *  - logging
- *  - contextStorage
- *  - exportGlobalContextKeys
- *  - externalModules
- ******************************************************************************/
+    /*******************************************************************************
+     * Runtime Settings
+     *  - lang
+     *  - logging
+     *  - contextStorage
+     *  - exportGlobalContextKeys
+     *  - externalModules
+     ******************************************************************************/
 
-     /** Uncomment the following to run node-red in your preferred language.
-      * Available languages include: en-US (default), ja, de, zh-CN, zh-TW, ru, ko
-      * Some languages are more complete than others.
-      */
-     // lang: "de",
+    /** Uncomment the following to run node-red in your preferred language.
+     * Available languages include: en-US (default), ja, de, zh-CN, zh-TW, ru, ko
+     * Some languages are more complete than others.
+     */
+    // lang: "de",
 
-     /** Configure the logging output */
-     logging: {
-         /** Only console logging is currently supported */
-         console: {
-             /** Level of logging to be recorded. Options are:
-              * fatal - only those errors which make the application unusable should be recorded
-              * error - record errors which are deemed fatal for a particular request + fatal errors
-              * warn - record problems which are non fatal + errors + fatal errors
-              * info - record information about the general running of the application + warn + error + fatal errors
-              * debug - record information which is more verbose than info + info + warn + error + fatal errors
-              * trace - record very detailed logging + debug + info + warn + error + fatal errors
-              * off - turn off all logging (doesn't affect metrics or audit)
-              */
-             level: "info",
-             /** Whether or not to include metric events in the log output */
-             metrics: false,
-             /** Whether or not to include audit events in the log output */
-             audit: false
-         }
-     },
+    /** Configure the logging output */
+    logging: {
+        /** Only console logging is currently supported */
+        console: {
+            /** Level of logging to be recorded. Options are:
+             * fatal - only those errors which make the application unusable should be recorded
+             * error - record errors which are deemed fatal for a particular request + fatal errors
+             * warn - record problems which are non fatal + errors + fatal errors
+             * info - record information about the general running of the application + warn + error + fatal errors
+             * debug - record information which is more verbose than info + info + warn + error + fatal errors
+             * trace - record very detailed logging + debug + info + warn + error + fatal errors
+             * off - turn off all logging (doesn't affect metrics or audit)
+             */
+            level: "info",
+            /** Whether or not to include metric events in the log output */
+            metrics: false,
+            /** Whether or not to include audit events in the log output */
+            audit: false
+        }
+    },
 
-     /** Context Storage
-      * The following property can be used to enable context storage. The configuration
-      * provided here will enable file-based context that flushes to disk every 30 seconds.
-      * Refer to the documentation for further options: https://nodered.org/docs/api/context/
-      */
-     //contextStorage: {
-     //    default: {
-     //        module:"localfilesystem"
-     //    },
-     //},
+    /** Context Storage
+     * The following property can be used to enable context storage. The configuration
+     * provided here will enable file-based context that flushes to disk every 30 seconds.
+     * Refer to the documentation for further options: https://nodered.org/docs/api/context/
+     */
+    //contextStorage: {
+    //    default: {
+    //        module:"localfilesystem"
+    //    },
+    //},
 
-     /** `global.keys()` returns a list of all properties set in global context.
-      * This allows them to be displayed in the Context Sidebar within the editor.
-      * In some circumstances it is not desirable to expose them to the editor. The
-      * following property can be used to hide any property set in `functionGlobalContext`
-      * from being list by `global.keys()`.
-      * By default, the property is set to false to avoid accidental exposure of
-      * their values. Setting this to true will cause the keys to be listed.
-      */
-     exportGlobalContextKeys: false,
+    /** `global.keys()` returns a list of all properties set in global context.
+     * This allows them to be displayed in the Context Sidebar within the editor.
+     * In some circumstances it is not desirable to expose them to the editor. The
+     * following property can be used to hide any property set in `functionGlobalContext`
+     * from being list by `global.keys()`.
+     * By default, the property is set to false to avoid accidental exposure of
+     * their values. Setting this to true will cause the keys to be listed.
+     */
+    exportGlobalContextKeys: false,
 
-     /** Configure how the runtime will handle external npm modules.
-      * This covers:
-      *  - whether the editor will allow new node modules to be installed
-      *  - whether nodes, such as the Function node are allowed to have their
-      * own dynamically configured dependencies.
-      * The allow/denyList options can be used to limit what modules the runtime
-      * will install/load. It can use '*' as a wildcard that matches anything.
-      */
-     externalModules: {
-         // autoInstall: false,   /** Whether the runtime will attempt to automatically install missing modules */
-         // autoInstallRetry: 30, /** Interval, in seconds, between reinstall attempts */
-         // palette: {              /** Configuration for the Palette Manager */
-         //     allowInstall: true, /** Enable the Palette Manager in the editor */
-         //     allowUpload: true,  /** Allow module tgz files to be uploaded and installed */
-         //     allowList: [],
-         //     denyList: []
-         // },
-         // modules: {              /** Configuration for node-specified modules */
-         //     allowInstall: true,
-         //     allowList: [],
-         //     denyList: []
-         // }
-     },
+    /** Configure how the runtime will handle external npm modules.
+     * This covers:
+     *  - whether the editor will allow new node modules to be installed
+     *  - whether nodes, such as the Function node are allowed to have their
+     * own dynamically configured dependencies.
+     * The allow/denyList options can be used to limit what modules the runtime
+     * will install/load. It can use '*' as a wildcard that matches anything.
+     */
+    externalModules: {
+        // autoInstall: false,   /** Whether the runtime will attempt to automatically install missing modules */
+        // autoInstallRetry: 30, /** Interval, in seconds, between reinstall attempts */
+        // palette: {              /** Configuration for the Palette Manager */
+        //     allowInstall: true, /** Enable the Palette Manager in the editor */
+        //     allowUpload: true,  /** Allow module tgz files to be uploaded and installed */
+        //     allowList: [],
+        //     denyList: []
+        // },
+        // modules: {              /** Configuration for node-specified modules */
+        //     allowInstall: true,
+        //     allowList: [],
+        //     denyList: []
+        // }
+    },
 
 
-/*******************************************************************************
- * Editor Settings
- *  - disableEditor
- *  - editorTheme
- ******************************************************************************/
+    /*******************************************************************************
+     * Editor Settings
+     *  - disableEditor
+     *  - editorTheme
+     ******************************************************************************/
 
     /** The following property can be used to disable the editor. The admin API
      * is not affected by this option. To disable both the editor and the admin
@@ -332,7 +324,7 @@ module.exports = {
          * See https://github.com/node-red-contrib-themes/theme-collection for
          * a collection of themes to chose from.
          */
-        //theme: "",
+        theme: "midnight-red",
         palette: {
             /** The following property can be used to order the categories in the editor
              * palette. If a node's category is not in the list, the category will get
@@ -377,26 +369,26 @@ module.exports = {
         }
     },
 
-/*******************************************************************************
- * Node Settings
- *  - fileWorkingDirectory
- *  - functionGlobalContext
- *  - functionExternalModules
- *  - nodeMessageBufferMaxLength
- *  - ui (for use with Node-RED Dashboard)
- *  - debugUseColors
- *  - debugMaxLength
- *  - execMaxBufferSize
- *  - httpRequestTimeout
- *  - mqttReconnectTime
- *  - serialReconnectTime
- *  - socketReconnectTime
- *  - socketTimeout
- *  - tcpMsgQueueSize
- *  - inboundWebSocketTimeout
- *  - tlsConfigDisableLocalFiles
- *  - webSocketNodeVerifyClient
- ******************************************************************************/
+    /*******************************************************************************
+     * Node Settings
+     *  - fileWorkingDirectory
+     *  - functionGlobalContext
+     *  - functionExternalModules
+     *  - nodeMessageBufferMaxLength
+     *  - ui (for use with Node-RED Dashboard)
+     *  - debugUseColors
+     *  - debugMaxLength
+     *  - execMaxBufferSize
+     *  - httpRequestTimeout
+     *  - mqttReconnectTime
+     *  - serialReconnectTime
+     *  - socketReconnectTime
+     *  - socketTimeout
+     *  - tcpMsgQueueSize
+     *  - inboundWebSocketTimeout
+     *  - tlsConfigDisableLocalFiles
+     *  - webSocketNodeVerifyClient
+     ******************************************************************************/
 
     /** The working directory to handle relative file paths from within the File nodes
      * defaults to the working directory of the Node-RED process.
@@ -414,7 +406,17 @@ module.exports = {
      *    global.get("os")
      */
     functionGlobalContext: {
-        // os:require('os'),
+        os: require('os'),
+        fetch: require('isomorphic-fetch'), // https://www.npmjs.com/package/isomorphic-fetch
+        //https://zazuko.github.io/sparql-http-client/#/simple-client
+        sparqlhttp_simple: require('sparql-http-client/SimpleClient'),
+        //https://zazuko.github.io/sparql-http-client/#/parsing-client
+        sparqlhttp_parsing: require('sparql-http-client/ParsingClient'),
+        //https://zazuko.github.io/sparql-http-client/#/stream-client
+        sparqlhttp_stream: require('sparql-http-client'),
+        //https://zazuko.github.io/sparql-http-client/#/base-client
+        sparqlhttp_base: require('sparql-http-client/BaseClient'),
+        rdf_ext: require('rdf-ext'), // https://github.com/rdf-ext/rdf-ext
     },
 
     /** The maximum number of messages nodes will buffer internally as part of their

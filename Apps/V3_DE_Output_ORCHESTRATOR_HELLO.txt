@@ -1,0 +1,1725 @@
+{
+    "flows": [
+        {
+            "flowID": "39ef55a8.55f96a",
+            "flowName": "HelloFunctionV2",
+            "flow": [
+                {
+                    "id": "39ef55a8.55f96a",
+                    "type": "tab",
+                    "label": "HelloFunctionV2",
+                    "disabled": false,
+                    "info": "",
+                    "env": []
+                },
+                {
+                    "id": "f70d642d7d615561",
+                    "type": "http in",
+                    "z": "39ef55a8.55f96a",
+                    "name": "",
+                    "url": "/init",
+                    "method": "post",
+                    "upload": false,
+                    "swaggerDoc": "",
+                    "x": 340,
+                    "y": 160,
+                    "wires": [
+                        [
+                            "a8ea37eb3bb8cf23"
+                        ]
+                    ]
+                },
+                {
+                    "id": "ee0278d90f6393a9",
+                    "type": "http in",
+                    "z": "39ef55a8.55f96a",
+                    "name": "",
+                    "url": "/run",
+                    "method": "post",
+                    "upload": false,
+                    "swaggerDoc": "",
+                    "x": 340,
+                    "y": 280,
+                    "wires": [
+                        [
+                            "f52b7bec399e315a"
+                        ]
+                    ]
+                },
+                {
+                    "id": "a8ea37eb3bb8cf23",
+                    "type": "http response",
+                    "z": "39ef55a8.55f96a",
+                    "name": "",
+                    "x": 730,
+                    "y": 180,
+                    "wires": []
+                },
+                {
+                    "id": "ab91c6c51decfbab",
+                    "type": "http response",
+                    "z": "39ef55a8.55f96a",
+                    "name": "",
+                    "x": 870,
+                    "y": 380,
+                    "wires": []
+                },
+                {
+                    "id": "f52b7bec399e315a",
+                    "type": "function",
+                    "z": "39ef55a8.55f96a",
+                    "name": "hello world",
+                    "func": "console.log(msg.payload);\nif ( Array.isArray(msg.payload.value.input)){\n    console.log('Step 1');\n    var names=msg.payload.value.input;\n    console.log('Step 2');\n    msg.payload={'response':'hello'};\n    console.log('Step 3');\n    for (i=0;i<names.length;i++){\n        console.log('Step:'+i);\n        msg.payload.response=msg.payload.response+' '+names[i].name;\n    }\n} else {\n    msg.payload={'response':'hello '+msg.payload.value.name};    \n}\n\nreturn msg;",
+                    "outputs": 1,
+                    "noerr": 0,
+                    "initialize": "",
+                    "finalize": "",
+                    "libs": [],
+                    "x": 670,
+                    "y": 280,
+                    "wires": [
+                        [
+                            "ab91c6c51decfbab"
+                        ]
+                    ]
+                },
+                {
+                    "id": "47d1123d17b41031",
+                    "type": "comment",
+                    "z": "39ef55a8.55f96a",
+                    "name": "OW SKELETON with hello world function",
+                    "info": "",
+                    "x": 440,
+                    "y": 360,
+                    "wires": []
+                },
+                {
+                    "id": "129fabd43047059b",
+                    "type": "subflow:694cb784968dc0b9",
+                    "z": "39ef55a8.55f96a",
+                    "name": "",
+                    "env": [
+                        {
+                            "name": "Executor Mode",
+                            "value": "NoderedFunction",
+                            "type": "str"
+                        }
+                    ],
+                    "x": 230,
+                    "y": 480,
+                    "wires": []
+                },
+                {
+                    "id": "bba4b91d07643081",
+                    "type": "subflow:dd8835083692860a",
+                    "z": "39ef55a8.55f96a",
+                    "name": "",
+                    "env": [
+                        {
+                            "name": "memory",
+                            "value": "512",
+                            "type": "num"
+                        },
+                        {
+                            "name": "timeout",
+                            "value": "220000",
+                            "type": "num"
+                        }
+                    ],
+                    "x": 220,
+                    "y": 540,
+                    "wires": [
+                        []
+                    ]
+                },
+                {
+                    "id": "46230eca45760f58",
+                    "type": "subflow:f0b9b88b6dcb2ece",
+                    "z": "39ef55a8.55f96a",
+                    "name": "",
+                    "env": [
+                        {
+                            "name": "goal",
+                            "value": "energy",
+                            "type": "str"
+                        }
+                    ],
+                    "x": 270,
+                    "y": 600,
+                    "wires": []
+                },
+                {
+                    "id": "be87371dd5bad13a",
+                    "type": "subflow:94dffc86e4af9a58",
+                    "z": "39ef55a8.55f96a",
+                    "name": "",
+                    "env": [
+                        {
+                            "name": "importance",
+                            "value": "high",
+                            "type": "str"
+                        }
+                    ],
+                    "x": 240,
+                    "y": 660,
+                    "wires": []
+                },
+                {
+                    "id": "7ec29cdc3b1457ea",
+                    "type": "subflow:05f045b87080a61e",
+                    "z": "39ef55a8.55f96a",
+                    "name": "",
+                    "env": [
+                        {
+                            "name": "locality",
+                            "value": "aws",
+                            "type": "str"
+                        }
+                    ],
+                    "x": 250,
+                    "y": 840,
+                    "wires": []
+                },
+                {
+                    "id": "82b665f654048ecf",
+                    "type": "function",
+                    "z": "694cb784968dc0b9",
+                    "name": "",
+                    "func": "msg.annotations={};\nmsg.annotations.executorMode=env.get('Executor Mode');",
+                    "outputs": 1,
+                    "noerr": 0,
+                    "initialize": "// Code added here will be run once\n// whenever the node is started.\n\n//msg.payload.imageName=env.get('Image Name');\n//return msg;",
+                    "finalize": "",
+                    "libs": [],
+                    "x": 360,
+                    "y": 140,
+                    "wires": [
+                        []
+                    ]
+                },
+                {
+                    "id": "eeb5210da7efebd3",
+                    "type": "comment",
+                    "z": "694cb784968dc0b9",
+                    "name": "Instructions",
+                    "info": "The Executor Mode Annotator is a mean to describe to the PHYSICS Environment the execution mode of a given flow. There are three options\n1) Service mode: the selected flow will be deployed as a Node-RED service, thus always running\n2) Node-RED Function mode: the selected flow will be wrapped around a Node-RED runtime and registered to a target Openwhisk platform, where it will be executed as a Node-RED runtime function\n3) Native Sequence: the included functions will be packaged and registered individually at the Openwhisk platform, while their links (workflow) will be translated to the native Openwhisk sequence format and registered to the Openwhisk platform. This mode at the moment is limited to pure function nodes of Node-RED, while the workflow description is limited by the sequence abilities of Openwhisk. ",
+                    "x": 560,
+                    "y": 280,
+                    "wires": []
+                },
+                {
+                    "id": "694cb784968dc0b9",
+                    "type": "subflow",
+                    "name": "Executor Mode",
+                    "info": "The Executor Mode Annotator is a mean to describe to the PHYSICS Environment the execution mode of a given flow. There are three options\n1) Service mode: the selected flow will be deployed as a Node-RED service, thus always running\n2) Node-RED Function mode: the selected flow will be wrapped around a Node-RED runtime and registered to a target Openwhisk platform, where it will be executed as a Node-RED runtime function\n3) Native Sequence: the included functions will be packaged and registered individually at the Openwhisk platform, while their links (workflow) will be translated to the native Openwhisk sequence format and registered to the Openwhisk platform. This mode at the moment is limited to pure function nodes of Node-RED, while the workflow description is limited by the sequence abilities of Openwhisk. ",
+                    "category": "PHYSICS Annotators",
+                    "in": [],
+                    "out": [],
+                    "env": [
+                        {
+                            "name": "Executor Mode",
+                            "type": "str",
+                            "value": "",
+                            "ui": {
+                                "type": "select",
+                                "opts": {
+                                    "opts": [
+                                        {
+                                            "l": {
+                                                "en-US": "Service"
+                                            },
+                                            "v": "Service"
+                                        },
+                                        {
+                                            "l": {
+                                                "en-US": "NoderedFunction"
+                                            },
+                                            "v": "NoderedFunction"
+                                        },
+                                        {
+                                            "l": {
+                                                "en-US": "NativeSequence"
+                                            },
+                                            "v": "NativeSequence"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    ],
+                    "meta": {},
+                    "color": "#C0DEED",
+                    "icon": "font-awesome/fa-angle-right"
+                },
+                {
+                    "id": "c66966a2d36f06b5",
+                    "type": "function",
+                    "z": "dd8835083692860a",
+                    "name": "add sizing",
+                    "func": "\nmsg.annotations={};\nmsg.annotations.sizing={};\nmsg.annotations.sizing.memory=env.get('memory');\nmsg.annotations.sizing.timeout=env.get('timeout');\n\nreturn msg;\n",
+                    "outputs": 1,
+                    "noerr": 0,
+                    "initialize": "// Code added here will be run once\n// whenever the node is started.\n\n//msg.payload.imageName=env.get('Image Name');\n//return msg;",
+                    "finalize": "",
+                    "libs": [],
+                    "x": 300,
+                    "y": 60,
+                    "wires": [
+                        []
+                    ]
+                },
+                {
+                    "id": "dd8835083692860a",
+                    "type": "subflow",
+                    "name": "SizingAnnotator",
+                    "info": "This node should be used to dictate what is the necessary size in terms of memory and timeout of the registered action in Openwhisk.\n\nIt is assumed that this node is used at the flow level, indicating that the annotation refers to the container configuration of a docker action that includes the overall flow in the used tab.\n",
+                    "category": "PHYSICS Annotators",
+                    "in": [
+                        {
+                            "x": 120,
+                            "y": 60,
+                            "wires": [
+                                {
+                                    "id": "c66966a2d36f06b5"
+                                }
+                            ]
+                        }
+                    ],
+                    "out": [
+                        {
+                            "x": 440,
+                            "y": 60,
+                            "wires": [
+                                {
+                                    "id": "c66966a2d36f06b5",
+                                    "port": 0
+                                }
+                            ]
+                        }
+                    ],
+                    "env": [
+                        {
+                            "name": "memory",
+                            "type": "num",
+                            "value": "",
+                            "ui": {
+                                "label": {
+                                    "en-US": "Memory (MB)"
+                                }
+                            }
+                        },
+                        {
+                            "name": "timeout",
+                            "type": "num",
+                            "value": "",
+                            "ui": {
+                                "icon": "font-awesome/fa-times-circle-o",
+                                "label": {
+                                    "en-US": "Timeout (millisecs)"
+                                }
+                            }
+                        }
+                    ],
+                    "meta": {},
+                    "color": "#E9967A",
+                    "icon": "font-awesome/fa-arrows-h"
+                },
+                {
+                    "id": "ef33a2b7c53c600f",
+                    "type": "comment",
+                    "z": "f0b9b88b6dcb2ece",
+                    "name": "",
+                    "info": "",
+                    "x": 200,
+                    "y": 80,
+                    "wires": []
+                },
+                {
+                    "id": "f0b9b88b6dcb2ece",
+                    "type": "subflow",
+                    "name": "Optimization Goal (Flow Level)",
+                    "info": "",
+                    "category": "PHYSICS Annotators",
+                    "in": [],
+                    "out": [],
+                    "env": [
+                        {
+                            "name": "goal",
+                            "type": "str",
+                            "value": "",
+                            "ui": {
+                                "type": "select",
+                                "opts": {
+                                    "opts": [
+                                        {
+                                            "l": {
+                                                "en-US": "performance"
+                                            },
+                                            "v": "performance"
+                                        },
+                                        {
+                                            "l": {
+                                                "en-US": "energy"
+                                            },
+                                            "v": "energy"
+                                        },
+                                        {
+                                            "l": {
+                                                "en-US": "availability"
+                                            },
+                                            "v": "availability"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    ],
+                    "meta": {},
+                    "color": "#FFAAAA",
+                    "icon": "font-awesome/fa-sliders"
+                },
+                {
+                    "id": "1896904e3b2cf282",
+                    "type": "comment",
+                    "z": "94dffc86e4af9a58",
+                    "name": "README",
+                    "info": "The node is used to indicate at the flow level what is the importance of the flow (to be taken under consideration in the scheduling aspects of PHYSICS)",
+                    "x": 400,
+                    "y": 160,
+                    "wires": []
+                },
+                {
+                    "id": "94dffc86e4af9a58",
+                    "type": "subflow",
+                    "name": "Importance (Flow level)",
+                    "info": "",
+                    "category": "PHYSICS Annotators",
+                    "in": [],
+                    "out": [],
+                    "env": [
+                        {
+                            "name": "importance",
+                            "type": "str",
+                            "value": "",
+                            "ui": {
+                                "type": "select",
+                                "opts": {
+                                    "opts": [
+                                        {
+                                            "l": {
+                                                "en-US": "high"
+                                            },
+                                            "v": "high"
+                                        },
+                                        {
+                                            "l": {
+                                                "en-US": "medium"
+                                            },
+                                            "v": "medium"
+                                        },
+                                        {
+                                            "l": {
+                                                "en-US": "low"
+                                            },
+                                            "v": "low"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    ],
+                    "meta": {},
+                    "color": "#3FADB5",
+                    "icon": "node-red/alert.svg"
+                },
+                {
+                    "id": "30ee5c09f384361d",
+                    "type": "comment",
+                    "z": "05f045b87080a61e",
+                    "name": "README",
+                    "info": "The node is used to indicate at the flow level the locality of this flow with relation to a set of standard locations by name.\n\nThe new clusters need to be retrieved from an external location and put in the msg.newClusters field as an array:\n[\n    \"aws\",\n    \"edgeA\",\n    \"edgeB\",\n    \"azure\"\n]\n\nThen all current flows are retrieved and the subflow definition of Locality is updated with the new options. Following, the flows are reposted to Node-RED. Be sure to check the merge afterwards, in case someone else has changed the flows in the meantime.\n\nThere is no API at the subflow level at the moment:\nhttps://discourse.nodered.org/t/api-for-subflows/20325/2\n\nPENDING: WE CAN ADD THE RETRIEVAL PART OF THE NEW CLUSTER LIST INSIDE THE SUBFLOW IF WE ALSO ADD PARAMETERS IN THE UI REGARDING THE ENDPOINT FROM WHICH TO RETRIEVE THE LIST",
+                    "x": 400,
+                    "y": 220,
+                    "wires": []
+                },
+                {
+                    "id": "55a2a753e271d52e",
+                    "type": "inject",
+                    "z": "05f045b87080a61e",
+                    "name": "SUBFLOW FORMAT",
+                    "props": [
+                        {
+                            "p": "payload"
+                        },
+                        {
+                            "p": "newClusters",
+                            "v": "[\"aws\", \"edgeA\",\"edgeB\",\"azure\"]",
+                            "vt": "json"
+                        }
+                    ],
+                    "repeat": "",
+                    "crontab": "",
+                    "once": false,
+                    "onceDelay": 0.1,
+                    "topic": "",
+                    "payload": "[     {         \"id\": \"05f045b87080a61e\",         \"type\": \"subflow\",         \"name\": \"Locality(flow level)\",         \"info\": \"\",         \"category\": \"PHYSICS Annotators\",         \"in\": [],         \"out\": [],         \"env\": [             {                 \"name\": \"locality\",                 \"type\": \"str\",                 \"value\": \"\",                 \"ui\": {                     \"type\": \"select\",                     \"opts\": {                         \"opts\": [                             {                                 \"l\": {                                     \"en-US\": \"aws\"                                 },                                 \"v\": \"aws\"                             },                             {                                 \"l\": {                                     \"en-US\": \"azure\"                                 },                                 \"v\": \"azure\"                             },                             {                                 \"l\": {                                     \"en-US\": \"edge\"                                 },                                 \"v\": \"edge\"                             }                         ]                     }                 }             }         ],         \"meta\": {},         \"color\": \"#D8BFD8\",         \"icon\": \"font-awesome/fa-braille\"     },     {         \"id\": \"30ee5c09f384361d\",         \"type\": \"comment\",         \"z\": \"05f045b87080a61e\",         \"name\": \"README\",         \"info\": \"The node is used to indicate at the flow level the locality of this flow with relation to a set of standard locations by name \",         \"x\": 400,         \"y\": 220,         \"wires\": []     },     {         \"id\": \"7ec29cdc3b1457ea\",         \"type\": \"subflow:05f045b87080a61e\",         \"z\": \"f8346d4a3a5cf215\",         \"name\": \"\",         \"env\": [             {                 \"name\": \"locality\",                 \"value\": \"aws\",                 \"type\": \"str\"             }         ],         \"x\": 550,         \"y\": 300,         \"wires\": []     } ]",
+                    "payloadType": "json",
+                    "x": 390,
+                    "y": 340,
+                    "wires": [
+                        [
+                            "0e0216a1434ea57a"
+                        ]
+                    ]
+                },
+                {
+                    "id": "0e0216a1434ea57a",
+                    "type": "function",
+                    "z": "05f045b87080a61e",
+                    "name": "UPDATE CLUSTERS",
+                    "func": "msg.headers={};\nvar changedNodes=[];\nfor (i=0;i<msg.payload.length;i++){\n    if ((msg.payload[i].type==\"subflow\")&&(msg.payload[i].name==\"Locality(flow level)\")){\n        msg.payload[i].env[0].ui.opts.opts=[];\n        var k=0;\n        for (k=0;k<msg.newClusters.length;k++){\n            var opt={\"l\":{\"en-US\":\"\"},\"v\":\"\"};\n            opt.l[\"en-US\"]=msg.newClusters[k];\n            opt.v=msg.newClusters[k];\n            console.log(\"K:\",k);\n            console.log(\"Opt:\",opt);\n            msg.payload[i].env[0].ui.opts.opts[k]=opt;\n            console.log(\"Array:\",msg.payload[i].env[0].ui.opts.opts);\n        }\n        changedNodes.push(msg.payload[i]);\n    }\n}\nmsg.changedNodes=changedNodes;\n\nreturn msg;",
+                    "outputs": 1,
+                    "noerr": 0,
+                    "initialize": "",
+                    "finalize": "",
+                    "libs": [],
+                    "x": 460,
+                    "y": 420,
+                    "wires": [
+                        [
+                            "e1deff3989857115"
+                        ]
+                    ]
+                },
+                {
+                    "id": "0607edf39bc4fcdd",
+                    "type": "inject",
+                    "z": "05f045b87080a61e",
+                    "name": "newClusters test",
+                    "props": [
+                        {
+                            "p": "payload"
+                        },
+                        {
+                            "p": "newClusters",
+                            "v": "[\"aws\",\"edgeA\",\"edgeB\",\"azure\"]",
+                            "vt": "json"
+                        }
+                    ],
+                    "repeat": "",
+                    "crontab": "",
+                    "once": false,
+                    "onceDelay": 0.1,
+                    "topic": "",
+                    "payload": "",
+                    "payloadType": "date",
+                    "x": 160,
+                    "y": 500,
+                    "wires": [
+                        [
+                            "2dfd6d65fe6d1982"
+                        ]
+                    ]
+                },
+                {
+                    "id": "2dfd6d65fe6d1982",
+                    "type": "http request",
+                    "z": "05f045b87080a61e",
+                    "name": "GET FLOWS",
+                    "method": "GET",
+                    "ret": "obj",
+                    "paytoqs": "ignore",
+                    "url": "localhost:1880/flows",
+                    "tls": "",
+                    "persist": false,
+                    "proxy": "",
+                    "authType": "",
+                    "senderr": false,
+                    "x": 230,
+                    "y": 420,
+                    "wires": [
+                        [
+                            "0e0216a1434ea57a"
+                        ]
+                    ]
+                },
+                {
+                    "id": "e1deff3989857115",
+                    "type": "http request",
+                    "z": "05f045b87080a61e",
+                    "name": "POST FLOW",
+                    "method": "POST",
+                    "ret": "obj",
+                    "paytoqs": "ignore",
+                    "url": "localhost:1880/flows",
+                    "tls": "",
+                    "persist": false,
+                    "proxy": "",
+                    "authType": "",
+                    "senderr": false,
+                    "x": 670,
+                    "y": 420,
+                    "wires": [
+                        [
+                            "fd2b4eee698cdcc4"
+                        ]
+                    ]
+                },
+                {
+                    "id": "fd2b4eee698cdcc4",
+                    "type": "debug",
+                    "z": "05f045b87080a61e",
+                    "name": "",
+                    "active": true,
+                    "tosidebar": true,
+                    "console": false,
+                    "tostatus": false,
+                    "complete": "true",
+                    "targetType": "full",
+                    "statusVal": "",
+                    "statusType": "auto",
+                    "x": 810,
+                    "y": 420,
+                    "wires": []
+                },
+                {
+                    "id": "05f045b87080a61e",
+                    "type": "subflow",
+                    "name": "Locality(flow level)",
+                    "info": "",
+                    "category": "PHYSICS Annotators",
+                    "in": [
+                        {
+                            "x": 80,
+                            "y": 420,
+                            "wires": [
+                                {
+                                    "id": "2dfd6d65fe6d1982"
+                                }
+                            ]
+                        }
+                    ],
+                    "out": [],
+                    "env": [
+                        {
+                            "name": "locality",
+                            "type": "str",
+                            "value": "",
+                            "ui": {
+                                "type": "select",
+                                "opts": {
+                                    "opts": [
+                                        {
+                                            "l": {
+                                                "en-US": "aws"
+                                            },
+                                            "v": "aws"
+                                        },
+                                        {
+                                            "l": {
+                                                "en-US": "edgeA"
+                                            },
+                                            "v": "edgeA"
+                                        },
+                                        {
+                                            "l": {
+                                                "en-US": "edgeB"
+                                            },
+                                            "v": "edgeB"
+                                        },
+                                        {
+                                            "l": {
+                                                "en-US": "azure"
+                                            },
+                                            "v": "azure"
+                                        },
+                                        {
+                                            "l": {
+                                                "en-US": "hua"
+                                            },
+                                            "v": "hua"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    ],
+                    "meta": {},
+                    "color": "#D8BFD8",
+                    "icon": "font-awesome/fa-braille"
+                }
+            ],
+            "artifact": "registry.apps.ocphub.physics-faas.eu/custom/george:199",
+            "type": "image"
+        },
+        {
+            "flowID": "a714de618203e22e",
+            "flowName": "orchestrator",
+            "flow": [
+                {
+                    "id": "a714de618203e22e",
+                    "type": "tab",
+                    "label": "orchestrator",
+                    "disabled": false,
+                    "info": "",
+                    "env": []
+                },
+                {
+                    "id": "ad0beb0a878c622a",
+                    "type": "subflow:3352c7dddc9aad6d",
+                    "z": "a714de618203e22e",
+                    "name": "call HelloFunctionV2",
+                    "env": [
+                        {
+                            "name": "dynamicActionName",
+                            "value": "HelloFunctionV2_george",
+                            "type": "str"
+                        },
+                        {
+                            "name": "actionName",
+                            "value": "HelloFunctionV2_george_9d780eb8-7441-4377-a648-4a1fceee3518.json",
+                            "type": "str"
+                        },
+                        {
+                            "name": "token",
+                            "type": "cred"
+                        }
+                    ],
+                    "x": 340,
+                    "y": 240,
+                    "wires": [
+                        [
+                            "d759376bc9171438"
+                        ]
+                    ]
+                },
+                {
+                    "id": "bf09047153273cf2",
+                    "type": "http in",
+                    "z": "a714de618203e22e",
+                    "name": "",
+                    "url": "/init",
+                    "method": "post",
+                    "upload": false,
+                    "swaggerDoc": "",
+                    "x": 100,
+                    "y": 140,
+                    "wires": [
+                        [
+                            "45437512996b2c7a"
+                        ]
+                    ]
+                },
+                {
+                    "id": "45437512996b2c7a",
+                    "type": "http response",
+                    "z": "a714de618203e22e",
+                    "name": "",
+                    "x": 530,
+                    "y": 140,
+                    "wires": []
+                },
+                {
+                    "id": "d759376bc9171438",
+                    "type": "http response",
+                    "z": "a714de618203e22e",
+                    "name": "",
+                    "statusCode": "",
+                    "headers": {},
+                    "x": 650,
+                    "y": 240,
+                    "wires": []
+                },
+                {
+                    "id": "fbf1b0d24c05f997",
+                    "type": "inject",
+                    "z": "a714de618203e22e",
+                    "name": "TEST_DELETECREDS BEFOREPUBLIC",
+                    "props": [
+                        {
+                            "p": "payload"
+                        },
+                        {
+                            "p": "topic",
+                            "vt": "str"
+                        }
+                    ],
+                    "repeat": "",
+                    "crontab": "",
+                    "once": false,
+                    "onceDelay": 0.1,
+                    "topic": "",
+                    "payload": "{\"value\":{\"__HelloFunctionV2_george_9d780eb8-7441-4377-a648-4a1fceee3518.json_HOST\":\"https://openwhisk.apps.ocphub.physics-faas.eu/api/v1/\",\"__HelloFunctionV2_george_9d780eb8-7441-4377-a648-4a1fceee3518.json_NAMESPACE\":\"guest\",\"__HelloFunctionV2_george_9d780eb8-7441-4377-a648-4a1fceee3518.json_CREDS\":\"17dz39c2-62f7-3ed6-9b88-925ce4l3c104:459bO3xUERmNZ9v2BLU1dRYFpXlPkccOFqm31LdAsMgRU4VrNZ9dhORZGuLJGIqF\",\"name\":\"george\"}}",
+                    "payloadType": "json",
+                    "x": 220,
+                    "y": 580,
+                    "wires": [
+                        [
+                            "73608b4ce219374a"
+                        ]
+                    ]
+                },
+                {
+                    "id": "73608b4ce219374a",
+                    "type": "http request",
+                    "z": "a714de618203e22e",
+                    "name": "",
+                    "method": "POST",
+                    "ret": "obj",
+                    "paytoqs": "ignore",
+                    "url": "http://localhost:1880/run",
+                    "tls": "",
+                    "persist": false,
+                    "proxy": "",
+                    "authType": "",
+                    "senderr": false,
+                    "x": 490,
+                    "y": 580,
+                    "wires": [
+                        [
+                            "8c2df5bff072d0f7"
+                        ]
+                    ]
+                },
+                {
+                    "id": "8c2df5bff072d0f7",
+                    "type": "debug",
+                    "z": "a714de618203e22e",
+                    "name": "",
+                    "active": true,
+                    "tosidebar": true,
+                    "console": false,
+                    "tostatus": false,
+                    "complete": "false",
+                    "statusVal": "",
+                    "statusType": "auto",
+                    "x": 710,
+                    "y": 580,
+                    "wires": []
+                },
+                {
+                    "id": "311e4be150c63a56",
+                    "type": "http in",
+                    "z": "a714de618203e22e",
+                    "name": "",
+                    "url": "/run",
+                    "method": "post",
+                    "upload": false,
+                    "swaggerDoc": "",
+                    "x": 100,
+                    "y": 240,
+                    "wires": [
+                        [
+                            "ad0beb0a878c622a"
+                        ]
+                    ]
+                },
+                {
+                    "id": "a0e2929e2897b0cd",
+                    "type": "subflow:789351ac.02c9d",
+                    "z": "a714de618203e22e",
+                    "name": "",
+                    "env": [
+                        {
+                            "name": "maxAttempts",
+                            "value": "20",
+                            "type": "str"
+                        },
+                        {
+                            "name": "pollPeriod",
+                            "value": "3000",
+                            "type": "num"
+                        },
+                        {
+                            "name": "method",
+                            "value": "GET",
+                            "type": "str"
+                        },
+                        {
+                            "name": "functionChain",
+                            "value": "false",
+                            "type": "bool"
+                        }
+                    ],
+                    "x": 270,
+                    "y": 440,
+                    "wires": [
+                        [],
+                        [],
+                        []
+                    ]
+                },
+                {
+                    "id": "60aae624d21f2cf1",
+                    "type": "subflow:dd8835083692860a",
+                    "z": "a714de618203e22e",
+                    "name": "",
+                    "env": [
+                        {
+                            "name": "memory",
+                            "value": "512",
+                            "type": "num"
+                        },
+                        {
+                            "name": "timeout",
+                            "value": "300000",
+                            "type": "num"
+                        }
+                    ],
+                    "x": 140,
+                    "y": 60,
+                    "wires": [
+                        []
+                    ]
+                },
+                {
+                    "id": "0a47269f76b1f09b",
+                    "type": "subflow:2f92914d720ab974",
+                    "z": "a714de618203e22e",
+                    "name": "",
+                    "env": [
+                        {
+                            "name": "averageWaitTime",
+                            "value": "200",
+                            "type": "num"
+                        }
+                    ],
+                    "x": 350,
+                    "y": 60,
+                    "wires": []
+                },
+                {
+                    "id": "a80b2fa1299e3bb8",
+                    "type": "tls-config",
+                    "z": "3352c7dddc9aad6d",
+                    "name": "",
+                    "cert": "",
+                    "key": "",
+                    "ca": "",
+                    "certname": "",
+                    "keyname": "",
+                    "caname": "",
+                    "servername": "",
+                    "verifyservercert": false,
+                    "alpnprotocol": ""
+                },
+                {
+                    "id": "b9c86339cffd54ea",
+                    "type": "http request",
+                    "z": "3352c7dddc9aad6d",
+                    "name": "",
+                    "method": "POST",
+                    "ret": "obj",
+                    "paytoqs": "ignore",
+                    "url": "",
+                    "tls": "a80b2fa1299e3bb8",
+                    "persist": false,
+                    "proxy": "",
+                    "authType": "",
+                    "senderr": false,
+                    "x": 370,
+                    "y": 180,
+                    "wires": [
+                        [
+                            "27c3b0af40ccb4e0"
+                        ]
+                    ]
+                },
+                {
+                    "id": "60d351e91c4f1f19",
+                    "type": "function",
+                    "z": "3352c7dddc9aad6d",
+                    "name": "create dynamic",
+                    "func": "//msg.headers={};\n\n\n//get info from incoming function params based on the action name given by the user in the Dynamic Action UI\nconst prophost='__'+env.get('actionName')+'_HOST';\nconst propcreds='__'+env.get('actionName')+'_CREDS';\nconst propnamespace='__'+env.get('actionName')+'_NAMESPACE';\n\n//retrieve from incoming msg params\nmsg.namespace=msg.payload.value[propnamespace];\nmsg.creds=msg.payload.value[propcreds];\nmsg.baseurl=msg.payload.value[prophost];\nmsg.url=msg.payload.value[prophost]+'namespaces/'+msg.namespace+'/actions/'+env.get('actionName');\n\n//delete info so that it does not leak into the newly called function, we dont know how the payload \n//is going to be used after that\n\ndelete msg.payload.value[propcreds];\ndelete msg.payload.value[propnamespace];\ndelete msg.payload.value[prophost]\n\n\n//denote msg.payload.value which is the normal payload to msg.payload since it is like this that the \n//inner function awaits it. Otherwise it will be in msg.payload.value.value from the follow-up OW call\nvar input=msg.payload.value;\nmsg.payload={};\nmsg.payload=input;\n\nmsg.headers={};\nvar auth = 'Basic ' + new Buffer(msg.creds).toString('base64');\nmsg.headers = {\n    \"Authorization\": auth\n}\n\nreturn msg;",
+                    "outputs": 1,
+                    "noerr": 0,
+                    "initialize": "",
+                    "finalize": "",
+                    "libs": [],
+                    "x": 200,
+                    "y": 180,
+                    "wires": [
+                        [
+                            "b9c86339cffd54ea"
+                        ]
+                    ]
+                },
+                {
+                    "id": "27c3b0af40ccb4e0",
+                    "type": "function",
+                    "z": "3352c7dddc9aad6d",
+                    "name": "add activation id",
+                    "func": "\nmsg.activationID=msg.headers['x-openwhisk-activation-id'];\n//msg.oldheaders=msg.headers;\n//msg.headers={};\nmsg.url=msg.baseurl+'namespaces/'+msg.namespace+'/activations/'+msg.activationID;\n\nreturn msg;",
+                    "outputs": 1,
+                    "noerr": 0,
+                    "initialize": "",
+                    "finalize": "",
+                    "libs": [],
+                    "x": 540,
+                    "y": 180,
+                    "wires": [
+                        [
+                            "5e15f34e1caa9fe7"
+                        ]
+                    ]
+                },
+                {
+                    "id": "5e15f34e1caa9fe7",
+                    "type": "subflow:789351ac.02c9d",
+                    "z": "3352c7dddc9aad6d",
+                    "name": "",
+                    "env": [
+                        {
+                            "name": "maxAttempts",
+                            "value": "20",
+                            "type": "str"
+                        },
+                        {
+                            "name": "pollPeriod",
+                            "value": "3000",
+                            "type": "num"
+                        },
+                        {
+                            "name": "method",
+                            "value": "GET",
+                            "type": "str"
+                        },
+                        {
+                            "name": "functionChain",
+                            "value": "false",
+                            "type": "bool"
+                        }
+                    ],
+                    "x": 610,
+                    "y": 260,
+                    "wires": [
+                        [
+                            "b84a3ec8968b0617",
+                            "47a494805843dcd7"
+                        ],
+                        [],
+                        []
+                    ]
+                },
+                {
+                    "id": "b84a3ec8968b0617",
+                    "type": "function",
+                    "z": "3352c7dddc9aad6d",
+                    "name": "reduce output",
+                    "func": "//msg.headers={};\nvar response=msg.payload.response;\nmsg.payload={};\nmsg.payload.response=response;\n\nreturn msg;\n//return msg.oldmsg;",
+                    "outputs": 1,
+                    "noerr": 0,
+                    "initialize": "",
+                    "finalize": "",
+                    "libs": [],
+                    "x": 840,
+                    "y": 280,
+                    "wires": [
+                        []
+                    ]
+                },
+                {
+                    "id": "47a494805843dcd7",
+                    "type": "debug",
+                    "z": "3352c7dddc9aad6d",
+                    "name": "",
+                    "active": true,
+                    "tosidebar": true,
+                    "console": false,
+                    "tostatus": false,
+                    "complete": "false",
+                    "statusVal": "",
+                    "statusType": "auto",
+                    "x": 610,
+                    "y": 60,
+                    "wires": []
+                },
+                {
+                    "id": "3352c7dddc9aad6d",
+                    "type": "subflow",
+                    "name": "Dynamic OW action",
+                    "info": "This node wraps around a typical http request node in order to have a specific type indicating a call to an Openwhisk action.\n\nThis annotation is needed for later stages of the PHYSICS platform, in which calls to OW actions need to be distinguished from calls to any other external REST API. Through this information, the platform and infrastructure services can understand which parts of the flow target OW actions in case of splitting of the flow in multiple OW locations.\n\n\nFurthermore, it is used to instantiate dynamic workflows in which the developer does not know beforehand at which OW endpoint each action is going to be deployed. For this reason the relevant information for all actions is retrieved through environment variables inside the OW action container that is intended to run this orchestrator flow. The convention is as follows:\n$ACTIONNAME_OW_ENDPOINT=http://10.100.59.183:3233\n$ACTIONNAME_OW_CREDS=user:pwd\n\nIn case of a POST method, msg.payload is assumed to carry the body of the call. The node returns JSON object, since this is the typical return object of an Openwhisk action.\n\nThis flow should be executed as a service or as a OW action. In case of usage in a manual way in a typical node-red flow, without environment variable population, the information from the UI may be used.\n\nWe have maintained the UI configuration of the OW action node, so that we can use this flow also in\na typical nodered environment. However the retrieved information from the environment variables prevail\nover the set ones in the UI.\n\nPENDING: check how to pass token from UI to http request node",
+                    "category": "PHYSICS Annotators",
+                    "in": [
+                        {
+                            "x": 80,
+                            "y": 180,
+                            "wires": [
+                                {
+                                    "id": "60d351e91c4f1f19"
+                                }
+                            ]
+                        }
+                    ],
+                    "out": [
+                        {
+                            "x": 980,
+                            "y": 280,
+                            "wires": [
+                                {
+                                    "id": "b84a3ec8968b0617",
+                                    "port": 0
+                                }
+                            ]
+                        }
+                    ],
+                    "env": [
+                        {
+                            "name": "dynamicActionName",
+                            "type": "str",
+                            "value": "dockeraction"
+                        }
+                    ],
+                    "meta": {},
+                    "color": "#C0DEED",
+                    "icon": "node-red/function.svg"
+                },
+                {
+                    "id": "2934f390.711324",
+                    "type": "tls-config",
+                    "z": "789351ac.02c9d",
+                    "name": "",
+                    "cert": "",
+                    "key": "",
+                    "ca": "",
+                    "certname": "",
+                    "keyname": "",
+                    "caname": "",
+                    "servername": "",
+                    "verifyservercert": false,
+                    "alpnprotocol": ""
+                },
+                {
+                    "id": "7d194c10.33b51c",
+                    "type": "function",
+                    "z": "789351ac.02c9d",
+                    "name": "defaults+activation id",
+                    "func": "\nif (msg.hasOwnProperty('maxAttempts')){\n    msg.iterations=msg.maxAttempts;\n} else {\n    msg.iterations=env.get('maxAttempts');\n}\n//needed to reset the iterations after function chaining\nmsg.defaultAttempts=msg.iterations;\n\nif (msg.hasOwnProperty('pollPeriod')){\n    \n} else {\n    msg.pollPeriod=env.get('pollPeriod');\n}\n\nif (msg.hasOwnProperty('method')){\n    \n} else {\n    msg.method=env.get('method');\n}\n\nif (msg.hasOwnProperty('url')){\n    \n} else {\n    msg.url=env.get('url');\n}\n\nif (msg.hasOwnProperty('retryCode')){\n    \n} else {\n    msg.retryCode=env.get('retryCode');\n}\n\nif (msg.hasOwnProperty('acceptCode')){\n    \n} else {\n    msg.acceptCode=env.get('acceptCode');\n}\n\nif (msg.hasOwnProperty('creds')){\n    \n} else {\n    msg.creds=env.get('creds');\n}\n\nif (msg.hasOwnProperty('functionChain')){\n    \n} else {\n    msg.functionChain=env.get('functionChain');\n}\n\nif (msg.hasOwnProperty('inputData')){\n    if (msg.inputData.hasOwnProperty('creds')){\n        msg.creds=msg.inputData.creds;\n    }\n}\n\n\n\nmsg.delay=msg.pollPeriod;\nmsg.start=Date.now();\nreturn msg;",
+                    "outputs": 1,
+                    "noerr": 0,
+                    "initialize": "",
+                    "finalize": "",
+                    "libs": [],
+                    "x": 200,
+                    "y": 160,
+                    "wires": [
+                        [
+                            "cad17b04.a2b4d8"
+                        ]
+                    ]
+                },
+                {
+                    "id": "4be3f205.3e8dc4",
+                    "type": "function",
+                    "z": "789351ac.02c9d",
+                    "name": "iterations--",
+                    "func": "msg.iterations=msg.iterations-1;\n/*\nif (flow.get('stop')==true){\n    msg.iterations=-1;\n}*/\nreturn msg;",
+                    "outputs": 1,
+                    "noerr": 0,
+                    "initialize": "",
+                    "finalize": "",
+                    "libs": [],
+                    "x": 350,
+                    "y": 300,
+                    "wires": [
+                        [
+                            "c2cf68b7.263d4"
+                        ]
+                    ]
+                },
+                {
+                    "id": "c2cf68b7.263d4",
+                    "type": "switch",
+                    "z": "789351ac.02c9d",
+                    "name": "if iterations finished",
+                    "property": "iterations",
+                    "propertyType": "msg",
+                    "rules": [
+                        {
+                            "t": "gte",
+                            "v": "1",
+                            "vt": "num"
+                        },
+                        {
+                            "t": "lt",
+                            "v": "1",
+                            "vt": "num"
+                        }
+                    ],
+                    "checkall": "true",
+                    "repair": false,
+                    "outputs": 2,
+                    "x": 550,
+                    "y": 300,
+                    "wires": [
+                        [
+                            "cad17b04.a2b4d8"
+                        ],
+                        []
+                    ]
+                },
+                {
+                    "id": "76299695.812bd8",
+                    "type": "comment",
+                    "z": "789351ac.02c9d",
+                    "name": "SUCCESS",
+                    "info": "",
+                    "x": 1100,
+                    "y": 60,
+                    "wires": []
+                },
+                {
+                    "id": "48093072.b17a6",
+                    "type": "comment",
+                    "z": "789351ac.02c9d",
+                    "name": "FINAL FAIL",
+                    "info": "",
+                    "x": 890,
+                    "y": 360,
+                    "wires": []
+                },
+                {
+                    "id": "d5960f2f.2e9448",
+                    "type": "delay",
+                    "z": "789351ac.02c9d",
+                    "name": "delay",
+                    "pauseType": "delayv",
+                    "timeout": "5",
+                    "timeoutUnits": "seconds",
+                    "rate": "1",
+                    "nbRateUnits": "1",
+                    "rateUnits": "second",
+                    "randomFirst": "1",
+                    "randomLast": "5",
+                    "randomUnits": "seconds",
+                    "drop": false,
+                    "outputs": 1,
+                    "x": 170,
+                    "y": 300,
+                    "wires": [
+                        [
+                            "4be3f205.3e8dc4"
+                        ]
+                    ]
+                },
+                {
+                    "id": "471b3d64.265894",
+                    "type": "http request",
+                    "z": "789351ac.02c9d",
+                    "name": "",
+                    "method": "use",
+                    "ret": "obj",
+                    "paytoqs": "ignore",
+                    "url": "",
+                    "tls": "2934f390.711324",
+                    "persist": false,
+                    "proxy": "",
+                    "authType": "",
+                    "senderr": false,
+                    "x": 590,
+                    "y": 160,
+                    "wires": [
+                        [
+                            "8694180b.ec1c68"
+                        ]
+                    ]
+                },
+                {
+                    "id": "8694180b.ec1c68",
+                    "type": "switch",
+                    "z": "789351ac.02c9d",
+                    "name": "Status code check",
+                    "property": "statusCode",
+                    "propertyType": "msg",
+                    "rules": [
+                        {
+                            "t": "lte",
+                            "v": "acceptCode",
+                            "vt": "msg"
+                        },
+                        {
+                            "t": "gte",
+                            "v": "retryCode",
+                            "vt": "msg"
+                        }
+                    ],
+                    "checkall": "true",
+                    "repair": false,
+                    "outputs": 2,
+                    "x": 810,
+                    "y": 160,
+                    "wires": [
+                        [
+                            "f9d0aba7.72382"
+                        ],
+                        [
+                            "d5960f2f.2e9448"
+                        ]
+                    ]
+                },
+                {
+                    "id": "ef03414f.ad9d78",
+                    "type": "comment",
+                    "z": "789351ac.02c9d",
+                    "name": "RETRY FAIL",
+                    "info": "",
+                    "x": 890,
+                    "y": 260,
+                    "wires": []
+                },
+                {
+                    "id": "66bbc0cf.0c62f",
+                    "type": "debug",
+                    "z": "789351ac.02c9d",
+                    "name": "BEFORE AUTH",
+                    "active": true,
+                    "tosidebar": true,
+                    "console": false,
+                    "tostatus": false,
+                    "complete": "true",
+                    "targetType": "full",
+                    "x": 370,
+                    "y": 100,
+                    "wires": []
+                },
+                {
+                    "id": "13791c2d.8cea7c",
+                    "type": "debug",
+                    "z": "789351ac.02c9d",
+                    "name": "URL",
+                    "active": true,
+                    "tosidebar": true,
+                    "console": true,
+                    "tostatus": false,
+                    "complete": "url",
+                    "targetType": "msg",
+                    "statusVal": "",
+                    "statusType": "auto",
+                    "x": 580,
+                    "y": 100,
+                    "wires": []
+                },
+                {
+                    "id": "cad17b04.a2b4d8",
+                    "type": "function",
+                    "z": "789351ac.02c9d",
+                    "name": "add auth",
+                    "func": "msg.headers={};\nvar auth = 'Basic ' + new Buffer(msg.creds).toString('base64');\nmsg.headers = {\n    \"Authorization\": auth\n}\nmsg.method='GET';\n\nreturn msg;",
+                    "outputs": 1,
+                    "noerr": 0,
+                    "initialize": "",
+                    "finalize": "",
+                    "libs": [],
+                    "x": 420,
+                    "y": 160,
+                    "wires": [
+                        [
+                            "471b3d64.265894"
+                        ]
+                    ]
+                },
+                {
+                    "id": "f2b7c4e4.a24c3",
+                    "type": "function",
+                    "z": "789351ac.02c9d",
+                    "name": "adapt to new activation",
+                    "func": "\n\nmsg.url=msg.payload.response.result.newActivationIDURL;\nmsg.iterations=msg.defaultAttempts+1;\nconsole.log('IN ADAPTATION TO ACTIVATION',msg.url);\nreturn msg;",
+                    "outputs": 1,
+                    "noerr": 0,
+                    "initialize": "",
+                    "finalize": "",
+                    "libs": [],
+                    "x": 1500,
+                    "y": 160,
+                    "wires": [
+                        [
+                            "d5960f2f.2e9448",
+                            "ee1dbf44.7368f8"
+                        ]
+                    ]
+                },
+                {
+                    "id": "c338e47b.b00ed",
+                    "type": "comment",
+                    "z": "789351ac.02c9d",
+                    "name": "FUNCTION CHAIN CONTINUATION",
+                    "info": "",
+                    "x": 1240,
+                    "y": 240,
+                    "wires": []
+                },
+                {
+                    "id": "ee1dbf44.7368f8",
+                    "type": "debug",
+                    "z": "789351ac.02c9d",
+                    "name": "AFTER CONTINUATION IN Poll2Push",
+                    "active": true,
+                    "tosidebar": true,
+                    "console": true,
+                    "tostatus": false,
+                    "complete": "payload",
+                    "targetType": "msg",
+                    "statusVal": "",
+                    "statusType": "auto",
+                    "x": 1420,
+                    "y": 300,
+                    "wires": []
+                },
+                {
+                    "id": "f9d0aba7.72382",
+                    "type": "switch",
+                    "z": "789351ac.02c9d",
+                    "name": "is Chain",
+                    "property": "functionChain",
+                    "propertyType": "msg",
+                    "rules": [
+                        {
+                            "t": "false"
+                        },
+                        {
+                            "t": "true"
+                        }
+                    ],
+                    "checkall": "true",
+                    "repair": false,
+                    "outputs": 2,
+                    "x": 1020,
+                    "y": 160,
+                    "wires": [
+                        [],
+                        [
+                            "6da1eea0.969368",
+                            "1bbc6fa0.4879c"
+                        ]
+                    ]
+                },
+                {
+                    "id": "6da1eea0.969368",
+                    "type": "debug",
+                    "z": "789351ac.02c9d",
+                    "name": "RESULT STATUS",
+                    "active": true,
+                    "tosidebar": true,
+                    "console": true,
+                    "tostatus": false,
+                    "complete": "payload",
+                    "targetType": "msg",
+                    "x": 1100,
+                    "y": 300,
+                    "wires": []
+                },
+                {
+                    "id": "f20a68d.9711598",
+                    "type": "debug",
+                    "z": "789351ac.02c9d",
+                    "name": "AFTER CODE CHECK",
+                    "active": true,
+                    "tosidebar": true,
+                    "console": true,
+                    "tostatus": false,
+                    "complete": "functionChain",
+                    "targetType": "msg",
+                    "x": 890,
+                    "y": 100,
+                    "wires": []
+                },
+                {
+                    "id": "36905e62.dfad92",
+                    "type": "debug",
+                    "z": "789351ac.02c9d",
+                    "name": "TOP1",
+                    "active": true,
+                    "tosidebar": true,
+                    "console": true,
+                    "tostatus": false,
+                    "complete": "payload",
+                    "targetType": "msg",
+                    "x": 1120,
+                    "y": 100,
+                    "wires": []
+                },
+                {
+                    "id": "9610a737.bf275",
+                    "type": "debug",
+                    "z": "789351ac.02c9d",
+                    "name": "TOP2",
+                    "active": true,
+                    "tosidebar": true,
+                    "console": true,
+                    "tostatus": false,
+                    "complete": "payload",
+                    "targetType": "msg",
+                    "x": 1300,
+                    "y": 100,
+                    "wires": []
+                },
+                {
+                    "id": "c52af08f.756ee8",
+                    "type": "debug",
+                    "z": "789351ac.02c9d",
+                    "name": "TOP3",
+                    "active": true,
+                    "tosidebar": true,
+                    "console": true,
+                    "tostatus": false,
+                    "complete": "payload",
+                    "targetType": "msg",
+                    "x": 1600,
+                    "y": 100,
+                    "wires": []
+                },
+                {
+                    "id": "1bbc6fa0.4879c",
+                    "type": "function",
+                    "z": "789351ac.02c9d",
+                    "name": "compare completion",
+                    "func": "console.log('IN COMPARE COMPLETION',msg.payload.response);\nif (msg.payload.response.result.status==='Completed'){\n    return [msg,null];\n} else {\n    return [null,msg];\n}\n",
+                    "outputs": 2,
+                    "noerr": 0,
+                    "initialize": "",
+                    "finalize": "",
+                    "libs": [],
+                    "x": 1240,
+                    "y": 160,
+                    "wires": [
+                        [
+                            "c52af08f.756ee8"
+                        ],
+                        [
+                            "f2b7c4e4.a24c3"
+                        ]
+                    ]
+                },
+                {
+                    "id": "d8305759.866988",
+                    "type": "debug",
+                    "z": "789351ac.02c9d",
+                    "name": "URL",
+                    "active": true,
+                    "tosidebar": true,
+                    "console": true,
+                    "tostatus": false,
+                    "complete": "iterations",
+                    "targetType": "msg",
+                    "x": 500,
+                    "y": 380,
+                    "wires": []
+                },
+                {
+                    "id": "789351ac.02c9d",
+                    "type": "subflow",
+                    "name": "PollTOPushConverterFC",
+                    "info": "This helper node aims at performing synchronous calls for polling in case of an async API (calls that return prior to completion, e.g. in the case of non blocking calls in OW, the initial request is returned with a submission success and an activation id in order to follow up on the result). The main difference from the main PollTOPushConverter is that it supports also function chaining (through a msg.functionChain or UI set boolean parameter).\n\nThe according function should return as a response the following structure:\n- have a result.status field with the 'Completed' (if chain is finished) or 'Continuing' string if the function has handed over to a new function in the chain.\n- have a result.newActivationIDURL field that indicates the updated ID with which to check the follow-up action's status \n\nThe node also can get credentials from the msg.creds field of the input message.\n\nThe remaining operations are similar with the standard PollTOPushConverter. The node does polling to a specific endpoint in order to detect whether the function has successfully finished\n\nThe node has three outputs:\n - Output 1 indicates successful finalization of the API call\n - Output 2 indicates intermediate failure and was added to return the reason for failure\n - Output 3 indicates final failure after max attempts\n\nCurrently the node assumes that in case of failure we get a >=40X return code, but this may not always be the case.\n\nThe node can be configured for the URL (msg.url), the HTTP method (msg.method), the maximum attempts (msg.maxAttempts), polling period (msg.pollPeriod), the status code above which to retry (msg.retryCode) and the status code for deciding the final success (msg.acceptCode). The msg properties override the UI set properties.\n\nGiven that conditions upon which the initial call needs to be polled are highly dependent on the used API, the node assumes that the initial call has been performed a priori.\n\nCredentials for accessing the HTTP endpoint can be set via msg.creds or through the UI (input msg prevails).\n \n",
+                    "category": "PHYSICS Helpers",
+                    "in": [
+                        {
+                            "x": 60,
+                            "y": 160,
+                            "wires": [
+                                {
+                                    "id": "7d194c10.33b51c"
+                                }
+                            ]
+                        }
+                    ],
+                    "out": [
+                        {
+                            "x": 1380,
+                            "y": 40,
+                            "wires": [
+                                {
+                                    "id": "f9d0aba7.72382",
+                                    "port": 0
+                                },
+                                {
+                                    "id": "1bbc6fa0.4879c",
+                                    "port": 0
+                                }
+                            ]
+                        },
+                        {
+                            "x": 780,
+                            "y": 260,
+                            "wires": [
+                                {
+                                    "id": "c2cf68b7.263d4",
+                                    "port": 0
+                                }
+                            ]
+                        },
+                        {
+                            "x": 780,
+                            "y": 360,
+                            "wires": [
+                                {
+                                    "id": "c2cf68b7.263d4",
+                                    "port": 1
+                                }
+                            ]
+                        }
+                    ],
+                    "env": [
+                        {
+                            "name": "maxAttempts",
+                            "type": "str",
+                            "value": "3"
+                        },
+                        {
+                            "name": "pollPeriod",
+                            "type": "str",
+                            "value": "3000"
+                        },
+                        {
+                            "name": "method",
+                            "type": "str",
+                            "value": ""
+                        },
+                        {
+                            "name": "url",
+                            "type": "str",
+                            "value": "http://10.100.59.182:3233/api/v1/namespaces/_/activations/"
+                        },
+                        {
+                            "name": "retryCode",
+                            "type": "num",
+                            "value": "202"
+                        },
+                        {
+                            "name": "acceptCode",
+                            "type": "num",
+                            "value": "200"
+                        },
+                        {
+                            "name": "functionChain",
+                            "type": "bool",
+                            "value": "true"
+                        }
+                    ],
+                    "meta": {},
+                    "color": "#b4e8a9"
+                },
+                {
+                    "id": "c66966a2d36f06b5",
+                    "type": "function",
+                    "z": "dd8835083692860a",
+                    "name": "add sizing",
+                    "func": "\nmsg.annotations={};\nmsg.annotations.sizing={};\nmsg.annotations.sizing.memory=env.get('memory');\nmsg.annotations.sizing.timeout=env.get('timeout');\n\nreturn msg;\n",
+                    "outputs": 1,
+                    "noerr": 0,
+                    "initialize": "// Code added here will be run once\n// whenever the node is started.\n\n//msg.payload.imageName=env.get('Image Name');\n//return msg;",
+                    "finalize": "",
+                    "libs": [],
+                    "x": 300,
+                    "y": 60,
+                    "wires": [
+                        []
+                    ]
+                },
+                {
+                    "id": "dd8835083692860a",
+                    "type": "subflow",
+                    "name": "SizingAnnotator",
+                    "info": "This node should be used to dictate what is the necessary size in terms of memory and timeout of the registered action in Openwhisk.\n\nIt is assumed that this node is used at the flow level, indicating that the annotation refers to the container configuration of a docker action that includes the overall flow in the used tab.\n",
+                    "category": "PHYSICS Annotators",
+                    "in": [
+                        {
+                            "x": 120,
+                            "y": 60,
+                            "wires": [
+                                {
+                                    "id": "c66966a2d36f06b5"
+                                }
+                            ]
+                        }
+                    ],
+                    "out": [
+                        {
+                            "x": 440,
+                            "y": 60,
+                            "wires": [
+                                {
+                                    "id": "c66966a2d36f06b5",
+                                    "port": 0
+                                }
+                            ]
+                        }
+                    ],
+                    "env": [
+                        {
+                            "name": "memory",
+                            "type": "num",
+                            "value": "",
+                            "ui": {
+                                "label": {
+                                    "en-US": "Memory (MB)"
+                                }
+                            }
+                        },
+                        {
+                            "name": "timeout",
+                            "type": "num",
+                            "value": "",
+                            "ui": {
+                                "icon": "font-awesome/fa-times-circle-o",
+                                "label": {
+                                    "en-US": "Timeout (millisecs)"
+                                }
+                            }
+                        }
+                    ],
+                    "meta": {},
+                    "color": "#E9967A",
+                    "icon": "font-awesome/fa-arrows-h"
+                },
+                {
+                    "id": "b87db5bf54ee1249",
+                    "type": "comment",
+                    "z": "2f92914d720ab974",
+                    "name": "",
+                    "info": "",
+                    "x": 190,
+                    "y": 80,
+                    "wires": []
+                },
+                {
+                    "id": "2f92914d720ab974",
+                    "type": "subflow",
+                    "name": "QoS Requirements",
+                    "info": "",
+                    "category": "PHYSICS Annotators",
+                    "in": [],
+                    "out": [],
+                    "env": [
+                        {
+                            "name": "averageDuration",
+                            "type": "num",
+                            "value": ""
+                        },
+                        {
+                            "name": "averageInitTime",
+                            "type": "num",
+                            "value": ""
+                        },
+                        {
+                            "name": "averageWaitTime",
+                            "type": "num",
+                            "value": ""
+                        },
+                        {
+                            "name": "windowOfTime",
+                            "type": "str",
+                            "value": ""
+                        }
+                    ],
+                    "meta": {},
+                    "color": "#FDF0C2",
+                    "icon": "font-awesome/fa-align-left"
+                }
+            ],
+            "artifact": "registry.apps.ocphub.physics-faas.eu/custom/george:200",
+            "type": "image"
+        }
+    ],
+    "displayName": "p2app",
+    "branchName": "george"
+}

@@ -4,5 +4,7 @@ Dockerfile
 node_modules
 .*.json
 *.backup
+*.yaml
+Jenkinsfile
+Jenkinsfile-deploy
 flows_cred.json
-rfEndpoint.example.json
